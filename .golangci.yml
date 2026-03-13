@@ -1,0 +1,129 @@
+version: "2"
+linters:
+  default: none
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - contextcheck
+    - copyloopvar
+    - depguard
+    - dogsled
+    - dupl
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
+    - forbidigo
+    - forcetypeassert
+    - gocheckcompilerdirectives
+    - gochecksumtype
+    - gocritic
+    - gocyclo
+    - godot
+    - goprintffuncname
+    - govet
+    - grouper
+    - importas
+    - inamedparam
+    - ineffassign
+    - interfacebloat
+    - intrange
+    - loggercheck
+    - makezero
+    - mirror
+    - misspell
+    - modernize
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnil
+    - noctx
+    - nolintlint
+    - nosprintfhostport
+    - perfsprint
+    - prealloc
+    - predeclared
+    - promlinter
+    - reassign
+    - revive
+    - rowserrcheck
+    - sloglint
+    - sqlclosecheck
+    - staticcheck
+    - testableexamples
+    - thelper
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    - usetesting
+    - wastedassign
+    - whitespace
+    - wrapcheck
+  settings:
+    depguard:
+      rules:
+        main:
+          files:
+            - $all
+          deny:
+            - pkg: unsafe
+              desc: "it's not safe"
+    gocritic:
+      enable-all: true
+      disabled-checks:
+        - paramTypeCombine # Some false positive.
+        - whyNoLint # We already have the nolintlint linter.
+    gocyclo:
+      min-complexity: 10
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment # Too many false positive.
+    grouper:
+      import-require-single-import: true
+      import-require-grouping: true
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+      allow-no-explanation:
+        - errcheck
+        - misspell
+      allow-unused: false
+    revive:
+      rules:
+        - name: exported
+          disabled: false
+          arguments:
+            - disableStutteringCheck
+        - name: unused-parameter # It's OK.
+          disabled: true
+    staticcheck:
+      checks:
+        - all
+    wrapcheck:
+      ignore-package-globs:
+        - errors
+        - github.com/pierrre/errors*
+  exclusions:
+    generated: lax
+formatters:
+  enable:
+    - gofmt
+    - gofumpt
+    - goimports
+  exclusions:
+    generated: lax
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+output:
+  sort-order:
+    - file
+    - linter
+    - severity
