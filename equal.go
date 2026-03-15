@@ -10,8 +10,8 @@ func Equal[T comparable](v T) Validator[T] {
 }
 
 // EqualFunc returns a [Validator] that checks if the value is equal to a specific value using a custom equality function.
-func EqualFunc[T any](expected T, eqFunc func(a, b T) bool) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("EqualFunc(%#v)", expected) }, equalFunc(expected, eqFunc))
+func EqualFunc[T any](v T, eqFunc func(a, b T) bool) Validator[T] {
+	return WithStringFunc(func() string { return fmt.Sprintf("EqualFunc(%#v)", v) }, equalFunc(v, eqFunc))
 }
 
 func equalFunc[T any](expected T, eqFunc func(a, b T) bool) func(T) error {
@@ -24,12 +24,12 @@ func equalFunc[T any](expected T, eqFunc func(a, b T) bool) func(T) error {
 }
 
 // EqualCmpFunc returns a [Validator] that checks if the value is equal to a specific value using a custom comparison function.
-func EqualCmpFunc[T any](expected T, cmpFunc func(a, b T) int) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("EqualCmpFunc(%#v)", expected) }, equalCmpFunc(expected, cmpFunc))
+func EqualCmpFunc[T any](v T, cmpFunc func(a, b T) int) Validator[T] {
+	return WithStringFunc(func() string { return fmt.Sprintf("EqualCmpFunc(%#v)", v) }, equalCmpFunc(v, cmpFunc))
 }
 
-func equalCmpFunc[T any](expected T, cmpFunc func(a, b T) int) func(T) error {
-	return equalFunc(expected, func(a, b T) bool { return cmpFunc(a, b) == 0 })
+func equalCmpFunc[T any](v T, cmpFunc func(a, b T) int) func(T) error {
+	return equalFunc(v, func(a, b T) bool { return cmpFunc(a, b) == 0 })
 }
 
 // NotEqual returns a [Validator] that checks if the value is not equal to a specific value.
@@ -38,8 +38,8 @@ func NotEqual[T comparable](v T) Validator[T] {
 }
 
 // NotEqualFunc returns a [Validator] that checks if the value is not equal to a specific value using a custom equality function.
-func NotEqualFunc[T any](expected T, eqFunc func(a, b T) bool) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("NotEqualFunc(%#v)", expected) }, notEqualFunc(expected, eqFunc))
+func NotEqualFunc[T any](v T, eqFunc func(a, b T) bool) Validator[T] {
+	return WithStringFunc(func() string { return fmt.Sprintf("NotEqualFunc(%#v)", v) }, notEqualFunc(v, eqFunc))
 }
 
 func notEqualFunc[T any](expected T, eqFunc func(a, b T) bool) func(T) error {
@@ -52,10 +52,10 @@ func notEqualFunc[T any](expected T, eqFunc func(a, b T) bool) func(T) error {
 }
 
 // NotEqualCmpFunc returns a [Validator] that checks if the value is not equal to a specific value using a custom comparison function.
-func NotEqualCmpFunc[T any](expected T, cmpFunc func(a, b T) int) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("NotEqualCmpFunc(%#v)", expected) }, notEqualCmpFunc(expected, cmpFunc))
+func NotEqualCmpFunc[T any](v T, cmpFunc func(a, b T) int) Validator[T] {
+	return WithStringFunc(func() string { return fmt.Sprintf("NotEqualCmpFunc(%#v)", v) }, notEqualCmpFunc(v, cmpFunc))
 }
 
-func notEqualCmpFunc[T any](expected T, cmpFunc func(a, b T) int) func(T) error {
-	return notEqualFunc(expected, func(a, b T) bool { return cmpFunc(a, b) == 0 })
+func notEqualCmpFunc[T any](v T, cmpFunc func(a, b T) int) func(T) error {
+	return notEqualFunc(v, func(a, b T) bool { return cmpFunc(a, b) == 0 })
 }
