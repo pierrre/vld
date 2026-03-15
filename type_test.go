@@ -1,0 +1,33 @@
+package vld_test
+
+import (
+	"fmt"
+
+	. "github.com/pierrre/vld"
+)
+
+func ExampleTypeOptional() {
+	vr := TypeOptional[any](Equal(1))
+	fmt.Println(vr)
+	fmt.Println(vr.Validate(1))
+	fmt.Println(vr.Validate("1"))
+	fmt.Println(vr.Validate(2))
+	// Output:
+	// TypeOptional[int](Equal(1))
+	// <nil>
+	// <nil>
+	// 2 is not equal to 1
+}
+
+func ExampleTypeRequired() {
+	vr := TypeRequired[any](Equal(1))
+	fmt.Println(vr)
+	fmt.Println(vr.Validate(1))
+	fmt.Println(vr.Validate("1"))
+	fmt.Println(vr.Validate(2))
+	// Output:
+	// TypeRequired[int](Equal(1))
+	// <nil>
+	// string cannot be converted to int
+	// 2 is not equal to 1
+}
