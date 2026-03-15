@@ -6,7 +6,8 @@ Go validation library.
 
 ## Features
 
-- Declarative syntax, type-safe (using generics), no reflection, and no code generation.
+- Simple value validation with declarative syntax and readable error messages.
+- Type-safe (using generics), no reflection, no code generation, and no dependency.
 - Composable validation rules with `And`, `Or`, `All`, `Not`, `If`, and `IfElse`.
 - Built-in validators for common checks such as equality, ordering, ranges, membership, zero values, and required values.
 - Specialized validators for strings, slices, maps, pointers, and regular expressions, including length, emptiness, containment, uniqueness, and per-item validation.
