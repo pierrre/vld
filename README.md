@@ -10,7 +10,7 @@ Go validation library.
 - Type-safe (using generics), no reflection, no code generation, no allocation while validating, and no dependency.
 - Composable validation rules with `And`, `Or`, `All`, `Not`, `If`, and `IfElse`.
 - Built-in validators for common checks such as equality, ordering, ranges, membership, zero values, and required values.
-- Specialized validators for strings, slices, maps, pointers, and regular expressions, including length, emptiness, containment, uniqueness, and per-item validation.
+- Specialized validators for strings, slices, maps, pointers, iterators, and regular expressions, including length, emptiness, containment, uniqueness, and per-item validation.
 - Helpers for validating derived and nested values with `Get`, `Field`, `Wrap`, and `Message`.
 - Error helpers to wrap and join validation errors while keeping messages structured and readable.
 
