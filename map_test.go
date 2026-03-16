@@ -104,3 +104,36 @@ func ExampleMapEachValue() {
 	// <nil>
 	// "b": 2 is not equal to 1
 }
+
+func ExampleMapSortedEach() {
+	vr := MapSortedEach[map[string]int](Equal(KeyValue[string, int]{Key: "a", Value: 1}))
+	fmt.Println(vr)
+	fmt.Println(vr.Validate(map[string]int{"a": 1}))
+	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	// Output:
+	// MapSortedEach(Equal(vld.KeyValue[string,int]{Key:"a", Value:1}))
+	// <nil>
+	// "b": vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}
+}
+
+func ExampleMapSortedEachKey() {
+	vr := MapSortedEachKey[map[string]int](Equal("a"))
+	fmt.Println(vr)
+	fmt.Println(vr.Validate(map[string]int{"a": 1}))
+	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	// Output:
+	// MapSortedEachKey(Equal("a"))
+	// <nil>
+	// "b": "b" is not equal to "a"
+}
+
+func ExampleMapSortedEachValue() {
+	vr := MapSortedEachValue[map[string]int](Equal(1))
+	fmt.Println(vr)
+	fmt.Println(vr.Validate(map[string]int{"a": 1}))
+	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	// Output:
+	// MapSortedEachValue(Equal(1))
+	// <nil>
+	// "b": 2 is not equal to 1
+}

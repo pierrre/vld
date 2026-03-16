@@ -1,7 +1,9 @@
 package vld
 
 import (
+	"cmp"
 	"fmt"
+	"slices"
 )
 
 func getMapLen[M ~map[K]V, K comparable, V any](m M) int {
@@ -57,6 +59,40 @@ func mapEach[M ~map[K]V, K comparable, V any](f func(KeyValue[K, V]) error) func
 	return func(m M) error {
 		var errs []error
 		for k, v := range m {
+			err := f(KeyValue[K, V]{Key: k, Value: v})
+			if err != nil {
+				errs = append(errs, ErrorWrapMessagef(err, "%#v", k))
+			}
+		}
+		return ErrorJoin(errs...)
+	}
+}
+
+// MapSortedEach returns a [Validator] that checks each key and value of the map in sorted order of keys.
+func MapSortedEach[M ~map[K]V, K cmp.Ordered, V any](vr Validator[KeyValue[K, V]]) Validator[M] {
+	return WithStringFunc(func() string { return fmt.Sprintf("MapSortedEach(%v)", vr) }, mapSortedEach[M](vr.Validate))
+}
+
+// MapSortedEachKey returns a [Validator] that checks each key of the map in sorted order of keys.
+func MapSortedEachKey[M ~map[K]V, K cmp.Ordered, V any](vr Validator[K]) Validator[M] {
+	return WithStringFunc(func() string { return fmt.Sprintf("MapSortedEachKey(%v)", vr) }, mapSortedEach[M](get(KeyValue[K, V].GetKey, vr.Validate)))
+}
+
+// MapSortedEachValue returns a [Validator] that checks each value of the map in sorted order of keys.
+func MapSortedEachValue[M ~map[K]V, K cmp.Ordered, V any](vr Validator[V]) Validator[M] {
+	return WithStringFunc(func() string { return fmt.Sprintf("MapSortedEachValue(%v)", vr) }, mapSortedEach[M](get(KeyValue[K, V].GetValue, vr.Validate)))
+}
+
+func mapSortedEach[M ~map[K]V, K cmp.Ordered, V any](f func(KeyValue[K, V]) error) func(M) error {
+	return func(m M) error {
+		var errs []error
+		keys := make([]K, 0, len(m))
+		for k := range m {
+			keys = append(keys, k)
+		}
+		slices.Sort(keys)
+		for _, k := range keys {
+			v := m[k]
 			err := f(KeyValue[K, V]{Key: k, Value: v})
 			if err != nil {
 				errs = append(errs, ErrorWrapMessagef(err, "%#v", k))
