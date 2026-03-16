@@ -86,3 +86,18 @@ func ErrorJoin(errs ...error) error {
 	}
 	return errors.Join(resErrs...)
 }
+
+// GetErrors returns a lice of errors from an error.
+// If the error is nil, it returns nil.
+// If the error implements Unwrap() []error, it returns the slice of errors.
+// Otherwise it returns a slice containing the error.
+func GetErrors(err error) []error {
+	if err == nil {
+		return nil
+	}
+	unwrapper, ok := err.(errorsUnwrapper)
+	if !ok {
+		return []error{err}
+	}
+	return unwrapper.Unwrap()
+}

@@ -46,3 +46,13 @@ func ExampleErrorJoin() {
 	// <nil>
 	// error
 }
+
+func ExampleGetErrors() {
+	fmt.Println(GetErrors(nil))
+	fmt.Println(GetErrors(errors.New("error")))
+	fmt.Println(GetErrors(errors.Join(errors.New("error1"), errors.New("error2"))))
+	// Output:
+	// []
+	// [error]
+	// [error1 error2]
+}
