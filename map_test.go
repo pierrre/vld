@@ -91,7 +91,7 @@ func ExampleMapEachKey() {
 	// Output:
 	// MapEachKey(Equal("a"))
 	// <nil>
-	// "b": "b" is not equal to "a"
+	// "b": key: "b" is not equal to "a"
 }
 
 func ExampleMapEachValue() {
@@ -102,7 +102,7 @@ func ExampleMapEachValue() {
 	// Output:
 	// MapEachValue(Equal(1))
 	// <nil>
-	// "b": 2 is not equal to 1
+	// "b": value: 2 is not equal to 1
 }
 
 func ExampleMapSortedEach() {
@@ -124,7 +124,7 @@ func ExampleMapSortedEachKey() {
 	// Output:
 	// MapSortedEachKey(Equal("a"))
 	// <nil>
-	// "b": "b" is not equal to "a"
+	// "b": key: "b" is not equal to "a"
 }
 
 func ExampleMapSortedEachValue() {
@@ -135,5 +135,5 @@ func ExampleMapSortedEachValue() {
 	// Output:
 	// MapSortedEachValue(Equal(1))
 	// <nil>
-	// "b": 2 is not equal to 1
+	// "b": value: 2 is not equal to 1
 }

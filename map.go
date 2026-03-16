@@ -47,12 +47,12 @@ func MapEach[M ~map[K]V, K comparable, V any](vr Validator[KeyValue[K, V]]) Vali
 
 // MapEachKey returns a [Validator] that checks each key of the map.
 func MapEachKey[M ~map[K]V, K comparable, V any](vr Validator[K]) Validator[M] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MapEachKey(%v)", vr) }, mapEach[M](get(KeyValue[K, V].GetKey, vr.Validate)))
+	return WithStringFunc(func() string { return fmt.Sprintf("MapEachKey(%v)", vr) }, mapEach[M](wrap("key", get(KeyValue[K, V].GetKey, vr.Validate))))
 }
 
 // MapEachValue returns a [Validator] that checks each value of the map.
 func MapEachValue[M ~map[K]V, K comparable, V any](vr Validator[V]) Validator[M] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MapEachValue(%v)", vr) }, mapEach[M](get(KeyValue[K, V].GetValue, vr.Validate)))
+	return WithStringFunc(func() string { return fmt.Sprintf("MapEachValue(%v)", vr) }, mapEach[M](wrap("value", get(KeyValue[K, V].GetValue, vr.Validate))))
 }
 
 func mapEach[M ~map[K]V, K comparable, V any](f func(KeyValue[K, V]) error) func(M) error {
@@ -75,12 +75,12 @@ func MapSortedEach[M ~map[K]V, K cmp.Ordered, V any](vr Validator[KeyValue[K, V]
 
 // MapSortedEachKey returns a [Validator] that checks each key of the map in sorted order of keys.
 func MapSortedEachKey[M ~map[K]V, K cmp.Ordered, V any](vr Validator[K]) Validator[M] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MapSortedEachKey(%v)", vr) }, mapSortedEach[M](get(KeyValue[K, V].GetKey, vr.Validate)))
+	return WithStringFunc(func() string { return fmt.Sprintf("MapSortedEachKey(%v)", vr) }, mapSortedEach[M](wrap("key", get(KeyValue[K, V].GetKey, vr.Validate))))
 }
 
 // MapSortedEachValue returns a [Validator] that checks each value of the map in sorted order of keys.
 func MapSortedEachValue[M ~map[K]V, K cmp.Ordered, V any](vr Validator[V]) Validator[M] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MapSortedEachValue(%v)", vr) }, mapSortedEach[M](get(KeyValue[K, V].GetValue, vr.Validate)))
+	return WithStringFunc(func() string { return fmt.Sprintf("MapSortedEachValue(%v)", vr) }, mapSortedEach[M](wrap("value", get(KeyValue[K, V].GetValue, vr.Validate))))
 }
 
 func mapSortedEach[M ~map[K]V, K cmp.Ordered, V any](f func(KeyValue[K, V]) error) func(M) error {
