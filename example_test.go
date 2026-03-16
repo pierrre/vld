@@ -41,9 +41,9 @@ func Example() {
 	// User: alice
 	// <nil>
 	// User: Bob
-	// Name: "Bob" does not match regexp "^[a-z]+$"
-	// Age: 15 is not in the range [18, 130]
-	// Roles: 1: "guest" is not in []string{"admin", "member"}
+	// path field "Name": "Bob" does not match regexp "^[a-z]+$"
+	// path field "Age": 15 is not in the range [18, 130]
+	// path field "Roles": path index 1: "guest" is not in []string{"admin", "member"}
 }
 
 type User struct {

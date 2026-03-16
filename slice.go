@@ -75,7 +75,7 @@ func sliceEach[S ~[]E, E any](f func(KeyValue[int, E]) error) func(S) error {
 		for i, v := range s {
 			err := f(KeyValue[int, E]{Key: i, Value: v})
 			if err != nil {
-				errs = append(errs, ErrorWrapMessagef(err, "%d", i))
+				errs = append(errs, ErrorWrapPathElement(err, &IndexPathElem{Index: i}))
 			}
 		}
 		return ErrorJoin(errs...)
@@ -90,7 +90,10 @@ func SliceUnique[S ~[]E, E comparable]() Validator[S] {
 		for i, v := range s {
 			_, ok := seen[v]
 			if ok {
-				errs = append(errs, fmt.Errorf("%d: duplicate %#v (index %d)", i, v, seen[v]))
+				errs = append(errs, &PathElemError{
+					Err:      fmt.Errorf("duplicate %#v (index %d)", v, seen[v]),
+					PathElem: &IndexPathElem{Index: i},
+				})
 			} else {
 				seen[v] = i
 			}
@@ -108,7 +111,10 @@ func SliceUniqueBy[S ~[]E, E any, K comparable](getKey func(E) K) Validator[S] {
 			key := getKey(v)
 			_, ok := seen[key]
 			if ok {
-				errs = append(errs, fmt.Errorf("%d: duplicate key %#v (index %d)", i, key, seen[key]))
+				errs = append(errs, &PathElemError{
+					Err:      fmt.Errorf("duplicate %#v (index %d)", v, seen[key]),
+					PathElem: &IndexPathElem{Index: i},
+				})
 			} else {
 				seen[key] = i
 			}

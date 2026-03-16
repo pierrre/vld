@@ -31,9 +31,21 @@ func wrap[T any](msg string, f func(T) error) func(T) error {
 	}
 }
 
-// Field returns a [Validator] that combines [Wrap] and [Get].
+// Field returns a [Validator] that validates a field returned by the get function.
 func Field[In, Out any](name string, getFunc func(In) Out, vr Validator[Out]) Validator[In] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Field(%q, %v)", name, vr) }, wrap(name, get(getFunc, vr.Validate)))
+	return WithStringFunc(func() string { return fmt.Sprintf("Field(%q, %v)", name, vr) }, field(name, getFunc, vr.Validate))
+}
+
+func field[In, Out any](name string, getFunc func(In) Out, f func(Out) error) func(In) error {
+	return func(v In) error {
+		err := f(getFunc(v))
+		if err != nil {
+			return ErrorWrapPathElement(err, &FieldPathElem{
+				Field: name,
+			})
+		}
+		return nil
+	}
 }
 
 // Message returns a [Validator] that overrides the error message of the validator.

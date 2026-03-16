@@ -102,7 +102,7 @@ func ExampleSliceEach() {
 	// Output:
 	// SliceEach(Equal(vld.KeyValue[int,int]{Key:0, Value:1}))
 	// <nil>
-	// 0: vld.KeyValue[int,int]{Key:0, Value:2} is not equal to vld.KeyValue[int,int]{Key:0, Value:1}
+	// path index 0: vld.KeyValue[int,int]{Key:0, Value:2} is not equal to vld.KeyValue[int,int]{Key:0, Value:1}
 }
 
 func ExampleSliceEachValue() {
@@ -113,7 +113,7 @@ func ExampleSliceEachValue() {
 	// Output:
 	// SliceEachValue(Equal(1))
 	// <nil>
-	// 1: 2 is not equal to 1
+	// path index 1: 2 is not equal to 1
 }
 
 func ExampleSliceUnique() {
@@ -124,7 +124,7 @@ func ExampleSliceUnique() {
 	// Output:
 	// SliceUnique
 	// <nil>
-	// 2: duplicate 1 (index 0)
+	// path index 2: duplicate 1 (index 0)
 }
 
 func ExampleSliceUniqueBy() {
@@ -135,5 +135,5 @@ func ExampleSliceUniqueBy() {
 	// Output:
 	// SliceUniqueBy
 	// <nil>
-	// 2: duplicate key 1 (index 0)
+	// path index 2: duplicate 3 (index 0)
 }

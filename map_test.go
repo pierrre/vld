@@ -80,7 +80,7 @@ func ExampleMapEach() {
 	// Output:
 	// MapEach(Equal(vld.KeyValue[string,int]{Key:"a", Value:1}))
 	// <nil>
-	// "b": vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}
+	// path key "b": vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}
 }
 
 func ExampleMapEachKey() {
@@ -91,7 +91,7 @@ func ExampleMapEachKey() {
 	// Output:
 	// MapEachKey(Equal("a"))
 	// <nil>
-	// "b": key: "b" is not equal to "a"
+	// path key "b": path field "key": "b" is not equal to "a"
 }
 
 func ExampleMapEachValue() {
@@ -102,7 +102,7 @@ func ExampleMapEachValue() {
 	// Output:
 	// MapEachValue(Equal(1))
 	// <nil>
-	// "b": value: 2 is not equal to 1
+	// path key "b": path field "value": 2 is not equal to 1
 }
 
 func ExampleMapSortedEach() {
@@ -113,7 +113,7 @@ func ExampleMapSortedEach() {
 	// Output:
 	// MapSortedEach(Equal(vld.KeyValue[string,int]{Key:"a", Value:1}))
 	// <nil>
-	// "b": vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}
+	// path key "b": vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}
 }
 
 func ExampleMapSortedEachKey() {
@@ -124,7 +124,7 @@ func ExampleMapSortedEachKey() {
 	// Output:
 	// MapSortedEachKey(Equal("a"))
 	// <nil>
-	// "b": key: "b" is not equal to "a"
+	// path key "b": path field "key": "b" is not equal to "a"
 }
 
 func ExampleMapSortedEachValue() {
@@ -135,5 +135,5 @@ func ExampleMapSortedEachValue() {
 	// Output:
 	// MapSortedEachValue(Equal(1))
 	// <nil>
-	// "b": value: 2 is not equal to 1
+	// path key "b": path field "value": 2 is not equal to 1
 }

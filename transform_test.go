@@ -42,7 +42,7 @@ func ExampleField() {
 	// Output:
 	// Field("Name", StringLenMax(5))
 	// <nil>
-	// Name: length 7 is greater than 5
+	// path field "Name": length 7 is greater than 5
 }
 
 func ExampleMessage() {

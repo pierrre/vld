@@ -16,7 +16,7 @@ func ExamplePointerOptional() {
 	// PointerOptional(Equal(1))
 	// <nil>
 	// <nil>
-	// 2 is not equal to 1
+	// path pointer: 2 is not equal to 1
 }
 
 func ExamplePointerRequired() {
@@ -29,5 +29,5 @@ func ExamplePointerRequired() {
 	// PointerRequired(Equal(1))
 	// <nil>
 	// pointer is nil
-	// 2 is not equal to 1
+	// path pointer: 2 is not equal to 1
 }
