@@ -11,10 +11,12 @@ func ExampleStringLenEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abcd"))
+	fmt.Println(GetErrorLocalization(vr.Validate("abcd"), "en"))
 	// Output:
 	// StringLenEqual(3)
 	// <nil>
 	// length 4 is not equal to 3
+	// Length 4 is not equal to 3.
 }
 
 func ExampleStringLenMin() {
@@ -22,10 +24,12 @@ func ExampleStringLenMin() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("ab"))
+	fmt.Println(GetErrorLocalization(vr.Validate("ab"), "en"))
 	// Output:
 	// StringLenMin(3)
 	// <nil>
 	// length 2 is less than 3
+	// Length 2 is less than 3.
 }
 
 func ExampleStringLenMax() {
@@ -33,10 +37,12 @@ func ExampleStringLenMax() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abcd"))
+	fmt.Println(GetErrorLocalization(vr.Validate("abcd"), "en"))
 	// Output:
 	// StringLenMax(3)
 	// <nil>
 	// length 4 is greater than 3
+	// Length 4 is greater than 3.
 }
 
 func ExampleStringLenRange() {
@@ -45,11 +51,13 @@ func ExampleStringLenRange() {
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("a"))
 	fmt.Println(vr.Validate("abcde"))
+	fmt.Println(GetErrorLocalization(vr.Validate("a"), "en"))
 	// Output:
 	// StringLenRange(2, 4)
 	// <nil>
 	// length 1 is not in the range [2, 4]
 	// length 5 is not in the range [2, 4]
+	// Length 1 is not in the range [2, 4].
 }
 
 func ExampleStringEmpty() {
@@ -57,10 +65,12 @@ func ExampleStringEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(""))
 	fmt.Println(vr.Validate("a"))
+	fmt.Println(GetErrorLocalization(vr.Validate("a"), "en"))
 	// Output:
 	// StringEmpty
 	// <nil>
 	// is not empty (1)
+	// Value is not empty (1).
 }
 
 func ExampleStringNotEmpty() {
@@ -68,10 +78,12 @@ func ExampleStringNotEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("a"))
 	fmt.Println(vr.Validate(""))
+	fmt.Println(GetErrorLocalization(vr.Validate(""), "en"))
 	// Output:
 	// StringNotEmpty
 	// <nil>
 	// is empty
+	// Value is empty.
 }
 
 func ExampleStringRunesEqual() {
@@ -79,10 +91,12 @@ func ExampleStringRunesEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abcd"))
+	fmt.Println(GetErrorLocalization(vr.Validate("abcd"), "en"))
 	// Output:
 	// StringRunesEqual(3)
 	// <nil>
 	// length 4 is not equal to 3
+	// Length 4 is not equal to 3.
 }
 
 func ExampleStringRunesMin() {
@@ -90,10 +104,12 @@ func ExampleStringRunesMin() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("ab"))
+	fmt.Println(GetErrorLocalization(vr.Validate("ab"), "en"))
 	// Output:
 	// StringRunesMin(3)
 	// <nil>
 	// length 2 is less than 3
+	// Length 2 is less than 3.
 }
 
 func ExampleStringRunesMax() {
@@ -101,10 +117,12 @@ func ExampleStringRunesMax() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abcd"))
+	fmt.Println(GetErrorLocalization(vr.Validate("abcd"), "en"))
 	// Output:
 	// StringRunesMax(3)
 	// <nil>
 	// length 4 is greater than 3
+	// Length 4 is greater than 3.
 }
 
 func ExampleStringRunesRange() {
@@ -113,11 +131,13 @@ func ExampleStringRunesRange() {
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("a"))
 	fmt.Println(vr.Validate("abcde"))
+	fmt.Println(GetErrorLocalization(vr.Validate("a"), "en"))
 	// Output:
 	// StringRunesRange(2, 4)
 	// <nil>
 	// length 1 is not in the range [2, 4]
 	// length 5 is not in the range [2, 4]
+	// Length 1 is not in the range [2, 4].
 }
 
 func ExampleStringContains() {
@@ -125,10 +145,12 @@ func ExampleStringContains() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("acd"))
+	fmt.Println(GetErrorLocalization(vr.Validate("acd"), "en"))
 	// Output:
 	// StringContains("b")
 	// <nil>
 	// "acd" does not contain "b"
+	// String "acd" does not contain "b".
 }
 
 func ExampleStringNotContains() {
@@ -136,10 +158,12 @@ func ExampleStringNotContains() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("acd"))
 	fmt.Println(vr.Validate("abc"))
+	fmt.Println(GetErrorLocalization(vr.Validate("abc"), "en"))
 	// Output:
 	// StringNotContains("b")
 	// <nil>
 	// "abc" contains "b"
+	// String "abc" contains "b".
 }
 
 func ExampleStringHasPrefix() {
@@ -147,10 +171,12 @@ func ExampleStringHasPrefix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("bac"))
+	fmt.Println(GetErrorLocalization(vr.Validate("bac"), "en"))
 	// Output:
 	// StringHasPrefix("a")
 	// <nil>
 	// "bac" does not begin with "a"
+	// String "bac" does not begin with "a".
 }
 
 func ExampleStringNotHasPrefix() {
@@ -158,10 +184,12 @@ func ExampleStringNotHasPrefix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("bac"))
 	fmt.Println(vr.Validate("abc"))
+	fmt.Println(GetErrorLocalization(vr.Validate("abc"), "en"))
 	// Output:
 	// StringNotHasPrefix("a")
 	// <nil>
 	// "abc" begins with "a"
+	// String "abc" begins with "a".
 }
 
 func ExampleStringHasSuffix() {
@@ -169,10 +197,12 @@ func ExampleStringHasSuffix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("acb"))
+	fmt.Println(GetErrorLocalization(vr.Validate("acb"), "en"))
 	// Output:
 	// StringHasSuffix("c")
 	// <nil>
 	// "acb" does not end with "c"
+	// String "acb" does not end with "c".
 }
 
 func ExampleStringNotHasSuffix() {
@@ -180,8 +210,10 @@ func ExampleStringNotHasSuffix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("acb"))
 	fmt.Println(vr.Validate("abc"))
+	fmt.Println(GetErrorLocalization(vr.Validate("abc"), "en"))
 	// Output:
 	// StringNotHasSuffix("c")
 	// <nil>
 	// "abc" ends with "c"
+	// String "abc" ends with "c".
 }

@@ -43,7 +43,9 @@ func SliceNotEmpty[S ~[]E, E any]() Validator[S] {
 func SliceContains[S ~[]E, E comparable](elem E) Validator[S] {
 	return WithStringFunc(func() string { return fmt.Sprintf("SliceContains(%#v)", elem) }, func(s S) error {
 		if !slices.Contains(s, elem) {
-			return fmt.Errorf("does not contain %#v", elem)
+			err := fmt.Errorf("does not contain %#v", elem)
+			err = ErrorWrapLocalization(err, "SliceContains", elem)
+			return err
 		}
 		return nil
 	})
@@ -53,7 +55,9 @@ func SliceContains[S ~[]E, E comparable](elem E) Validator[S] {
 func SliceNotContains[S ~[]E, E comparable](elem E) Validator[S] {
 	return WithStringFunc(func() string { return fmt.Sprintf("SliceNotContains(%#v)", elem) }, func(s S) error {
 		if slices.Contains(s, elem) {
-			return fmt.Errorf("contains %#v", elem)
+			err := fmt.Errorf("contains %#v", elem)
+			err = ErrorWrapLocalization(err, "SliceNotContains", elem)
+			return err
 		}
 		return nil
 	})
@@ -90,8 +94,10 @@ func SliceUnique[S ~[]E, E comparable]() Validator[S] {
 		for i, v := range s {
 			_, ok := seen[v]
 			if ok {
+				err := fmt.Errorf("duplicate %#v (index %d)", v, seen[v])
+				err = ErrorWrapLocalization(err, "SliceUnique", v, seen[v])
 				errs = append(errs, &PathElemError{
-					Err:      fmt.Errorf("duplicate %#v (index %d)", v, seen[v]),
+					Err:      err,
 					PathElem: &IndexPathElem{Index: i},
 				})
 			} else {
@@ -111,8 +117,10 @@ func SliceUniqueBy[S ~[]E, E any, K comparable](getKey func(E) K) Validator[S] {
 			key := getKey(v)
 			_, ok := seen[key]
 			if ok {
+				err := fmt.Errorf("duplicate %#v (index %d)", v, seen[key])
+				err = ErrorWrapLocalization(err, "SliceUnique", v, seen[key])
 				errs = append(errs, &PathElemError{
-					Err:      fmt.Errorf("duplicate %#v (index %d)", v, seen[key]),
+					Err:      err,
 					PathElem: &IndexPathElem{Index: i},
 				})
 			} else {

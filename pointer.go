@@ -23,7 +23,9 @@ func PointerOptional[T any](vr Validator[T]) Validator[*T] {
 func PointerRequired[T any](vr Validator[T]) Validator[*T] {
 	return WithStringFunc(func() string { return fmt.Sprintf("PointerRequired(%v)", vr) }, func(v *T) error {
 		if v == nil {
-			return errors.New("pointer is nil")
+			err := errors.New("pointer is nil")
+			err = ErrorWrapLocalization(err, "PointerRequired")
+			return err
 		}
 		err := vr.Validate(*v)
 		if err != nil {

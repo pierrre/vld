@@ -11,10 +11,12 @@ func ExampleMapLenEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenEqual(1)
 	// <nil>
 	// length 0 is not equal to 1
+	// Length 0 is not equal to 1.
 }
 
 func ExampleMapLenMin() {
@@ -22,10 +24,12 @@ func ExampleMapLenMin() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenMin(1)
 	// <nil>
 	// length 0 is less than 1
+	// Length 0 is less than 1.
 }
 
 func ExampleMapLenMax() {
@@ -33,10 +37,12 @@ func ExampleMapLenMax() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(vr.Validate(map[string]int{"a": 1, "b": 2}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{"a": 1, "b": 2}), "en"))
 	// Output:
 	// MapLenMax(1)
 	// <nil>
 	// length 2 is greater than 1
+	// Length 2 is greater than 1.
 }
 
 func ExampleMapLenRange() {
@@ -44,10 +50,12 @@ func ExampleMapLenRange() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenRange(1, 2)
 	// <nil>
 	// length 0 is not in the range [1, 2]
+	// Length 0 is not in the range [1, 2].
 }
 
 func ExampleMapEmpty() {
@@ -55,10 +63,12 @@ func ExampleMapEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{"a": 1}), "en"))
 	// Output:
 	// MapEmpty
 	// <nil>
 	// is not empty (1)
+	// Value is not empty (1).
 }
 
 func ExampleMapNotEmpty() {
@@ -66,10 +76,12 @@ func ExampleMapNotEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapNotEmpty
 	// <nil>
 	// is empty
+	// Value is empty.
 }
 
 func ExampleMapEach() {
@@ -77,10 +89,12 @@ func ExampleMapEach() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapEach(Equal(vld.KeyValue[string,int]{Key:"a", Value:1}))
 	// <nil>
 	// path key "b": vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}
+	// Value vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}.
 }
 
 func ExampleMapEachKey() {
@@ -88,10 +102,12 @@ func ExampleMapEachKey() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapEachKey(Equal("a"))
 	// <nil>
 	// path key "b": path field "key": "b" is not equal to "a"
+	// Value "b" is not equal to "a".
 }
 
 func ExampleMapEachValue() {
@@ -99,10 +115,12 @@ func ExampleMapEachValue() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapEachValue(Equal(1))
 	// <nil>
 	// path key "b": path field "value": 2 is not equal to 1
+	// Value 2 is not equal to 1.
 }
 
 func ExampleMapSortedEach() {
@@ -110,10 +128,12 @@ func ExampleMapSortedEach() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapSortedEach(Equal(vld.KeyValue[string,int]{Key:"a", Value:1}))
 	// <nil>
 	// path key "b": vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}
+	// Value vld.KeyValue[string,int]{Key:"b", Value:2} is not equal to vld.KeyValue[string,int]{Key:"a", Value:1}.
 }
 
 func ExampleMapSortedEachKey() {
@@ -121,10 +141,12 @@ func ExampleMapSortedEachKey() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapSortedEachKey(Equal("a"))
 	// <nil>
 	// path key "b": path field "key": "b" is not equal to "a"
+	// Value "b" is not equal to "a".
 }
 
 func ExampleMapSortedEachValue() {
@@ -132,8 +154,10 @@ func ExampleMapSortedEachValue() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
+	fmt.Println(GetErrorLocalization(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapSortedEachValue(Equal(1))
 	// <nil>
 	// path key "b": path field "value": 2 is not equal to 1
+	// Value 2 is not equal to 1.
 }

@@ -19,7 +19,9 @@ func minCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) func(T) error {
 	return func(v T) error {
 		c := cmpFunc(v, minValue)
 		if c < 0 {
-			return fmt.Errorf("%#v is less than %#v", v, minValue)
+			err := fmt.Errorf("%#v is less than %#v", v, minValue)
+			err = ErrorWrapLocalization(err, "Min", v, minValue)
+			return err
 		}
 		return nil
 	}
@@ -39,7 +41,9 @@ func maxCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) func(T) error {
 	return func(v T) error {
 		c := cmpFunc(v, maxValue)
 		if c > 0 {
-			return fmt.Errorf("%#v is greater than %#v", v, maxValue)
+			err := fmt.Errorf("%#v is greater than %#v", v, maxValue)
+			err = ErrorWrapLocalization(err, "Max", v, maxValue)
+			return err
 		}
 		return nil
 	}
@@ -60,7 +64,9 @@ func rangeCmpFunc[T any](minValue, maxValue T, cmpFunc func(a, b T) int) func(T)
 		cMin := cmpFunc(v, minValue)
 		cMax := cmpFunc(v, maxValue)
 		if cMin < 0 || cMax > 0 {
-			return fmt.Errorf("%#v is not in the range [%#v, %#v]", v, minValue, maxValue)
+			err := fmt.Errorf("%#v is not in the range [%#v, %#v]", v, minValue, maxValue)
+			err = ErrorWrapLocalization(err, "Range", v, minValue, maxValue)
+			return err
 		}
 		return nil
 	}
@@ -80,7 +86,9 @@ func lessCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) func(T) error {
 	return func(v T) error {
 		c := cmpFunc(v, maxValue)
 		if c >= 0 {
-			return fmt.Errorf("%#v is not less than %#v", v, maxValue)
+			err := fmt.Errorf("%#v is not less than %#v", v, maxValue)
+			err = ErrorWrapLocalization(err, "Less", v, maxValue)
+			return err
 		}
 		return nil
 	}
@@ -100,7 +108,9 @@ func greaterCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) func(T) error {
 	return func(v T) error {
 		c := cmpFunc(v, minValue)
 		if c <= 0 {
-			return fmt.Errorf("%#v is not greater than %#v", v, minValue)
+			err := fmt.Errorf("%#v is not greater than %#v", v, minValue)
+			err = ErrorWrapLocalization(err, "Greater", v, minValue)
+			return err
 		}
 		return nil
 	}

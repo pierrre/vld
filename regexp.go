@@ -25,7 +25,9 @@ func RegexpMatch[RS RegexpString](rs RS) Validator[string] {
 	r := getRegexp(rs)
 	return WithStringFunc(func() string { return fmt.Sprintf("RegexpMatch(%q)", r) }, func(s string) error {
 		if !r.MatchString(s) {
-			return fmt.Errorf("%q does not match regexp %q", s, r)
+			err := fmt.Errorf("%q does not match regexp %q", s, r)
+			err = ErrorWrapLocalization(err, "RegexpMatch", s, r)
+			return err
 		}
 		return nil
 	})
@@ -36,7 +38,9 @@ func RegexpNotMatch[RS RegexpString](rs RS) Validator[string] {
 	r := getRegexp(rs)
 	return WithStringFunc(func() string { return fmt.Sprintf("RegexpNotMatch(%q)", r) }, func(s string) error {
 		if r.MatchString(s) {
-			return fmt.Errorf("%q matches regexp %q", s, r)
+			err := fmt.Errorf("%q matches regexp %q", s, r)
+			err = ErrorWrapLocalization(err, "RegexpNotMatch", s, r)
+			return err
 		}
 		return nil
 	})

@@ -13,7 +13,9 @@ func In[T comparable](vs ...T) Validator[T] {
 	return WithStringFunc(func() string { return fmt.Sprintf("In(%#v)", vs) }, func(v T) error {
 		_, ok := m[v]
 		if !ok {
-			return fmt.Errorf("%#v is not in %#v", v, vs)
+			err := fmt.Errorf("%#v is not in %#v", v, vs)
+			err = ErrorWrapLocalization(err, "In", v, vs)
+			return err
 		}
 		return nil
 	})
@@ -28,7 +30,9 @@ func NotIn[T comparable](vs ...T) Validator[T] {
 	return WithStringFunc(func() string { return fmt.Sprintf("NotIn(%#v)", vs) }, func(v T) error {
 		_, ok := m[v]
 		if ok {
-			return fmt.Errorf("%#v is in %#v", v, vs)
+			err := fmt.Errorf("%#v is in %#v", v, vs)
+			err = ErrorWrapLocalization(err, "NotIn", v, vs)
+			return err
 		}
 		return nil
 	})

@@ -14,10 +14,12 @@ func ExampleGet() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(User{Name: "Alice"}))
 	fmt.Println(vr.Validate(User{Name: "Charlie"}))
+	fmt.Println(GetErrorLocalization(vr.Validate(User{Name: "Charlie"}), "en"))
 	// Output:
 	// Get(vld_test.User => string, StringLenMax(5))
 	// <nil>
 	// length 7 is greater than 5
+	// Length 7 is greater than 5.
 }
 
 func ExampleWrap() {
@@ -25,10 +27,12 @@ func ExampleWrap() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
+	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
 	// Output:
 	// Wrap("message", Equal(1))
 	// <nil>
 	// message: 2 is not equal to 1
+	// Value 2 is not equal to 1.
 }
 
 func ExampleField() {
@@ -39,10 +43,12 @@ func ExampleField() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(User{Name: "Alice"}))
 	fmt.Println(vr.Validate(User{Name: "Charlie"}))
+	fmt.Println(GetErrorLocalization(vr.Validate(User{Name: "Charlie"}), "en"))
 	// Output:
 	// Field("Name", StringLenMax(5))
 	// <nil>
 	// path field "Name": length 7 is greater than 5
+	// Length 7 is greater than 5.
 }
 
 func ExampleMessage() {

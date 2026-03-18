@@ -15,7 +15,9 @@ func Positive[T Signed]() Validator[T] {
 		if v > 0 {
 			return nil
 		}
-		return fmt.Errorf("%#v is not positive", v)
+		err := fmt.Errorf("%#v is not positive", v)
+		err = ErrorWrapLocalization(err, "Positive", v)
+		return err
 	})
 }
 
@@ -25,6 +27,8 @@ func Negative[T Signed]() Validator[T] {
 		if v < 0 {
 			return nil
 		}
-		return fmt.Errorf("%#v is not negative", v)
+		err := fmt.Errorf("%#v is not negative", v)
+		err = ErrorWrapLocalization(err, "Negative", v)
+		return err
 	})
 }

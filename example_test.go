@@ -24,7 +24,15 @@ func Example() {
 		{Name: "Bob", Age: 15, Roles: []string{"admin", "guest"}},
 	} {
 		fmt.Println("User:", u.Name)
-		fmt.Println(vr.Validate(u))
+		err := vr.Validate(u)
+		if err == nil {
+			fmt.Println("no error")
+			continue
+		}
+		fmt.Println(err)
+		for _, err := range GetErrors(err) {
+			fmt.Printf("%v : %s\n", GetErrorPath(err), GetErrorLocalization(err, "en"))
+		}
 	}
 	// Output:
 	// All(
@@ -39,11 +47,14 @@ func Example() {
 	// 	)),
 	// )
 	// User: alice
-	// <nil>
+	// no error
 	// User: Bob
 	// path field "Name": "Bob" does not match regexp "^[a-z]+$"
 	// path field "Age": 15 is not in the range [18, 130]
 	// path field "Roles": path index 1: "guest" is not in []string{"admin", "member"}
+	// .Name : String "Bob" does not match regexp "^[a-z]+$".
+	// .Age : Value 15 is not in the range [18, 130].
+	// .Roles[1] : Value "guest" is not in []string{"admin", "member"}.
 }
 
 type User struct {

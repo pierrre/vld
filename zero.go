@@ -14,7 +14,9 @@ func isZero[T comparable](v T) bool {
 func Zero[T comparable]() Validator[T] {
 	return WithStringFunc(func() string { return "Zero" }, func(v T) error {
 		if !isZero(v) {
-			return fmt.Errorf("%#v is not zero", v)
+			err := fmt.Errorf("%#v is not zero", v)
+			err = ErrorWrapLocalization(err, "Zero", v)
+			return err
 		}
 		return nil
 	})
@@ -24,7 +26,9 @@ func Zero[T comparable]() Validator[T] {
 func NotZero[T comparable]() Validator[T] {
 	return WithStringFunc(func() string { return "NotZero" }, func(v T) error {
 		if isZero(v) {
-			return errors.New("is zero")
+			err := errors.New("is zero")
+			err = ErrorWrapLocalization(err, "NotZero")
+			return err
 		}
 		return nil
 	})
@@ -44,7 +48,9 @@ func Optional[T comparable](vr Validator[T]) Validator[T] {
 func Required[T comparable](vr Validator[T]) Validator[T] {
 	return WithStringFunc(func() string { return fmt.Sprintf("Required(%v)", vr) }, func(v T) error {
 		if isZero(v) {
-			return errors.New("required")
+			err := errors.New("required")
+			err = ErrorWrapLocalization(err, "Required")
+			return err
 		}
 		return vr.Validate(v)
 	})

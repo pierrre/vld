@@ -18,10 +18,12 @@ func ExampleCmpEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(2)))
+	fmt.Println(GetErrorLocalization(vr.Validate(intComparer(2)), "en"))
 	// Output:
 	// CmpEqual(1)
 	// <nil>
 	// 2 is not equal to 1
+	// Value 2 is not equal to 1.
 }
 
 func ExampleCmpNotEqual() {
@@ -29,10 +31,12 @@ func ExampleCmpNotEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(intComparer(2)))
 	fmt.Println(vr.Validate(intComparer(1)))
+	fmt.Println(GetErrorLocalization(vr.Validate(intComparer(1)), "en"))
 	// Output:
 	// CmpNotEqual(1)
 	// <nil>
 	// 1 is equal to 1
+	// Value 1 is equal to 1.
 }
 
 func ExampleCmpMin() {
@@ -41,11 +45,13 @@ func ExampleCmpMin() {
 	fmt.Println(vr.Validate(intComparer(2)))
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(0)))
+	fmt.Println(GetErrorLocalization(vr.Validate(intComparer(0)), "en"))
 	// Output:
 	// CmpMin(1)
 	// <nil>
 	// <nil>
 	// 0 is less than 1
+	// Value 0 is less than 1.
 }
 
 func ExampleCmpMax() {
@@ -54,11 +60,13 @@ func ExampleCmpMax() {
 	fmt.Println(vr.Validate(intComparer(0)))
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(2)))
+	fmt.Println(GetErrorLocalization(vr.Validate(intComparer(2)), "en"))
 	// Output:
 	// CmpMax(1)
 	// <nil>
 	// <nil>
 	// 2 is greater than 1
+	// Value 2 is greater than 1.
 }
 
 func ExampleCmpRange() {
@@ -69,6 +77,7 @@ func ExampleCmpRange() {
 	fmt.Println(vr.Validate(intComparer(3)))
 	fmt.Println(vr.Validate(intComparer(0)))
 	fmt.Println(vr.Validate(intComparer(4)))
+	fmt.Println(GetErrorLocalization(vr.Validate(intComparer(0)), "en"))
 	// Output:
 	// CmpRange(1, 3)
 	// <nil>
@@ -76,6 +85,7 @@ func ExampleCmpRange() {
 	// <nil>
 	// 0 is not in the range [1, 3]
 	// 4 is not in the range [1, 3]
+	// Value 0 is not in the range [1, 3].
 }
 
 func ExampleCmpLess() {
@@ -84,11 +94,13 @@ func ExampleCmpLess() {
 	fmt.Println(vr.Validate(intComparer(0)))
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(2)))
+	fmt.Println(GetErrorLocalization(vr.Validate(intComparer(1)), "en"))
 	// Output:
 	// CmpLess(1)
 	// <nil>
 	// 1 is not less than 1
 	// 2 is not less than 1
+	// Value 1 is not less than 1.
 }
 
 func ExampleCmpGreater() {
@@ -97,9 +109,11 @@ func ExampleCmpGreater() {
 	fmt.Println(vr.Validate(intComparer(2)))
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(0)))
+	fmt.Println(GetErrorLocalization(vr.Validate(intComparer(1)), "en"))
 	// Output:
 	// CmpGreater(1)
 	// <nil>
 	// 1 is not greater than 1
 	// 0 is not greater than 1
+	// Value 1 is not greater than 1.
 }

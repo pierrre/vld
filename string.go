@@ -64,7 +64,9 @@ func StringRunesRange(minRunes, maxRunes int) Validator[string] {
 func StringContains(substr string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringContains(%q)", substr) }, func(s string) error {
 		if !strings.Contains(s, substr) {
-			return fmt.Errorf("%q does not contain %q", s, substr)
+			err := fmt.Errorf("%q does not contain %q", s, substr)
+			err = ErrorWrapLocalization(err, "StringContains", s, substr)
+			return err
 		}
 		return nil
 	})
@@ -74,7 +76,9 @@ func StringContains(substr string) Validator[string] {
 func StringNotContains(substr string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringNotContains(%q)", substr) }, func(s string) error {
 		if strings.Contains(s, substr) {
-			return fmt.Errorf("%q contains %q", s, substr)
+			err := fmt.Errorf("%q contains %q", s, substr)
+			err = ErrorWrapLocalization(err, "StringNotContains", s, substr)
+			return err
 		}
 		return nil
 	})
@@ -84,7 +88,9 @@ func StringNotContains(substr string) Validator[string] {
 func StringHasPrefix(prefix string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringHasPrefix(%q)", prefix) }, func(s string) error {
 		if !strings.HasPrefix(s, prefix) {
-			return fmt.Errorf("%q does not begin with %q", s, prefix)
+			err := fmt.Errorf("%q does not begin with %q", s, prefix)
+			err = ErrorWrapLocalization(err, "StringHasPrefix", s, prefix)
+			return err
 		}
 		return nil
 	})
@@ -94,7 +100,9 @@ func StringHasPrefix(prefix string) Validator[string] {
 func StringNotHasPrefix(prefix string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringNotHasPrefix(%q)", prefix) }, func(s string) error {
 		if strings.HasPrefix(s, prefix) {
-			return fmt.Errorf("%q begins with %q", s, prefix)
+			err := fmt.Errorf("%q begins with %q", s, prefix)
+			err = ErrorWrapLocalization(err, "StringNotHasPrefix", s, prefix)
+			return err
 		}
 		return nil
 	})
@@ -104,7 +112,9 @@ func StringNotHasPrefix(prefix string) Validator[string] {
 func StringHasSuffix(suffix string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringHasSuffix(%q)", suffix) }, func(s string) error {
 		if !strings.HasSuffix(s, suffix) {
-			return fmt.Errorf("%q does not end with %q", s, suffix)
+			err := fmt.Errorf("%q does not end with %q", s, suffix)
+			err = ErrorWrapLocalization(err, "StringHasSuffix", s, suffix)
+			return err
 		}
 		return nil
 	})
@@ -114,7 +124,9 @@ func StringHasSuffix(suffix string) Validator[string] {
 func StringNotHasSuffix(suffix string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringNotHasSuffix(%q)", suffix) }, func(s string) error {
 		if strings.HasSuffix(s, suffix) {
-			return fmt.Errorf("%q ends with %q", s, suffix)
+			err := fmt.Errorf("%q ends with %q", s, suffix)
+			err = ErrorWrapLocalization(err, "StringNotHasSuffix", s, suffix)
+			return err
 		}
 		return nil
 	})

@@ -20,7 +20,9 @@ func TypeRequired[In, Out any](vr Validator[Out]) Validator[In] {
 	return WithStringFunc(func() string { return fmt.Sprintf("TypeRequired[%T](%v)", *new(Out), vr) }, func(v In) error {
 		vOut, ok := any(v).(Out)
 		if !ok {
-			return fmt.Errorf("%T cannot be converted to %T", v, *new(Out))
+			err := fmt.Errorf("%T cannot be converted to %T", v, *new(Out))
+			err = ErrorWrapLocalization(err, "TypeRequired", v, *new(Out))
+			return err
 		}
 		return vr.Validate(vOut)
 	})

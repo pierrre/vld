@@ -11,8 +11,9 @@ Go validation library.
 - Composable validation rules with `And`, `Or`, `All`, `Not`, `If`, and `IfElse`.
 - Built-in validators for common checks such as equality, ordering, ranges, membership, zero values, and required values.
 - Specialized validators for strings, slices, maps, pointers, iterators, and regular expressions, including length, emptiness, containment, uniqueness, and per-item validation.
-- Helpers for validating derived and nested values with `Get`, `Field`, `Wrap`, and `Message`.
-- Error helpers to wrap and join validation errors while keeping messages structured and readable.
+- Localized error messages (en/fr) with support for custom localizations.
+- Extract path from errors.
+
 
 ## Usage
 

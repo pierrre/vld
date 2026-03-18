@@ -13,11 +13,13 @@ func ExampleMin() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
+	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
 	// Output:
 	// Min(1)
 	// <nil>
 	// <nil>
 	// 0 is less than 1
+	// Value 0 is less than 1.
 }
 
 func ExampleMinCmpFunc() {
@@ -26,11 +28,13 @@ func ExampleMinCmpFunc() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
+	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
 	// Output:
 	// MinCmpFunc(1)
 	// <nil>
 	// <nil>
 	// 0 is less than 1
+	// Value 0 is less than 1.
 }
 
 func ExampleMax() {
@@ -39,11 +43,13 @@ func ExampleMax() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
+	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
 	// Output:
 	// Max(1)
 	// <nil>
 	// <nil>
 	// 2 is greater than 1
+	// Value 2 is greater than 1.
 }
 
 func ExampleMaxCmpFunc() {
@@ -52,11 +58,13 @@ func ExampleMaxCmpFunc() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
+	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
 	// Output:
 	// MaxCmpFunc(1)
 	// <nil>
 	// <nil>
 	// 2 is greater than 1
+	// Value 2 is greater than 1.
 }
 
 func ExampleRange() {
@@ -67,6 +75,7 @@ func ExampleRange() {
 	fmt.Println(vr.Validate(3))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(4))
+	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
 	// Output:
 	// Range(1, 3)
 	// <nil>
@@ -74,6 +83,7 @@ func ExampleRange() {
 	// <nil>
 	// 0 is not in the range [1, 3]
 	// 4 is not in the range [1, 3]
+	// Value 0 is not in the range [1, 3].
 }
 
 func ExampleRangeCmpFunc() {
@@ -84,6 +94,7 @@ func ExampleRangeCmpFunc() {
 	fmt.Println(vr.Validate(3))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(4))
+	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
 	// Output:
 	// RangeCmpFunc(1, 3)
 	// <nil>
@@ -91,6 +102,7 @@ func ExampleRangeCmpFunc() {
 	// <nil>
 	// 0 is not in the range [1, 3]
 	// 4 is not in the range [1, 3]
+	// Value 0 is not in the range [1, 3].
 }
 
 func ExampleLess() {
@@ -99,11 +111,13 @@ func ExampleLess() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
+	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
 	// Output:
 	// Less(1)
 	// <nil>
 	// 1 is not less than 1
 	// 2 is not less than 1
+	// Value 1 is not less than 1.
 }
 
 func ExampleLessCmpFunc() {
@@ -112,11 +126,13 @@ func ExampleLessCmpFunc() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
+	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
 	// Output:
 	// LessCmpFunc(1)
 	// <nil>
 	// 1 is not less than 1
 	// 2 is not less than 1
+	// Value 1 is not less than 1.
 }
 
 func ExampleGreater() {
@@ -125,11 +141,13 @@ func ExampleGreater() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
+	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
 	// Output:
 	// Greater(1)
 	// <nil>
 	// 1 is not greater than 1
 	// 0 is not greater than 1
+	// Value 1 is not greater than 1.
 }
 
 func ExampleGreaterCmpFunc() {
@@ -138,9 +156,11 @@ func ExampleGreaterCmpFunc() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
+	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
 	// Output:
 	// GreaterCmpFunc(1)
 	// <nil>
 	// 1 is not greater than 1
 	// 0 is not greater than 1
+	// Value 1 is not greater than 1.
 }

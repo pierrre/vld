@@ -17,7 +17,9 @@ func EqualFunc[T any](v T, eqFunc func(a, b T) bool) Validator[T] {
 func equalFunc[T any](expected T, eqFunc func(a, b T) bool) func(T) error {
 	return func(v T) error {
 		if !eqFunc(v, expected) {
-			return fmt.Errorf("%#v is not equal to %#v", v, expected)
+			err := fmt.Errorf("%#v is not equal to %#v", v, expected)
+			err = ErrorWrapLocalization(err, "Equal", v, expected)
+			return err
 		}
 		return nil
 	}
@@ -45,7 +47,9 @@ func NotEqualFunc[T any](v T, eqFunc func(a, b T) bool) Validator[T] {
 func notEqualFunc[T any](expected T, eqFunc func(a, b T) bool) func(T) error {
 	return func(v T) error {
 		if eqFunc(v, expected) {
-			return fmt.Errorf("%#v is equal to %#v", v, expected)
+			err := fmt.Errorf("%#v is equal to %#v", v, expected)
+			err = ErrorWrapLocalization(err, "NotEqual", v, expected)
+			return err
 		}
 		return nil
 	}

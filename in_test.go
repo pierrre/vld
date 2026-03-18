@@ -11,10 +11,12 @@ func ExampleIn() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(4))
+	fmt.Println(GetErrorLocalization(vr.Validate(4), "en"))
 	// Output:
 	// In([]int{1, 2, 3})
 	// <nil>
 	// 4 is not in []int{1, 2, 3}
+	// Value 4 is not in []int{1, 2, 3}.
 }
 
 func ExampleNotIn() {
@@ -22,8 +24,10 @@ func ExampleNotIn() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(4))
 	fmt.Println(vr.Validate(1))
+	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
 	// Output:
 	// NotIn([]int{1, 2, 3})
 	// <nil>
 	// 1 is in []int{1, 2, 3}
+	// Value 1 is in []int{1, 2, 3}.
 }

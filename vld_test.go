@@ -11,10 +11,12 @@ func ExampleValidatorFunc() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
+	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
 	// Output:
 	// ValidatorFunc
 	// <nil>
 	// 2 is not equal to 1
+	// Value 2 is not equal to 1.
 }
 
 func ExampleWithStringFunc() {
@@ -22,8 +24,10 @@ func ExampleWithStringFunc() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
+	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
 	// Output:
 	// custom
 	// <nil>
 	// 2 is not equal to 1
+	// Value 2 is not equal to 1.
 }
