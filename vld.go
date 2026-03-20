@@ -23,7 +23,8 @@ func (f ValidatorFunc[T]) String() string {
 	return "ValidatorFunc"
 }
 
-// WithStringFunc returns a [Validator] that has a custom string representation, and validates the value using the function.
+// WithStringFunc returns a [Validator] with a custom string representation.
+// It validates the value with the given function.
 func WithStringFunc[T any](getString func() string, f func(T) error) Validator[T] {
 	return &withStringFunc[T]{
 		getString: getString,

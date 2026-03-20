@@ -11,8 +11,9 @@ type errorsUnwrapper interface {
 
 // ErrorWrap applies the wrapFunc to the error.
 // If the error is nil, it returns nil.
-// If the error implements Unwrap() []error, it applies the wrapFunc to each error in the slice and returns a new error that joins them.
-// Otherwise it applies the wrapFunc to the error and returns the result.
+// If the error implements Unwrap() []error, it applies wrapFunc to each error in the slice.
+// It then returns a joined error.
+// Otherwise, it applies wrapFunc to the error and returns the result.
 func ErrorWrap(err error, wrapFunc func(error) error) error {
 	if err == nil {
 		return nil
@@ -54,7 +55,8 @@ func ErrorWrapMessagef(err error, format string, args ...any) error {
 
 // ErrorJoin takes a list of errors and returns a single error that joins them.
 // If an error is nil, it is ignored.
-// If an error implements Unwrap() []error, it is unwrapped and each error in the slice is included in the result.
+// If an error implements Unwrap() []error, it is unwrapped.
+// Each error in the slice is included in the result.
 func ErrorJoin(errs ...error) error {
 	if len(errs) == 0 {
 		return nil
@@ -87,7 +89,7 @@ func ErrorJoin(errs ...error) error {
 	return errors.Join(resErrs...)
 }
 
-// GetErrors returns a lice of errors from an error.
+// GetErrors returns a slice of errors from an error.
 // If the error is nil, it returns nil.
 // If the error implements Unwrap() []error, it returns the slice of errors.
 // Otherwise it returns a slice containing the error.

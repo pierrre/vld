@@ -6,7 +6,8 @@ import (
 )
 
 // RegexpString is a type that can be either a [*regexp.Regexp] or a string.
-// If the value is a string, it will be compiled into a [*regexp.Regexp] using [regexp.MustCompile] which will panic if the string is not a valid regular expression.
+// If the value is a string, it is compiled with [regexp.MustCompile].
+// This panics if the string is not a valid regular expression.
 type RegexpString interface {
 	*regexp.Regexp | string
 }
