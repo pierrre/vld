@@ -94,9 +94,9 @@ func (err *PathElemError) Unwrap() error {
 	return err.Err
 }
 
-// ErrorWrapPathElement wraps the error with the [PathElem].
+// ErrorWrapPathElem wraps the error with the [PathElem].
 // See [ErrorWrap] for details.
-func ErrorWrapPathElement(err error, e PathElem) error {
+func ErrorWrapPathElem(err error, e PathElem) error {
 	if err == nil {
 		return nil
 	}

@@ -40,7 +40,7 @@ func field[In, Out any](name string, getFunc func(In) Out, f func(Out) error) fu
 	return func(v In) error {
 		err := f(getFunc(v))
 		if err != nil {
-			return ErrorWrapPathElement(err, &FieldPathElem{
+			return ErrorWrapPathElem(err, &FieldPathElem{
 				Field: name,
 			})
 		}

@@ -13,7 +13,7 @@ func PointerOptional[T any](vr Validator[T]) Validator[*T] {
 		}
 		err := vr.Validate(*v)
 		if err != nil {
-			return ErrorWrapPathElement(err, &PointerPathElem{})
+			return ErrorWrapPathElem(err, &PointerPathElem{})
 		}
 		return nil
 	})
@@ -29,7 +29,7 @@ func PointerRequired[T any](vr Validator[T]) Validator[*T] {
 		}
 		err := vr.Validate(*v)
 		if err != nil {
-			return ErrorWrapPathElement(err, &PointerPathElem{})
+			return ErrorWrapPathElem(err, &PointerPathElem{})
 		}
 		return nil
 	})

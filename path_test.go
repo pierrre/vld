@@ -69,10 +69,10 @@ func ExamplePathElemError() {
 	// error
 }
 
-func ExampleErrorWrapPathElement() {
+func ExampleErrorWrapPathElem() {
 	e := &FieldPathElem{Field: "Test"}
-	fmt.Println(ErrorWrapPathElement(nil, e))
-	fmt.Println(ErrorWrapPathElement(errors.New("error"), e))
+	fmt.Println(ErrorWrapPathElem(nil, e))
+	fmt.Println(ErrorWrapPathElem(errors.New("error"), e))
 	// Output:
 	// <nil>
 	// path field "Test": error
@@ -80,8 +80,8 @@ func ExampleErrorWrapPathElement() {
 
 func ExampleGetErrorPath() {
 	err := errors.New("error")
-	err = ErrorWrapPathElement(err, &FieldPathElem{Field: "Foo"})
-	err = ErrorWrapPathElement(err, &FieldPathElem{Field: "Bar"})
+	err = ErrorWrapPathElem(err, &FieldPathElem{Field: "Foo"})
+	err = ErrorWrapPathElem(err, &FieldPathElem{Field: "Bar"})
 	fmt.Println(err)
 	fmt.Println(GetErrorPath(err))
 	// Output:

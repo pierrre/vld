@@ -22,7 +22,7 @@ func seqEach[T any](f func(KeyValue[int, T]) error) func(iter.Seq[T]) error {
 		for v := range s {
 			err := f(KeyValue[int, T]{Key: i, Value: v})
 			if err != nil {
-				errs = append(errs, ErrorWrapPathElement(err, &IndexPathElem{Index: i}))
+				errs = append(errs, ErrorWrapPathElem(err, &IndexPathElem{Index: i}))
 			}
 			i++
 		}
@@ -52,7 +52,7 @@ func seq2Each[K, V any](f func(KeyValue[K, V]) error) func(iter.Seq2[K, V]) erro
 		for k, v := range s {
 			err := f(KeyValue[K, V]{Key: k, Value: v})
 			if err != nil {
-				errs = append(errs, ErrorWrapPathElement(err, &IndexPathElem{Index: i}))
+				errs = append(errs, ErrorWrapPathElem(err, &IndexPathElem{Index: i}))
 			}
 			i++
 		}

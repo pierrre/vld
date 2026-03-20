@@ -79,7 +79,7 @@ func sliceEach[S ~[]E, E any](f func(KeyValue[int, E]) error) func(S) error {
 		for i, v := range s {
 			err := f(KeyValue[int, E]{Key: i, Value: v})
 			if err != nil {
-				errs = append(errs, ErrorWrapPathElement(err, &IndexPathElem{Index: i}))
+				errs = append(errs, ErrorWrapPathElem(err, &IndexPathElem{Index: i}))
 			}
 		}
 		return ErrorJoin(errs...)

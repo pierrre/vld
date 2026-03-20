@@ -61,7 +61,7 @@ func mapEach[M ~map[K]V, K comparable, V any](f func(KeyValue[K, V]) error) func
 		for k, v := range m {
 			err := f(KeyValue[K, V]{Key: k, Value: v})
 			if err != nil {
-				errs = append(errs, ErrorWrapPathElement(err, &KeyPathElem{Key: k}))
+				errs = append(errs, ErrorWrapPathElem(err, &KeyPathElem{Key: k}))
 			}
 		}
 		return ErrorJoin(errs...)
@@ -95,7 +95,7 @@ func mapSortedEach[M ~map[K]V, K cmp.Ordered, V any](f func(KeyValue[K, V]) erro
 			v := m[k]
 			err := f(KeyValue[K, V]{Key: k, Value: v})
 			if err != nil {
-				errs = append(errs, ErrorWrapPathElement(err, &KeyPathElem{Key: k}))
+				errs = append(errs, ErrorWrapPathElem(err, &KeyPathElem{Key: k}))
 			}
 		}
 		return ErrorJoin(errs...)
