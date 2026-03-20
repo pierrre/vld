@@ -11,22 +11,22 @@ func getSliceLen[S ~[]E, E any](s S) int {
 
 // SliceLenEqual returns a [Validator] that checks if the length of the slice is equal to the specified length.
 func SliceLenEqual[S ~[]E, E any](length int) Validator[S] {
-	return WithStringFunc(func() string { return fmt.Sprintf("SliceLenEqual(%d)", length) }, lenEqual("length", length, getSliceLen[S]))
+	return WithStringFunc(func() string { return fmt.Sprintf("SliceLenEqual(%d)", length) }, lenEqual(length, getSliceLen[S]))
 }
 
 // SliceLenMin returns a [Validator] that checks if the length of the slice is greater than or equal to the minimum length.
 func SliceLenMin[S ~[]E, E any](minLen int) Validator[S] {
-	return WithStringFunc(func() string { return fmt.Sprintf("SliceLenMin(%d)", minLen) }, lenMin("length", minLen, getSliceLen[S]))
+	return WithStringFunc(func() string { return fmt.Sprintf("SliceLenMin(%d)", minLen) }, lenMin(minLen, getSliceLen[S]))
 }
 
 // SliceLenMax returns a [Validator] that checks if the length of the slice is less than or equal to the maximum length.
 func SliceLenMax[S ~[]E, E any](maxLen int) Validator[S] {
-	return WithStringFunc(func() string { return fmt.Sprintf("SliceLenMax(%d)", maxLen) }, lenMax("length", maxLen, getSliceLen[S]))
+	return WithStringFunc(func() string { return fmt.Sprintf("SliceLenMax(%d)", maxLen) }, lenMax(maxLen, getSliceLen[S]))
 }
 
 // SliceLenRange returns a [Validator] that checks if the length of the slice is within the range.
 func SliceLenRange[S ~[]E, E any](minLen, maxLen int) Validator[S] {
-	return WithStringFunc(func() string { return fmt.Sprintf("SliceLenRange(%d, %d)", minLen, maxLen) }, lenRange("length", minLen, maxLen, getSliceLen[S]))
+	return WithStringFunc(func() string { return fmt.Sprintf("SliceLenRange(%d, %d)", minLen, maxLen) }, lenRange(minLen, maxLen, getSliceLen[S]))
 }
 
 // SliceEmpty returns a [Validator] that checks if the slice is empty.

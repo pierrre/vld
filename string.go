@@ -12,22 +12,22 @@ func getStringLen(s string) int {
 
 // StringLenEqual returns a [Validator] that checks if the length of the string is equal to the specified length.
 func StringLenEqual(length int) Validator[string] {
-	return WithStringFunc(func() string { return fmt.Sprintf("StringLenEqual(%d)", length) }, lenEqual("length", length, getStringLen))
+	return WithStringFunc(func() string { return fmt.Sprintf("StringLenEqual(%d)", length) }, lenEqual(length, getStringLen))
 }
 
 // StringLenMin returns a [Validator] that checks if the length of the string is greater than or equal to the minimum length.
 func StringLenMin(minLen int) Validator[string] {
-	return WithStringFunc(func() string { return fmt.Sprintf("StringLenMin(%d)", minLen) }, lenMin("length", minLen, getStringLen))
+	return WithStringFunc(func() string { return fmt.Sprintf("StringLenMin(%d)", minLen) }, lenMin(minLen, getStringLen))
 }
 
 // StringLenMax returns a [Validator] that checks if the length of the string is less than or equal to the maximum length.
 func StringLenMax(maxLen int) Validator[string] {
-	return WithStringFunc(func() string { return fmt.Sprintf("StringLenMax(%d)", maxLen) }, lenMax("length", maxLen, getStringLen))
+	return WithStringFunc(func() string { return fmt.Sprintf("StringLenMax(%d)", maxLen) }, lenMax(maxLen, getStringLen))
 }
 
 // StringLenRange returns a [Validator] that checks if the length of the string is within the range.
 func StringLenRange(minLen, maxLen int) Validator[string] {
-	return WithStringFunc(func() string { return fmt.Sprintf("StringLenRange(%d, %d)", minLen, maxLen) }, lenRange("length", minLen, maxLen, getStringLen))
+	return WithStringFunc(func() string { return fmt.Sprintf("StringLenRange(%d, %d)", minLen, maxLen) }, lenRange(minLen, maxLen, getStringLen))
 }
 
 // StringEmpty returns a [Validator] that checks if the string is empty.
@@ -42,22 +42,22 @@ func StringNotEmpty() Validator[string] {
 
 // StringRunesEqual returns a [Validator] that checks if the number of runes in the string is equal to the specified number of runes.
 func StringRunesEqual(numRunes int) Validator[string] {
-	return WithStringFunc(func() string { return fmt.Sprintf("StringRunesEqual(%d)", numRunes) }, lenEqual("runes count", numRunes, utf8.RuneCountInString))
+	return WithStringFunc(func() string { return fmt.Sprintf("StringRunesEqual(%d)", numRunes) }, lenEqual(numRunes, utf8.RuneCountInString))
 }
 
 // StringRunesMin returns a [Validator] that checks if the number of runes in the string is greater than or equal to the minimum number of runes.
 func StringRunesMin(minRunes int) Validator[string] {
-	return WithStringFunc(func() string { return fmt.Sprintf("StringRunesMin(%d)", minRunes) }, lenMin("runes count", minRunes, utf8.RuneCountInString))
+	return WithStringFunc(func() string { return fmt.Sprintf("StringRunesMin(%d)", minRunes) }, lenMin(minRunes, utf8.RuneCountInString))
 }
 
 // StringRunesMax returns a [Validator] that checks if the number of runes in the string is less than or equal to the maximum number of runes.
 func StringRunesMax(maxRunes int) Validator[string] {
-	return WithStringFunc(func() string { return fmt.Sprintf("StringRunesMax(%d)", maxRunes) }, lenMax("runes count", maxRunes, utf8.RuneCountInString))
+	return WithStringFunc(func() string { return fmt.Sprintf("StringRunesMax(%d)", maxRunes) }, lenMax(maxRunes, utf8.RuneCountInString))
 }
 
 // StringRunesRange returns a [Validator] that checks if the number of runes in the string is within the range.
 func StringRunesRange(minRunes, maxRunes int) Validator[string] {
-	return WithStringFunc(func() string { return fmt.Sprintf("StringRunesRange(%d, %d)", minRunes, maxRunes) }, lenRange("runes count", minRunes, maxRunes, utf8.RuneCountInString))
+	return WithStringFunc(func() string { return fmt.Sprintf("StringRunesRange(%d, %d)", minRunes, maxRunes) }, lenRange(minRunes, maxRunes, utf8.RuneCountInString))
 }
 
 // StringContains returns a [Validator] that checks if the string contains the substring.

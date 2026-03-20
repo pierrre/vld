@@ -12,22 +12,22 @@ func getMapLen[M ~map[K]V, K comparable, V any](m M) int {
 
 // MapLenEqual returns a [Validator] that checks if the length of the map is equal to the specified length.
 func MapLenEqual[M ~map[K]V, K comparable, V any](length int) Validator[M] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MapLenEqual(%d)", length) }, lenEqual("length", length, getMapLen[M]))
+	return WithStringFunc(func() string { return fmt.Sprintf("MapLenEqual(%d)", length) }, lenEqual(length, getMapLen[M]))
 }
 
 // MapLenMin returns a [Validator] that checks if the length of the map is greater than or equal to the minimum length.
 func MapLenMin[M ~map[K]V, K comparable, V any](minLen int) Validator[M] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MapLenMin(%d)", minLen) }, lenMin("length", minLen, getMapLen[M]))
+	return WithStringFunc(func() string { return fmt.Sprintf("MapLenMin(%d)", minLen) }, lenMin(minLen, getMapLen[M]))
 }
 
 // MapLenMax returns a [Validator] that checks if the length of the map is less than or equal to the maximum length.
 func MapLenMax[M ~map[K]V, K comparable, V any](maxLen int) Validator[M] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MapLenMax(%d)", maxLen) }, lenMax("length", maxLen, getMapLen[M]))
+	return WithStringFunc(func() string { return fmt.Sprintf("MapLenMax(%d)", maxLen) }, lenMax(maxLen, getMapLen[M]))
 }
 
 // MapLenRange returns a [Validator] that checks if the length of the map is within the range.
 func MapLenRange[M ~map[K]V, K comparable, V any](minLen, maxLen int) Validator[M] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MapLenRange(%d, %d)", minLen, maxLen) }, lenRange("length", minLen, maxLen, getMapLen[M]))
+	return WithStringFunc(func() string { return fmt.Sprintf("MapLenRange(%d, %d)", minLen, maxLen) }, lenRange(minLen, maxLen, getMapLen[M]))
 }
 
 // MapEmpty returns a [Validator] that checks if the map is empty.

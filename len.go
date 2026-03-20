@@ -5,41 +5,41 @@ import (
 	"fmt"
 )
 
-func lenEqual[T any](name string, length int, getLen func(v T) int) func(T) error {
+func lenEqual[T any](length int, getLen func(v T) int) func(T) error {
 	return func(v T) error {
 		l := getLen(v)
 		if l != length {
-			return fmt.Errorf("%s %d is not equal to %d", name, l, length)
+			return fmt.Errorf("length %d is not equal to %d", l, length)
 		}
 		return nil
 	}
 }
 
-func lenMin[T any](name string, minLen int, getLen func(v T) int) func(T) error {
+func lenMin[T any](minLen int, getLen func(v T) int) func(T) error {
 	return func(v T) error {
 		l := getLen(v)
 		if l < minLen {
-			return fmt.Errorf("%s %d is less than %d", name, l, minLen)
+			return fmt.Errorf("length %d is less than %d", l, minLen)
 		}
 		return nil
 	}
 }
 
-func lenMax[T any](name string, maxLen int, getLen func(v T) int) func(T) error {
+func lenMax[T any](maxLen int, getLen func(v T) int) func(T) error {
 	return func(v T) error {
 		l := getLen(v)
 		if l > maxLen {
-			return fmt.Errorf("%s %d is greater than %d", name, l, maxLen)
+			return fmt.Errorf("length %d is greater than %d", l, maxLen)
 		}
 		return nil
 	}
 }
 
-func lenRange[T any](name string, minLen, maxLen int, getLen func(v T) int) func(T) error {
+func lenRange[T any](minLen, maxLen int, getLen func(v T) int) func(T) error {
 	return func(v T) error {
 		l := getLen(v)
 		if l < minLen || l > maxLen {
-			return fmt.Errorf("%s %d is not in the range [%d, %d]", name, l, minLen, maxLen)
+			return fmt.Errorf("length %d is not in the range [%d, %d]", l, minLen, maxLen)
 		}
 		return nil
 	}

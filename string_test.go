@@ -82,7 +82,7 @@ func ExampleStringRunesEqual() {
 	// Output:
 	// StringRunesEqual(3)
 	// <nil>
-	// runes count 4 is not equal to 3
+	// length 4 is not equal to 3
 }
 
 func ExampleStringRunesMin() {
@@ -93,7 +93,7 @@ func ExampleStringRunesMin() {
 	// Output:
 	// StringRunesMin(3)
 	// <nil>
-	// runes count 2 is less than 3
+	// length 2 is less than 3
 }
 
 func ExampleStringRunesMax() {
@@ -104,7 +104,7 @@ func ExampleStringRunesMax() {
 	// Output:
 	// StringRunesMax(3)
 	// <nil>
-	// runes count 4 is greater than 3
+	// length 4 is greater than 3
 }
 
 func ExampleStringRunesRange() {
@@ -116,8 +116,8 @@ func ExampleStringRunesRange() {
 	// Output:
 	// StringRunesRange(2, 4)
 	// <nil>
-	// runes count 1 is not in the range [2, 4]
-	// runes count 5 is not in the range [2, 4]
+	// length 1 is not in the range [2, 4]
+	// length 5 is not in the range [2, 4]
 }
 
 func ExampleStringContains() {
