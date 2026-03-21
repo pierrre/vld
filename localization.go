@@ -119,6 +119,38 @@ var LocalizedMessages = map[string]map[string]string{
 		"en": "String %[1]q ends with %[2]q.",
 		"fr": "La chaîne %[1]q se termine par %[2]q.",
 	},
+	"BytesEqual": {
+		"en": "Bytes %[1]v is not equal to %[2]v.",
+		"fr": "Les bytes %[1]v ne sont pas égaux à %[2]v.",
+	},
+	"BytesNotEqual": {
+		"en": "Bytes %[1]v is equal to %[2]v.",
+		"fr": "Les bytes %[1]v sont égaux à %[2]v.",
+	},
+	"BytesContains": {
+		"en": "Bytes %[1]v does not contain %[2]v.",
+		"fr": "Les bytes %[1]v ne contiennent pas %[2]v.",
+	},
+	"BytesNotContains": {
+		"en": "Bytes %[1]v contains %[2]v.",
+		"fr": "Les bytes %[1]v contiennent %[2]v.",
+	},
+	"BytesHasPrefix": {
+		"en": "Bytes %[1]v does not have prefix %[2]v.",
+		"fr": "Les bytes %[1]v n'ont pas le préfixe %[2]v.",
+	},
+	"BytesNotHasPrefix": {
+		"en": "Bytes %[1]v has prefix %[2]v.",
+		"fr": "Les bytes %[1]v ont le préfixe %[2]v.",
+	},
+	"BytesHasSuffix": {
+		"en": "Bytes %[1]v does not have suffix %[2]v.",
+		"fr": "Les bytes %[1]v n'ont pas le suffixe %[2]v.",
+	},
+	"BytesNotHasSuffix": {
+		"en": "Bytes %[1]v has suffix %[2]v.",
+		"fr": "Les bytes %[1]v ont le suffixe %[2]v.",
+	},
 	"Zero": {
 		"en": "Value %#[1]v is not zero.",
 		"fr": "La valeur %#[1]v n'est pas zéro.",
