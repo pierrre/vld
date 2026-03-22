@@ -70,7 +70,7 @@ func ExampleIf() {
 	fmt.Println(vr.Validate(5))
 	fmt.Println(vr.Validate(-1))
 	// Output:
-	// If(condition, Min(1))
+	// If(github.com/pierrre/vld_test.ExampleIf.func1, Min(1))
 	// <nil>
 	// <nil>
 	// -1 is less than 1
@@ -85,7 +85,7 @@ func ExampleIfElse() {
 	fmt.Println(vr.Validate(-5))
 	fmt.Println(vr.Validate(-11))
 	// Output:
-	// IfElse(condition, Max(10), Min(-10))
+	// IfElse(github.com/pierrre/vld_test.ExampleIfElse.func1, Max(10), Min(-10))
 	// <nil>
 	// 11 is greater than 10
 	// <nil>

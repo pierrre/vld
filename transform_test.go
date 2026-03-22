@@ -16,7 +16,7 @@ func ExampleGet() {
 	fmt.Println(vr.Validate(User{Name: "Charlie"}))
 	fmt.Println(GetErrorLocalization(vr.Validate(User{Name: "Charlie"}), "en"))
 	// Output:
-	// Get(vld_test.User => string, StringLenMax(5))
+	// Get(github.com/pierrre/vld_test.ExampleGet.func1, StringLenMax(5))
 	// <nil>
 	// length 7 is greater than 5
 	// Length 7 is greater than 5.

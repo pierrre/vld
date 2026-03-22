@@ -60,7 +60,7 @@ func Not[T any](msg string, vr Validator[T]) Validator[T] {
 
 // If returns a [Validator] that validates the value if the condition is true.
 func If[T any](cond func(v T) bool, vr Validator[T]) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("If(condition, %v)", vr) }, func(v T) error {
+	return WithStringFunc(func() string { return fmt.Sprintf("If(%s, %v)", getFuncName(cond), vr) }, func(v T) error {
 		if !cond(v) {
 			return nil
 		}
@@ -70,7 +70,7 @@ func If[T any](cond func(v T) bool, vr Validator[T]) Validator[T] {
 
 // IfElse returns a [Validator] that validates the value with the thenVr validator if the condition is true, or with the elseVr validator if the condition is false.
 func IfElse[T any](cond func(v T) bool, thenVr Validator[T], elseVr Validator[T]) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("IfElse(condition, %v, %v)", thenVr, elseVr) }, func(v T) error {
+	return WithStringFunc(func() string { return fmt.Sprintf("IfElse(%s, %v, %v)", getFuncName(cond), thenVr, elseVr) }, func(v T) error {
 		if cond(v) {
 			return thenVr.Validate(v)
 		}

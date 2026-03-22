@@ -7,7 +7,7 @@ import (
 
 // Get returns a [Validator] that validates the value returned by the get function.
 func Get[In, Out any](getFunc func(In) Out, vr Validator[Out]) Validator[In] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Get(%T => %T, %v)", *new(In), *new(Out), vr) }, get(getFunc, vr.Validate))
+	return WithStringFunc(func() string { return fmt.Sprintf("Get(%s, %v)", getFuncName(getFunc), vr) }, get(getFunc, vr.Validate))
 }
 
 func get[In, Out any](getFunc func(In) Out, f func(Out) error) func(In) error {
