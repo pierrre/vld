@@ -13,10 +13,10 @@ func ExampleBytesEqual() {
 	fmt.Println(vr.Validate([]byte("abd")))
 	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abd")), "en"))
 	// Output:
-	// BytesEqual([97 98 99])
+	// BytesEqual("abc")
 	// <nil>
-	// [97 98 100] is not equal to [97 98 99]
-	// Bytes [97 98 100] is not equal to [97 98 99].
+	// "abd" is not equal to "abc"
+	// Bytes "abd" is not equal to "abc".
 }
 
 func ExampleBytesNotEqual() {
@@ -26,10 +26,10 @@ func ExampleBytesNotEqual() {
 	fmt.Println(vr.Validate([]byte("abc")))
 	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abc")), "en"))
 	// Output:
-	// BytesNotEqual([97 98 99])
+	// BytesNotEqual("abc")
 	// <nil>
-	// [97 98 99] is equal to [97 98 99]
-	// Bytes [97 98 99] is equal to [97 98 99].
+	// "abc" is equal to "abc"
+	// Bytes "abc" is equal to "abc".
 }
 
 func ExampleBytesContains() {
@@ -39,10 +39,10 @@ func ExampleBytesContains() {
 	fmt.Println(vr.Validate([]byte("acd")))
 	fmt.Println(GetErrorLocalization(vr.Validate([]byte("acd")), "en"))
 	// Output:
-	// BytesContains([98])
+	// BytesContains("b")
 	// <nil>
-	// [97 99 100] does not contain [98]
-	// Bytes [97 99 100] does not contain [98].
+	// "acd" does not contain "b"
+	// Bytes "acd" does not contain "b".
 }
 
 func ExampleBytesNotContains() {
@@ -52,10 +52,10 @@ func ExampleBytesNotContains() {
 	fmt.Println(vr.Validate([]byte("abc")))
 	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abc")), "en"))
 	// Output:
-	// BytesNotContains([98])
+	// BytesNotContains("b")
 	// <nil>
-	// [97 98 99] contains [98]
-	// Bytes [97 98 99] contains [98].
+	// "abc" contains "b"
+	// Bytes "abc" contains "b".
 }
 
 func ExampleBytesHasPrefix() {
@@ -65,10 +65,10 @@ func ExampleBytesHasPrefix() {
 	fmt.Println(vr.Validate([]byte("bac")))
 	fmt.Println(GetErrorLocalization(vr.Validate([]byte("bac")), "en"))
 	// Output:
-	// BytesHasPrefix([97])
+	// BytesHasPrefix("a")
 	// <nil>
-	// [98 97 99] does not have prefix [97]
-	// Bytes [98 97 99] does not have prefix [97].
+	// "bac" does not have prefix "a"
+	// Bytes "bac" does not have prefix "a".
 }
 
 func ExampleBytesNotHasPrefix() {
@@ -78,10 +78,10 @@ func ExampleBytesNotHasPrefix() {
 	fmt.Println(vr.Validate([]byte("abc")))
 	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abc")), "en"))
 	// Output:
-	// BytesNotHasPrefix([97])
+	// BytesNotHasPrefix("a")
 	// <nil>
-	// [97 98 99] has prefix [97]
-	// Bytes [97 98 99] has prefix [97].
+	// "abc" has prefix "a"
+	// Bytes "abc" has prefix "a".
 }
 
 func ExampleBytesHasSuffix() {
@@ -91,10 +91,10 @@ func ExampleBytesHasSuffix() {
 	fmt.Println(vr.Validate([]byte("acb")))
 	fmt.Println(GetErrorLocalization(vr.Validate([]byte("acb")), "en"))
 	// Output:
-	// BytesHasSuffix([99])
+	// BytesHasSuffix("c")
 	// <nil>
-	// [97 99 98] does not have suffix [99]
-	// Bytes [97 99 98] does not have suffix [99].
+	// "acb" does not have suffix "c"
+	// Bytes "acb" does not have suffix "c".
 }
 
 func ExampleBytesNotHasSuffix() {
@@ -104,8 +104,8 @@ func ExampleBytesNotHasSuffix() {
 	fmt.Println(vr.Validate([]byte("abc")))
 	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abc")), "en"))
 	// Output:
-	// BytesNotHasSuffix([99])
+	// BytesNotHasSuffix("c")
 	// <nil>
-	// [97 98 99] has suffix [99]
-	// Bytes [97 98 99] has suffix [99].
+	// "abc" has suffix "c"
+	// Bytes "abc" has suffix "c".
 }

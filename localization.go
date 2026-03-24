@@ -120,36 +120,36 @@ var LocalizedMessages = map[string]map[string]string{
 		"fr": "La chaîne %[1]q se termine par %[2]q.",
 	},
 	"BytesEqual": {
-		"en": "Bytes %[1]v is not equal to %[2]v.",
-		"fr": "Les bytes %[1]v ne sont pas égaux à %[2]v.",
+		"en": "Bytes %[1]q is not equal to %[2]q.",
+		"fr": "Les bytes %[1]q ne sont pas égaux à %[2]q.",
 	},
 	"BytesNotEqual": {
-		"en": "Bytes %[1]v is equal to %[2]v.",
-		"fr": "Les bytes %[1]v sont égaux à %[2]v.",
+		"en": "Bytes %[1]q is equal to %[2]q.",
+		"fr": "Les bytes %[1]q sont égaux à %[2]q.",
 	},
 	"BytesContains": {
-		"en": "Bytes %[1]v does not contain %[2]v.",
-		"fr": "Les bytes %[1]v ne contiennent pas %[2]v.",
+		"en": "Bytes %[1]q does not contain %[2]q.",
+		"fr": "Les bytes %[1]q ne contiennent pas %[2]q.",
 	},
 	"BytesNotContains": {
-		"en": "Bytes %[1]v contains %[2]v.",
-		"fr": "Les bytes %[1]v contiennent %[2]v.",
+		"en": "Bytes %[1]q contains %[2]q.",
+		"fr": "Les bytes %[1]q contiennent %[2]q.",
 	},
 	"BytesHasPrefix": {
-		"en": "Bytes %[1]v does not have prefix %[2]v.",
-		"fr": "Les bytes %[1]v n'ont pas le préfixe %[2]v.",
+		"en": "Bytes %[1]q does not have prefix %[2]q.",
+		"fr": "Les bytes %[1]q n'ont pas le préfixe %[2]q.",
 	},
 	"BytesNotHasPrefix": {
-		"en": "Bytes %[1]v has prefix %[2]v.",
-		"fr": "Les bytes %[1]v ont le préfixe %[2]v.",
+		"en": "Bytes %[1]q has prefix %[2]q.",
+		"fr": "Les bytes %[1]q ont le préfixe %[2]q.",
 	},
 	"BytesHasSuffix": {
-		"en": "Bytes %[1]v does not have suffix %[2]v.",
-		"fr": "Les bytes %[1]v n'ont pas le suffixe %[2]v.",
+		"en": "Bytes %[1]q does not have suffix %[2]q.",
+		"fr": "Les bytes %[1]q n'ont pas le suffixe %[2]q.",
 	},
 	"BytesNotHasSuffix": {
-		"en": "Bytes %[1]v has suffix %[2]v.",
-		"fr": "Les bytes %[1]v ont le suffixe %[2]v.",
+		"en": "Bytes %[1]q has suffix %[2]q.",
+		"fr": "Les bytes %[1]q ont le suffixe %[2]q.",
 	},
 	"Zero": {
 		"en": "Value %#[1]v is not zero.",
