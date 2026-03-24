@@ -3,6 +3,7 @@ package vld
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 // And returns a [Validator] that returns the first error returned by any of the validators.
@@ -76,4 +77,58 @@ func IfElse[T any](cond func(v T) bool, thenVr Validator[T], elseVr Validator[T]
 		}
 		return elseVr.Validate(v)
 	})
+}
+
+// Switch returns a new [SwitchValidator] with the given cases.
+func Switch[T any](cases ...*SwitchCase[T]) SwitchValidator[T] {
+	return SwitchValidator[T]{
+		Cases: cases,
+	}
+}
+
+// SwitchValidator is a [Validator] that validates the value with the first validator whose condition returns true.
+type SwitchValidator[T any] struct {
+	Cases []*SwitchCase[T]
+}
+
+// Validate implements [Validator].
+func (sv SwitchValidator[T]) Validate(v T) error {
+	for _, c := range sv.Cases {
+		if c.Condition(v) {
+			return c.Validator.Validate(v) //nolint:wrapcheck // Not needed.
+		}
+	}
+	return nil
+}
+
+func (sv SwitchValidator[T]) String() string {
+	sb := new(strings.Builder)
+	sb.WriteString("Switch(")
+	if len(sv.Cases) > 0 {
+		sb.WriteString("\n")
+		for _, c := range sv.Cases {
+			writeStringIndent(sb, c.String())
+			sb.WriteString(",\n")
+		}
+	}
+	sb.WriteString(")")
+	return sb.String()
+}
+
+// Case returns a new [SwitchCase] with the given condition and [Validator].
+func Case[T any](cond func(v T) bool, vr Validator[T]) *SwitchCase[T] {
+	return &SwitchCase[T]{
+		Condition: cond,
+		Validator: vr,
+	}
+}
+
+// SwitchCase is a case for [SwitchValidator].
+type SwitchCase[T any] struct {
+	Condition func(v T) bool
+	Validator Validator[T]
+}
+
+func (sc *SwitchCase[T]) String() string {
+	return fmt.Sprintf("Case(%s, %v)", getFuncName(sc.Condition), sc.Validator)
 }

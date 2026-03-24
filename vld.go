@@ -1,10 +1,6 @@
 // Package vld provides a validation library.
 package vld
 
-import (
-	"strings"
-)
-
 // Validator is an interface that validates a value of type T.
 type Validator[T any] interface {
 	Validate(v T) error
@@ -43,22 +39,4 @@ func (vr *withStringFunc[T]) Validate(v T) error {
 
 func (vr *withStringFunc[T]) String() string {
 	return vr.getString()
-}
-
-func getMultiValidatorString[T any](name string, vrs ...Validator[T]) string {
-	var sb strings.Builder
-	sb.WriteString(name)
-	sb.WriteString("(")
-	if len(vrs) > 0 {
-		sb.WriteString("\n")
-		for _, vr := range vrs {
-			for line := range strings.Lines(vr.String()) {
-				sb.WriteString("\t")
-				sb.WriteString(line)
-			}
-			sb.WriteString(",\n")
-		}
-	}
-	sb.WriteString(")")
-	return sb.String()
 }
