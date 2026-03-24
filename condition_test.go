@@ -47,7 +47,6 @@ func ExampleSwitch() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(11))
 	fmt.Println(vr.Validate(-11))
-
 	// Output:
 	// Switch(
 	// 	Case(github.com/pierrre/vld_test.ExampleSwitch.func1, Max(10)),
