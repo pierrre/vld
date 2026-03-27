@@ -64,70 +64,172 @@ func StringRunesRange(minRunes, maxRunes int) Validator[string] {
 func StringContains(substr string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringContains(%q)", substr) }, func(s string) error {
 		if !strings.Contains(s, substr) {
-			err := fmt.Errorf("%q does not contain %q", s, substr)
-			err = ErrorWrapLocalization(err, "StringContains", s, substr)
-			return err
+			return &StringContainsError{
+				Value: s,
+				Sub:   substr,
+			}
 		}
 		return nil
 	})
+}
+
+// StringContainsError is the error type returned by [StringContains].
+type StringContainsError struct {
+	Value string
+	Sub   string
+}
+
+// Error implements [error].
+func (e *StringContainsError) Error() string {
+	return fmt.Sprintf("%q does not contain %q", e.Value, e.Sub)
+}
+
+// Localization implements [LocalizableError].
+func (e *StringContainsError) Localization() (key string, args []any) {
+	return "StringContainsError", []any{e.Value, e.Sub}
 }
 
 // StringNotContains returns a [Validator] that checks if the string does not contain the substring.
 func StringNotContains(substr string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringNotContains(%q)", substr) }, func(s string) error {
 		if strings.Contains(s, substr) {
-			err := fmt.Errorf("%q contains %q", s, substr)
-			err = ErrorWrapLocalization(err, "StringNotContains", s, substr)
-			return err
+			return &StringNotContainsError{
+				Value:    s,
+				Expected: substr,
+			}
 		}
 		return nil
 	})
+}
+
+// StringNotContainsError is the error type returned by [StringNotContains].
+type StringNotContainsError struct {
+	Value    string
+	Expected string
+}
+
+// Error implements [error].
+func (e *StringNotContainsError) Error() string {
+	return fmt.Sprintf("%q contains %q", e.Value, e.Expected)
+}
+
+// Localization implements [LocalizableError].
+func (e *StringNotContainsError) Localization() (key string, args []any) {
+	return "StringNotContainsError", []any{e.Value, e.Expected}
 }
 
 // StringHasPrefix returns a [Validator] that checks if the string begins with the prefix.
 func StringHasPrefix(prefix string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringHasPrefix(%q)", prefix) }, func(s string) error {
 		if !strings.HasPrefix(s, prefix) {
-			err := fmt.Errorf("%q does not begin with %q", s, prefix)
-			err = ErrorWrapLocalization(err, "StringHasPrefix", s, prefix)
-			return err
+			return &StringHasPrefixError{
+				Value:  s,
+				Prefix: prefix,
+			}
 		}
 		return nil
 	})
+}
+
+// StringHasPrefixError is the error type returned by [StringHasPrefix].
+type StringHasPrefixError struct {
+	Value  string
+	Prefix string
+}
+
+// Error implements [error].
+func (e *StringHasPrefixError) Error() string {
+	return fmt.Sprintf("%q does not begin with %q", e.Value, e.Prefix)
+}
+
+// Localization implements [LocalizableError].
+func (e *StringHasPrefixError) Localization() (key string, args []any) {
+	return "StringHasPrefixError", []any{e.Value, e.Prefix}
 }
 
 // StringNotHasPrefix returns a [Validator] that checks if the string does not begin with the prefix.
 func StringNotHasPrefix(prefix string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringNotHasPrefix(%q)", prefix) }, func(s string) error {
 		if strings.HasPrefix(s, prefix) {
-			err := fmt.Errorf("%q begins with %q", s, prefix)
-			err = ErrorWrapLocalization(err, "StringNotHasPrefix", s, prefix)
-			return err
+			return &StringNotHasPrefixError{
+				Value:  s,
+				Prefix: prefix,
+			}
 		}
 		return nil
 	})
+}
+
+// StringNotHasPrefixError is the error type returned by [StringNotHasPrefix].
+type StringNotHasPrefixError struct {
+	Value  string
+	Prefix string
+}
+
+// Error implements [error].
+func (e *StringNotHasPrefixError) Error() string {
+	return fmt.Sprintf("%q begins with %q", e.Value, e.Prefix)
+}
+
+// Localization implements [LocalizableError].
+func (e *StringNotHasPrefixError) Localization() (key string, args []any) {
+	return "StringNotHasPrefixError", []any{e.Value, e.Prefix}
 }
 
 // StringHasSuffix returns a [Validator] that checks if the string ends with the suffix.
 func StringHasSuffix(suffix string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringHasSuffix(%q)", suffix) }, func(s string) error {
 		if !strings.HasSuffix(s, suffix) {
-			err := fmt.Errorf("%q does not end with %q", s, suffix)
-			err = ErrorWrapLocalization(err, "StringHasSuffix", s, suffix)
-			return err
+			return &StringHasSuffixError{
+				Value:  s,
+				Suffix: suffix,
+			}
 		}
 		return nil
 	})
+}
+
+// StringHasSuffixError is the error type returned by [StringHasSuffix].
+type StringHasSuffixError struct {
+	Value  string
+	Suffix string
+}
+
+// Error implements [error].
+func (e *StringHasSuffixError) Error() string {
+	return fmt.Sprintf("%q does not end with %q", e.Value, e.Suffix)
+}
+
+// Localization implements [LocalizableError].
+func (e *StringHasSuffixError) Localization() (key string, args []any) {
+	return "StringHasSuffixError", []any{e.Value, e.Suffix}
 }
 
 // StringNotHasSuffix returns a [Validator] that checks if the string does not end with the suffix.
 func StringNotHasSuffix(suffix string) Validator[string] {
 	return WithStringFunc(func() string { return fmt.Sprintf("StringNotHasSuffix(%q)", suffix) }, func(s string) error {
 		if strings.HasSuffix(s, suffix) {
-			err := fmt.Errorf("%q ends with %q", s, suffix)
-			err = ErrorWrapLocalization(err, "StringNotHasSuffix", s, suffix)
-			return err
+			return &StringNotHasSuffixError{
+				Value:  s,
+				Suffix: suffix,
+			}
 		}
 		return nil
 	})
+}
+
+// StringNotHasSuffixError is the error type returned by [StringNotHasSuffix].
+type StringNotHasSuffixError struct {
+	Value  string
+	Suffix string
+}
+
+// Error implements [error].
+func (e *StringNotHasSuffixError) Error() string {
+	return fmt.Sprintf("%q ends with %q", e.Value, e.Suffix)
+}
+
+// Localization implements [LocalizableError].
+func (e *StringNotHasSuffixError) Localization() (key string, args []any) {
+	return "StringNotHasSuffixError", []any{e.Value, e.Suffix}
 }

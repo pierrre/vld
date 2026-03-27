@@ -43,24 +43,54 @@ func SliceNotEmpty[S ~[]E, E any]() Validator[S] {
 func SliceContains[S ~[]E, E comparable](elem E) Validator[S] {
 	return WithStringFunc(func() string { return fmt.Sprintf("SliceContains(%#v)", elem) }, func(s S) error {
 		if !slices.Contains(s, elem) {
-			err := fmt.Errorf("does not contain %#v", elem)
-			err = ErrorWrapLocalization(err, "SliceContains", elem)
-			return err
+			return &SliceContainsError[E]{
+				Element: elem,
+			}
 		}
 		return nil
 	})
+}
+
+// SliceContainsError is the error type returned by [SliceContains].
+type SliceContainsError[E comparable] struct {
+	Element E
+}
+
+// Error implements [error].
+func (e *SliceContainsError[E]) Error() string {
+	return fmt.Sprintf("does not contain %#v", e.Element)
+}
+
+// Localization implements [LocalizableError].
+func (e *SliceContainsError[E]) Localization() (key string, args []any) {
+	return "SliceContainsError", []any{e.Element}
 }
 
 // SliceNotContains returns a [Validator] that checks if the slice does not contain the element.
 func SliceNotContains[S ~[]E, E comparable](elem E) Validator[S] {
 	return WithStringFunc(func() string { return fmt.Sprintf("SliceNotContains(%#v)", elem) }, func(s S) error {
 		if slices.Contains(s, elem) {
-			err := fmt.Errorf("contains %#v", elem)
-			err = ErrorWrapLocalization(err, "SliceNotContains", elem)
-			return err
+			return &SliceNotContainsError[E]{
+				Element: elem,
+			}
 		}
 		return nil
 	})
+}
+
+// SliceNotContainsError is the error type returned by [SliceNotContains].
+type SliceNotContainsError[E comparable] struct {
+	Element E
+}
+
+// Error implements [error].
+func (e *SliceNotContainsError[E]) Error() string {
+	return fmt.Sprintf("contains %#v", e.Element)
+}
+
+// Localization implements [LocalizableError].
+func (e *SliceNotContainsError[E]) Localization() (key string, args []any) {
+	return "SliceNotContainsError", []any{e.Element}
 }
 
 // SliceEach returns a [Validator] that checks each index and element of the slice.
@@ -93,16 +123,19 @@ func SliceUnique[S ~[]E, E comparable]() Validator[S] {
 		var errs []error
 		for i, v := range s {
 			_, ok := seen[v]
-			if ok {
-				err := fmt.Errorf("duplicate %#v (index %d)", v, seen[v])
-				err = ErrorWrapLocalization(err, "SliceUnique", v, seen[v])
-				errs = append(errs, &PathElemError{
-					Err:      err,
-					PathElem: &IndexPathElem{Index: i},
-				})
-			} else {
+			if !ok {
 				seen[v] = i
+				continue
 			}
+			var err error = &SliceUniqueError[E]{
+				Value: v,
+				Index: seen[v],
+			}
+			err = &PathElemError{
+				Err:      err,
+				PathElem: &IndexPathElem{Index: i},
+			}
+			errs = append(errs, err)
 		}
 		return ErrorJoin(errs...)
 	})
@@ -116,17 +149,36 @@ func SliceUniqueBy[S ~[]E, E any, K comparable](getKey func(E) K) Validator[S] {
 		for i, v := range s {
 			key := getKey(v)
 			_, ok := seen[key]
-			if ok {
-				err := fmt.Errorf("duplicate %#v (index %d)", v, seen[key])
-				err = ErrorWrapLocalization(err, "SliceUnique", v, seen[key])
-				errs = append(errs, &PathElemError{
-					Err:      err,
-					PathElem: &IndexPathElem{Index: i},
-				})
-			} else {
+			if !ok {
 				seen[key] = i
+				continue
 			}
+			var err error = &SliceUniqueError[E]{
+				Value: v,
+				Index: seen[key],
+			}
+			err = &PathElemError{
+				Err:      err,
+				PathElem: &IndexPathElem{Index: i},
+			}
+			errs = append(errs, err)
 		}
 		return ErrorJoin(errs...)
 	})
+}
+
+// SliceUniqueError is the error type returned by [SliceUnique] and [SliceUniqueBy].
+type SliceUniqueError[E any] struct {
+	Value E
+	Index int
+}
+
+// Error implements [error].
+func (e *SliceUniqueError[E]) Error() string {
+	return fmt.Sprintf("duplicate %#v (index %d)", e.Value, e.Index)
+}
+
+// Localization implements [LocalizableError].
+func (e *SliceUniqueError[E]) Localization() (key string, args []any) {
+	return "SliceUniqueError", []any{e.Value, e.Index}
 }

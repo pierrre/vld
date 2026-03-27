@@ -1,7 +1,6 @@
 package vld
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -23,9 +22,7 @@ func PointerOptional[T any](vr Validator[T]) Validator[*T] {
 func PointerRequired[T any](vr Validator[T]) Validator[*T] {
 	return WithStringFunc(func() string { return fmt.Sprintf("PointerRequired(%v)", vr) }, func(v *T) error {
 		if v == nil {
-			err := errors.New("pointer is nil")
-			err = ErrorWrapLocalization(err, "PointerRequired")
-			return err
+			return &PointerRequiredError{}
 		}
 		err := vr.Validate(*v)
 		if err != nil {
@@ -33,4 +30,17 @@ func PointerRequired[T any](vr Validator[T]) Validator[*T] {
 		}
 		return nil
 	})
+}
+
+// PointerRequiredError is the error type returned by [PointerRequired].
+type PointerRequiredError struct{}
+
+// Error implements [error].
+func (e *PointerRequiredError) Error() string {
+	return "pointer is nil"
+}
+
+// Localization implements [LocalizableError].
+func (e *PointerRequiredError) Localization() (key string, args []any) {
+	return "PointerRequiredError", nil
 }

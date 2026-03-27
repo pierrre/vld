@@ -20,10 +20,25 @@ func TypeRequired[In, Out any](vr Validator[Out]) Validator[In] {
 	return WithStringFunc(func() string { return fmt.Sprintf("TypeRequired[%T](%v)", *new(Out), vr) }, func(v In) error {
 		vOut, ok := any(v).(Out)
 		if !ok {
-			err := fmt.Errorf("%T cannot be converted to %T", v, *new(Out))
-			err = ErrorWrapLocalization(err, "TypeRequired", v, *new(Out))
-			return err
+			return &TypeRequiredError[In, Out]{
+				Value: v,
+			}
 		}
 		return vr.Validate(vOut)
 	})
+}
+
+// TypeRequiredError is the error type returned by [TypeRequired] when conversion fails.
+type TypeRequiredError[In, Out any] struct {
+	Value In
+}
+
+// Error implements [error].
+func (e *TypeRequiredError[In, Out]) Error() string {
+	return fmt.Sprintf("%T cannot be converted to %T", e.Value, *new(Out))
+}
+
+// Localization implements [LocalizableError].
+func (e *TypeRequiredError[In, Out]) Localization() (key string, args []any) {
+	return "TypeRequiredError", []any{e.Value, *new(Out)}
 }

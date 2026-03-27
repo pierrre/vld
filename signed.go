@@ -15,10 +15,25 @@ func Positive[T Signed]() Validator[T] {
 		if v > 0 {
 			return nil
 		}
-		err := fmt.Errorf("%#v is not positive", v)
-		err = ErrorWrapLocalization(err, "Positive", v)
-		return err
+		return &PositiveError[T]{
+			Value: v,
+		}
 	})
+}
+
+// PositiveError is the error type returned by [Positive].
+type PositiveError[T Signed] struct {
+	Value T
+}
+
+// Error implements [error].
+func (e *PositiveError[T]) Error() string {
+	return fmt.Sprintf("%#v is not positive", e.Value)
+}
+
+// Localization implements [LocalizableError].
+func (e *PositiveError[T]) Localization() (key string, args []any) {
+	return "PositiveError", []any{e.Value}
 }
 
 // Negative returns a [Validator] that checks if the value is negative.
@@ -27,8 +42,23 @@ func Negative[T Signed]() Validator[T] {
 		if v < 0 {
 			return nil
 		}
-		err := fmt.Errorf("%#v is not negative", v)
-		err = ErrorWrapLocalization(err, "Negative", v)
-		return err
+		return &NegativeError[T]{
+			Value: v,
+		}
 	})
+}
+
+// NegativeError is the error type returned by [Negative].
+type NegativeError[T Signed] struct {
+	Value T
+}
+
+// Error implements [error].
+func (e *NegativeError[T]) Error() string {
+	return fmt.Sprintf("%#v is not negative", e.Value)
+}
+
+// Localization implements [LocalizableError].
+func (e *NegativeError[T]) Localization() (key string, args []any) {
+	return "NegativeError", []any{e.Value}
 }

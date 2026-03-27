@@ -1,7 +1,6 @@
 package vld
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -53,8 +52,18 @@ func Message[T any](msg string, vr Validator[T]) Validator[T] {
 	return WithStringFunc(func() string { return fmt.Sprintf("Message(%q, %v)", msg, vr) }, func(v T) error {
 		err := vr.Validate(v)
 		if err != nil {
-			return errors.New(msg)
+			return &MessageError{Message: msg}
 		}
 		return nil
 	})
+}
+
+// MessageError is the error type returned by [Message].
+type MessageError struct {
+	Message string
+}
+
+// Error implements [error].
+func (e *MessageError) Error() string {
+	return e.Message
 }

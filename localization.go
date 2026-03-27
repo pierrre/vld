@@ -7,167 +7,167 @@ import (
 
 // LocalizationMessages contains localization messages.
 var LocalizationMessages = map[string]map[string]string{
-	"Equal": {
+	"EqualError": {
 		"en": "Value %#[1]v is not equal to %#[2]v.",
 		"fr": "La valeur %#[1]v n'est pas égale à %#[2]v.",
 	},
-	"NotEqual": {
+	"NotEqualError": {
 		"en": "Value %#[1]v is equal to %#[2]v.",
 		"fr": "La valeur %#[1]v est égale à %#[2]v.",
 	},
-	"In": {
+	"InError": {
 		"en": "Value %#[1]v is not in %#[2]v.",
 		"fr": "La valeur %#[1]v n'est pas dans %#[2]v.",
 	},
-	"NotIn": {
+	"NotInError": {
 		"en": "Value %#[1]v is in %#[2]v.",
 		"fr": "La valeur %#[1]v est dans %#[2]v.",
 	},
-	"LenEqual": {
+	"LenEqualError": {
 		"en": "Length %[1]d is not equal to %[2]d.",
 		"fr": "La longueur %[1]d n'est pas égale à %[2]d.",
 	},
-	"LenMin": {
+	"LenMinError": {
 		"en": "Length %[1]d is less than %[2]d.",
 		"fr": "La longueur %[1]d est inférieure à %[2]d.",
 	},
-	"LenMax": {
+	"LenMaxError": {
 		"en": "Length %[1]d is greater than %[2]d.",
 		"fr": "La longueur %[1]d est supérieure à %[2]d.",
 	},
-	"LenRange": {
+	"LenRangeError": {
 		"en": "Length %[1]d is not in the range [%[2]d, %[3]d].",
 		"fr": "La longueur %[1]d n'est pas dans l'intervalle [%[2]d, %[3]d].",
 	},
-	"NotEmpty": {
+	"NotEmptyError": {
 		"en": "Value is not empty (%[1]d).",
 		"fr": "La valeur n'est pas vide (%[1]d).",
 	},
-	"Empty": {
+	"EmptyError": {
 		"en": "Value is empty.",
 		"fr": "La valeur est vide.",
 	},
-	"Min": {
+	"MinError": {
 		"en": "Value %#[1]v is less than %#[2]v.",
 		"fr": "La valeur %#[1]v est inférieure à %#[2]v.",
 	},
-	"Max": {
+	"MaxError": {
 		"en": "Value %#[1]v is greater than %#[2]v.",
 		"fr": "La valeur %#[1]v est supérieure à %#[2]v.",
 	},
-	"Range": {
+	"RangeError": {
 		"en": "Value %#[1]v is not in the range [%#[2]v, %#[3]v].",
 		"fr": "La valeur %#[1]v n'est pas dans l'intervalle [%#[2]v, %#[3]v].",
 	},
-	"Less": {
+	"LessError": {
 		"en": "Value %#[1]v is not less than %#[2]v.",
 		"fr": "La valeur %#[1]v n'est pas inférieure à %#[2]v.",
 	},
-	"Greater": {
+	"GreaterError": {
 		"en": "Value %#[1]v is not greater than %#[2]v.",
 		"fr": "La valeur %#[1]v n'est pas supérieure à %#[2]v.",
 	},
-	"RegexpMatch": {
+	"RegexpMatchError": {
 		"en": "String %[1]q does not match regexp %[2]q.",
 		"fr": "La chaîne %[1]q ne correspond pas à l'expression régulière %[2]q.",
 	},
-	"RegexpNotMatch": {
+	"RegexpNotMatchError": {
 		"en": "String %[1]q matches regexp %[2]q.",
 		"fr": "La chaîne %[1]q correspond à l'expression régulière %[2]q.",
 	},
-	"Positive": {
+	"PositiveError": {
 		"en": "Value %#[1]v is not positive.",
 		"fr": "La valeur %#[1]v n'est pas positive.",
 	},
-	"Negative": {
+	"NegativeError": {
 		"en": "Value %#[1]v is not negative.",
 		"fr": "La valeur %#[1]v n'est pas négative.",
 	},
-	"SliceContains": {
+	"SliceContainsError": {
 		"en": "Slice does not contain %#[1]v.",
 		"fr": "Le slice ne contient pas %#[1]v.",
 	},
-	"SliceNotContains": {
+	"SliceNotContainsError": {
 		"en": "Slice contains %#[1]v.",
 		"fr": "Le slice contient %#[1]v.",
 	},
-	"SliceUnique": {
+	"SliceUniqueError": {
 		"en": "Duplicate %#[1]v (index %[2]d).",
 		"fr": "Doublon %#[1]v (indice %[2]d).",
 	},
-	"StringContains": {
+	"StringContainsError": {
 		"en": "String %[1]q does not contain %[2]q.",
 		"fr": "La chaîne %[1]q ne contient pas %[2]q.",
 	},
-	"StringNotContains": {
+	"StringNotContainsError": {
 		"en": "String %[1]q contains %[2]q.",
 		"fr": "La chaîne %[1]q contient %[2]q.",
 	},
-	"StringHasPrefix": {
+	"StringHasPrefixError": {
 		"en": "String %[1]q does not begin with %[2]q.",
 		"fr": "La chaîne %[1]q ne commence pas par %[2]q.",
 	},
-	"StringNotHasPrefix": {
+	"StringNotHasPrefixError": {
 		"en": "String %[1]q begins with %[2]q.",
 		"fr": "La chaîne %[1]q commence par %[2]q.",
 	},
-	"StringHasSuffix": {
+	"StringHasSuffixError": {
 		"en": "String %[1]q does not end with %[2]q.",
 		"fr": "La chaîne %[1]q ne se termine pas par %[2]q.",
 	},
-	"StringNotHasSuffix": {
+	"StringNotHasSuffixError": {
 		"en": "String %[1]q ends with %[2]q.",
 		"fr": "La chaîne %[1]q se termine par %[2]q.",
 	},
-	"BytesEqual": {
+	"BytesEqualError": {
 		"en": "Bytes %[1]q is not equal to %[2]q.",
 		"fr": "Les bytes %[1]q ne sont pas égaux à %[2]q.",
 	},
-	"BytesNotEqual": {
+	"BytesNotEqualError": {
 		"en": "Bytes %[1]q is equal to %[2]q.",
 		"fr": "Les bytes %[1]q sont égaux à %[2]q.",
 	},
-	"BytesContains": {
+	"BytesContainsError": {
 		"en": "Bytes %[1]q does not contain %[2]q.",
 		"fr": "Les bytes %[1]q ne contiennent pas %[2]q.",
 	},
-	"BytesNotContains": {
+	"BytesNotContainsError": {
 		"en": "Bytes %[1]q contains %[2]q.",
 		"fr": "Les bytes %[1]q contiennent %[2]q.",
 	},
-	"BytesHasPrefix": {
+	"BytesHasPrefixError": {
 		"en": "Bytes %[1]q does not have prefix %[2]q.",
 		"fr": "Les bytes %[1]q n'ont pas le préfixe %[2]q.",
 	},
-	"BytesNotHasPrefix": {
+	"BytesNotHasPrefixError": {
 		"en": "Bytes %[1]q has prefix %[2]q.",
 		"fr": "Les bytes %[1]q ont le préfixe %[2]q.",
 	},
-	"BytesHasSuffix": {
+	"BytesHasSuffixError": {
 		"en": "Bytes %[1]q does not have suffix %[2]q.",
 		"fr": "Les bytes %[1]q n'ont pas le suffixe %[2]q.",
 	},
-	"BytesNotHasSuffix": {
+	"BytesNotHasSuffixError": {
 		"en": "Bytes %[1]q has suffix %[2]q.",
 		"fr": "Les bytes %[1]q ont le suffixe %[2]q.",
 	},
-	"Zero": {
+	"ZeroError": {
 		"en": "Value %#[1]v is not zero.",
 		"fr": "La valeur %#[1]v n'est pas zéro.",
 	},
-	"NotZero": {
+	"NotZeroError": {
 		"en": "Value is zero.",
 		"fr": "La valeur est zéro.",
 	},
-	"Required": {
+	"RequiredError": {
 		"en": "Value is required.",
 		"fr": "La valeur est requise.",
 	},
-	"PointerRequired": {
+	"PointerRequiredError": {
 		"en": "Pointer is nil.",
 		"fr": "Le pointeur est nil.", //nolint:misspell // "pointeur" is correct in French
 	},
-	"TypeRequired": {
+	"TypeRequiredError": {
 		"en": "Type %[1]T cannot be converted to %[2]T.",
 		"fr": "Le type %[1]T ne peut pas être converti en %[2]T.",
 	},
@@ -203,30 +203,6 @@ func GetLocalizableMessage(l Localizable, locales ...string) string {
 type LocalizableError interface {
 	error
 	Localizable
-}
-
-// ErrorWrapLocalization wraps the error with a localized message.
-func ErrorWrapLocalization(err error, key string, args ...any) error {
-	if err == nil {
-		return nil
-	}
-	return ErrorWrap(err, func(err error) error {
-		return &localizableError{
-			error: err,
-			key:   key,
-			args:  args,
-		}
-	})
-}
-
-type localizableError struct {
-	error
-	key  string
-	args []any
-}
-
-func (e *localizableError) Localization() (key string, args []any) {
-	return e.key, e.args
 }
 
 // GetErrorLocalizedMessage returns the localized message for a given error and locales (by order of preference).

@@ -1,7 +1,6 @@
 package vld
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -52,8 +51,18 @@ func Not[T any](msg string, vr Validator[T]) Validator[T] {
 	return WithStringFunc(func() string { return fmt.Sprintf("Not(%q, %v)", msg, vr) }, func(v T) error {
 		err := vr.Validate(v)
 		if err == nil {
-			return errors.New(msg)
+			return &NotError{Message: msg}
 		}
 		return nil
 	})
+}
+
+// NotError is the error type returned by [Not].
+type NotError struct {
+	Message string
+}
+
+// Error implements [error].
+func (e *NotError) Error() string {
+	return e.Message
 }

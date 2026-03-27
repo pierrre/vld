@@ -7,22 +7,22 @@ import (
 	. "github.com/pierrre/vld"
 )
 
-func ExampleGetErrorLocalizedMessage() {
-	fmt.Printf("%#v\n", GetErrorLocalizedMessage(ErrorWrapLocalization(errors.New("error"), "Equal", 1, 2), "fr"))
-	fmt.Printf("%#v\n", GetErrorLocalizedMessage(ErrorWrapLocalization(errors.New("error"), "LenEqual", 1, 2), "en"))
-	fmt.Printf("%#v\n", GetErrorLocalizedMessage(ErrorWrapLocalization(errors.New("error"), "LenEqual", 1, 2), "fr"))
-	fmt.Printf("%#v\n", ErrorWrapLocalization(nil, ""))
-	fmt.Printf("%#v\n", GetErrorLocalizedMessage(nil, "en"))
-	fmt.Printf("%#v\n", GetErrorLocalizedMessage(errors.New("error"), "en"))
-	fmt.Printf("%#v\n", GetErrorLocalizedMessage(ErrorWrapLocalization(errors.New("error"), "Unknown"), "en"))
-	fmt.Printf("%#v\n", GetErrorLocalizedMessage(ErrorWrapLocalization(errors.New("error"), "Equal", 1, 2), "unknown"))
+func ExampleGetLocalizedMessage() {
+	fmt.Printf("%#v\n", GetLocalizedMessage("EqualError", []any{1, 2}, "fr"))
+	fmt.Printf("%#v\n", GetLocalizedMessage("_Unknown", nil, "en"))
+	fmt.Printf("%#v\n", GetLocalizedMessage("EqualError", []any{1, 2}, "unknown"))
 	// Output:
 	// "La valeur 1 n'est pas égale à 2."
-	// "Length 1 is not equal to 2."
-	// "La longueur 1 n'est pas égale à 2."
-	// <nil>
 	// ""
 	// ""
+}
+
+func ExampleGetErrorLocalizedMessage() {
+	fmt.Printf("%#v\n", GetErrorLocalizedMessage(&EqualError[int]{Value: 1, Expected: 2}, "fr"))
+	fmt.Printf("%#v\n", GetErrorLocalizedMessage(nil, "en"))
+	fmt.Printf("%#v\n", GetErrorLocalizedMessage(errors.New("error"), "en"))
+	// Output:
+	// "La valeur 1 n'est pas égale à 2."
 	// ""
 	// ""
 }

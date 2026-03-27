@@ -19,12 +19,29 @@ func minCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) func(T) error {
 	return func(v T) error {
 		c := cmpFunc(v, minValue)
 		if c < 0 {
-			err := fmt.Errorf("%#v is less than %#v", v, minValue)
-			err = ErrorWrapLocalization(err, "Min", v, minValue)
-			return err
+			return &MinError[T]{
+				Value: v,
+				Min:   minValue,
+			}
 		}
 		return nil
 	}
+}
+
+// MinError is the error type returned by validators using [minCmpFunc].
+type MinError[T any] struct {
+	Value T
+	Min   T
+}
+
+// Error implements [error].
+func (e *MinError[T]) Error() string {
+	return fmt.Sprintf("%#v is less than %#v", e.Value, e.Min)
+}
+
+// Localization implements [LocalizableError].
+func (e *MinError[T]) Localization() (key string, args []any) {
+	return "MinError", []any{e.Value, e.Min}
 }
 
 // Max returns a [Validator] that checks if the value is less than or equal to the maximum value.
@@ -41,12 +58,29 @@ func maxCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) func(T) error {
 	return func(v T) error {
 		c := cmpFunc(v, maxValue)
 		if c > 0 {
-			err := fmt.Errorf("%#v is greater than %#v", v, maxValue)
-			err = ErrorWrapLocalization(err, "Max", v, maxValue)
-			return err
+			return &MaxError[T]{
+				Value: v,
+				Max:   maxValue,
+			}
 		}
 		return nil
 	}
+}
+
+// MaxError is the error type returned by validators using [maxCmpFunc].
+type MaxError[T any] struct {
+	Value T
+	Max   T
+}
+
+// Error implements [error].
+func (e *MaxError[T]) Error() string {
+	return fmt.Sprintf("%#v is greater than %#v", e.Value, e.Max)
+}
+
+// Localization implements [LocalizableError].
+func (e *MaxError[T]) Localization() (key string, args []any) {
+	return "MaxError", []any{e.Value, e.Max}
 }
 
 // Range returns a [Validator] that checks if the value is within the range [minValue, maxValue] (inclusive).
@@ -64,12 +98,31 @@ func rangeCmpFunc[T any](minValue, maxValue T, cmpFunc func(a, b T) int) func(T)
 		cMin := cmpFunc(v, minValue)
 		cMax := cmpFunc(v, maxValue)
 		if cMin < 0 || cMax > 0 {
-			err := fmt.Errorf("%#v is not in the range [%#v, %#v]", v, minValue, maxValue)
-			err = ErrorWrapLocalization(err, "Range", v, minValue, maxValue)
-			return err
+			return &RangeError[T]{
+				Value: v,
+				Min:   minValue,
+				Max:   maxValue,
+			}
 		}
 		return nil
 	}
+}
+
+// RangeError is the error type returned by validators using [rangeCmpFunc].
+type RangeError[T any] struct {
+	Value T
+	Min   T
+	Max   T
+}
+
+// Error implements [error].
+func (e *RangeError[T]) Error() string {
+	return fmt.Sprintf("%#v is not in the range [%#v, %#v]", e.Value, e.Min, e.Max)
+}
+
+// Localization implements [LocalizableError].
+func (e *RangeError[T]) Localization() (key string, args []any) {
+	return "RangeError", []any{e.Value, e.Min, e.Max}
 }
 
 // Less returns a [Validator] that checks if the value is less than the maximum value.
@@ -86,12 +139,29 @@ func lessCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) func(T) error {
 	return func(v T) error {
 		c := cmpFunc(v, maxValue)
 		if c >= 0 {
-			err := fmt.Errorf("%#v is not less than %#v", v, maxValue)
-			err = ErrorWrapLocalization(err, "Less", v, maxValue)
-			return err
+			return &LessError[T]{
+				Value: v,
+				Max:   maxValue,
+			}
 		}
 		return nil
 	}
+}
+
+// LessError is the error type returned by validators using [lessCmpFunc].
+type LessError[T any] struct {
+	Value T
+	Max   T
+}
+
+// Error implements [error].
+func (e *LessError[T]) Error() string {
+	return fmt.Sprintf("%#v is not less than %#v", e.Value, e.Max)
+}
+
+// Localization implements [LocalizableError].
+func (e *LessError[T]) Localization() (key string, args []any) {
+	return "LessError", []any{e.Value, e.Max}
 }
 
 // Greater returns a [Validator] that checks if the value is greater than the minimum value.
@@ -108,10 +178,27 @@ func greaterCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) func(T) error {
 	return func(v T) error {
 		c := cmpFunc(v, minValue)
 		if c <= 0 {
-			err := fmt.Errorf("%#v is not greater than %#v", v, minValue)
-			err = ErrorWrapLocalization(err, "Greater", v, minValue)
-			return err
+			return &GreaterError[T]{
+				Value: v,
+				Min:   minValue,
+			}
 		}
 		return nil
 	}
+}
+
+// GreaterError is the error type returned by validators using [greaterCmpFunc].
+type GreaterError[T any] struct {
+	Value T
+	Min   T
+}
+
+// Error implements [error].
+func (e *GreaterError[T]) Error() string {
+	return fmt.Sprintf("%#v is not greater than %#v", e.Value, e.Min)
+}
+
+// Localization implements [LocalizableError].
+func (e *GreaterError[T]) Localization() (key string, args []any) {
+	return "GreaterError", []any{e.Value, e.Min}
 }

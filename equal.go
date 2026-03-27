@@ -17,12 +17,29 @@ func EqualFunc[T any](v T, eqFunc func(a, b T) bool) Validator[T] {
 func equalFunc[T any](expected T, eqFunc func(a, b T) bool) func(T) error {
 	return func(v T) error {
 		if !eqFunc(v, expected) {
-			err := fmt.Errorf("%#v is not equal to %#v", v, expected)
-			err = ErrorWrapLocalization(err, "Equal", v, expected)
-			return err
+			return &EqualError[T]{
+				Value:    v,
+				Expected: expected,
+			}
 		}
 		return nil
 	}
+}
+
+// EqualError is the error type returned by validators using [equalFunc].
+type EqualError[T any] struct {
+	Value    T
+	Expected T
+}
+
+// Error implements [error].
+func (e *EqualError[T]) Error() string {
+	return fmt.Sprintf("%#v is not equal to %#v", e.Value, e.Expected)
+}
+
+// Localization implements [LocalizableError].
+func (e *EqualError[T]) Localization() (key string, args []any) {
+	return "EqualError", []any{e.Value, e.Expected}
 }
 
 // EqualCmpFunc returns a [Validator] that checks if the value is equal to a specific value using a custom comparison function.
@@ -47,12 +64,29 @@ func NotEqualFunc[T any](v T, eqFunc func(a, b T) bool) Validator[T] {
 func notEqualFunc[T any](expected T, eqFunc func(a, b T) bool) func(T) error {
 	return func(v T) error {
 		if eqFunc(v, expected) {
-			err := fmt.Errorf("%#v is equal to %#v", v, expected)
-			err = ErrorWrapLocalization(err, "NotEqual", v, expected)
-			return err
+			return &NotEqualError[T]{
+				Value:    v,
+				Expected: expected,
+			}
 		}
 		return nil
 	}
+}
+
+// NotEqualError is the error type returned by validators using [notEqualFunc].
+type NotEqualError[T any] struct {
+	Value    T
+	Expected T
+}
+
+// Error implements [error].
+func (e *NotEqualError[T]) Error() string {
+	return fmt.Sprintf("%#v is equal to %#v", e.Value, e.Expected)
+}
+
+// Localization implements [LocalizableError].
+func (e *NotEqualError[T]) Localization() (key string, args []any) {
+	return "NotEqualError", []any{e.Value, e.Expected}
 }
 
 // NotEqualCmpFunc returns a [Validator] that checks if the value is not equal to a specific value using a custom comparison function.
