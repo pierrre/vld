@@ -12,7 +12,7 @@ func ExamplePointerOptional() {
 	fmt.Println(vr.Validate(new(1)))
 	fmt.Println(vr.Validate(nil))
 	fmt.Println(vr.Validate(new(2)))
-	fmt.Println(GetErrorLocalization(vr.Validate(new(2)), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(new(2)), "en"))
 	// Output:
 	// PointerOptional(Equal(1))
 	// <nil>
@@ -27,7 +27,7 @@ func ExamplePointerRequired() {
 	fmt.Println(vr.Validate(new(1)))
 	fmt.Println(vr.Validate(nil))
 	fmt.Println(vr.Validate(new(2)))
-	fmt.Println(GetErrorLocalization(vr.Validate(nil), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(nil), "en"))
 	// Output:
 	// PointerRequired(Equal(1))
 	// <nil>

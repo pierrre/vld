@@ -11,7 +11,7 @@ func ExampleBytesEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]byte("abc")))
 	fmt.Println(vr.Validate([]byte("abd")))
-	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abd")), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]byte("abd")), "en"))
 	// Output:
 	// BytesEqual("abc")
 	// <nil>
@@ -24,7 +24,7 @@ func ExampleBytesNotEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]byte("abd")))
 	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abc")), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]byte("abc")), "en"))
 	// Output:
 	// BytesNotEqual("abc")
 	// <nil>
@@ -37,7 +37,7 @@ func ExampleBytesContains() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]byte("abc")))
 	fmt.Println(vr.Validate([]byte("acd")))
-	fmt.Println(GetErrorLocalization(vr.Validate([]byte("acd")), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]byte("acd")), "en"))
 	// Output:
 	// BytesContains("b")
 	// <nil>
@@ -50,7 +50,7 @@ func ExampleBytesNotContains() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]byte("acd")))
 	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abc")), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]byte("abc")), "en"))
 	// Output:
 	// BytesNotContains("b")
 	// <nil>
@@ -63,7 +63,7 @@ func ExampleBytesHasPrefix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]byte("abc")))
 	fmt.Println(vr.Validate([]byte("bac")))
-	fmt.Println(GetErrorLocalization(vr.Validate([]byte("bac")), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]byte("bac")), "en"))
 	// Output:
 	// BytesHasPrefix("a")
 	// <nil>
@@ -76,7 +76,7 @@ func ExampleBytesNotHasPrefix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]byte("bac")))
 	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abc")), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]byte("abc")), "en"))
 	// Output:
 	// BytesNotHasPrefix("a")
 	// <nil>
@@ -89,7 +89,7 @@ func ExampleBytesHasSuffix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]byte("abc")))
 	fmt.Println(vr.Validate([]byte("acb")))
-	fmt.Println(GetErrorLocalization(vr.Validate([]byte("acb")), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]byte("acb")), "en"))
 	// Output:
 	// BytesHasSuffix("c")
 	// <nil>
@@ -102,7 +102,7 @@ func ExampleBytesNotHasSuffix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]byte("acb")))
 	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(GetErrorLocalization(vr.Validate([]byte("abc")), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]byte("abc")), "en"))
 	// Output:
 	// BytesNotHasSuffix("c")
 	// <nil>

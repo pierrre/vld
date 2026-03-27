@@ -5,8 +5,8 @@ import (
 	"fmt"
 )
 
-// LocalizedMessages contains localized messages.
-var LocalizedMessages = map[string]map[string]string{
+// LocalizationMessages contains localization messages.
+var LocalizationMessages = map[string]map[string]string{
 	"Equal": {
 		"en": "Value %#[1]v is not equal to %#[2]v.",
 		"fr": "La valeur %#[1]v n'est pas égale à %#[2]v.",
@@ -173,11 +173,36 @@ var LocalizedMessages = map[string]map[string]string{
 	},
 }
 
-// LocalizedError is an interface for errors that can provide localized messages.
-type LocalizedError interface {
+// GetLocalizedMessage returns the localized message for a given key and arguments, using the provided locales (by order of preference).
+func GetLocalizedMessage(key string, args []any, locales ...string) string {
+	formats, ok := LocalizationMessages[key]
+	if !ok {
+		return ""
+	}
+	for _, locale := range locales {
+		format, ok := formats[locale]
+		if ok {
+			return fmt.Sprintf(format, args...)
+		}
+	}
+	return ""
+}
+
+// Localizable is an interface for types that can provide a localization key and arguments.
+type Localizable interface {
+	Localization() (key string, args []any)
+}
+
+// GetLocalizableMessage returns the localized message for a given [Localizable] and locales (by order of preference).
+func GetLocalizableMessage(l Localizable, locales ...string) string {
+	key, args := l.Localization()
+	return GetLocalizedMessage(key, args, locales...)
+}
+
+// LocalizableError is an interface for errors that can provide localized messages.
+type LocalizableError interface {
 	error
-	LocalizationKey() string
-	LocalizationArgs() []any
+	Localizable
 }
 
 // ErrorWrapLocalization wraps the error with a localized message.
@@ -186,7 +211,7 @@ func ErrorWrapLocalization(err error, key string, args ...any) error {
 		return nil
 	}
 	return ErrorWrap(err, func(err error) error {
-		return &localizedError{
+		return &localizableError{
 			error: err,
 			key:   key,
 			args:  args,
@@ -194,39 +219,24 @@ func ErrorWrapLocalization(err error, key string, args ...any) error {
 	})
 }
 
-type localizedError struct {
+type localizableError struct {
 	error
 	key  string
 	args []any
 }
 
-func (e *localizedError) LocalizationKey() string {
-	return e.key
+func (e *localizableError) Localization() (key string, args []any) {
+	return e.key, e.args
 }
 
-func (e *localizedError) LocalizationArgs() []any {
-	return e.args
-}
-
-// GetErrorLocalization returns the localized message for a given error and locales (by order of preference).
-func GetErrorLocalization(err error, locales ...string) string {
+// GetErrorLocalizedMessage returns the localized message for a given error and locales (by order of preference).
+func GetErrorLocalizedMessage(err error, locales ...string) string {
 	if err == nil {
 		return ""
 	}
-	lv, ok := errors.AsType[LocalizedError](err)
+	lv, ok := errors.AsType[LocalizableError](err)
 	if !ok {
 		return ""
 	}
-	key := lv.LocalizationKey()
-	formats, ok := LocalizedMessages[key]
-	if !ok {
-		return ""
-	}
-	for _, locale := range locales {
-		format, ok := formats[locale]
-		if ok {
-			return fmt.Sprintf(format, lv.LocalizationArgs()...)
-		}
-	}
-	return ""
+	return GetLocalizableMessage(lv, locales...)
 }

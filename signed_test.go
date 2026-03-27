@@ -12,7 +12,7 @@ func ExamplePositive() {
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(-1))
-	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(0), "en"))
 	// Output:
 	// Positive
 	// <nil>
@@ -27,7 +27,7 @@ func ExampleNegative() {
 	fmt.Println(vr.Validate(-1))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
-	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(0), "en"))
 	// Output:
 	// Negative
 	// <nil>

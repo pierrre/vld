@@ -11,7 +11,7 @@ func ExampleStringLenEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abcd"))
-	fmt.Println(GetErrorLocalization(vr.Validate("abcd"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abcd"), "en"))
 	// Output:
 	// StringLenEqual(3)
 	// <nil>
@@ -24,7 +24,7 @@ func ExampleStringLenMin() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("ab"))
-	fmt.Println(GetErrorLocalization(vr.Validate("ab"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("ab"), "en"))
 	// Output:
 	// StringLenMin(3)
 	// <nil>
@@ -37,7 +37,7 @@ func ExampleStringLenMax() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abcd"))
-	fmt.Println(GetErrorLocalization(vr.Validate("abcd"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abcd"), "en"))
 	// Output:
 	// StringLenMax(3)
 	// <nil>
@@ -51,7 +51,7 @@ func ExampleStringLenRange() {
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("a"))
 	fmt.Println(vr.Validate("abcde"))
-	fmt.Println(GetErrorLocalization(vr.Validate("a"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("a"), "en"))
 	// Output:
 	// StringLenRange(2, 4)
 	// <nil>
@@ -65,7 +65,7 @@ func ExampleStringEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(""))
 	fmt.Println(vr.Validate("a"))
-	fmt.Println(GetErrorLocalization(vr.Validate("a"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("a"), "en"))
 	// Output:
 	// StringEmpty
 	// <nil>
@@ -78,7 +78,7 @@ func ExampleStringNotEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("a"))
 	fmt.Println(vr.Validate(""))
-	fmt.Println(GetErrorLocalization(vr.Validate(""), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(""), "en"))
 	// Output:
 	// StringNotEmpty
 	// <nil>
@@ -91,7 +91,7 @@ func ExampleStringRunesEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abcd"))
-	fmt.Println(GetErrorLocalization(vr.Validate("abcd"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abcd"), "en"))
 	// Output:
 	// StringRunesEqual(3)
 	// <nil>
@@ -104,7 +104,7 @@ func ExampleStringRunesMin() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("ab"))
-	fmt.Println(GetErrorLocalization(vr.Validate("ab"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("ab"), "en"))
 	// Output:
 	// StringRunesMin(3)
 	// <nil>
@@ -117,7 +117,7 @@ func ExampleStringRunesMax() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abcd"))
-	fmt.Println(GetErrorLocalization(vr.Validate("abcd"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abcd"), "en"))
 	// Output:
 	// StringRunesMax(3)
 	// <nil>
@@ -131,7 +131,7 @@ func ExampleStringRunesRange() {
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("a"))
 	fmt.Println(vr.Validate("abcde"))
-	fmt.Println(GetErrorLocalization(vr.Validate("a"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("a"), "en"))
 	// Output:
 	// StringRunesRange(2, 4)
 	// <nil>
@@ -145,7 +145,7 @@ func ExampleStringContains() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("acd"))
-	fmt.Println(GetErrorLocalization(vr.Validate("acd"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("acd"), "en"))
 	// Output:
 	// StringContains("b")
 	// <nil>
@@ -158,7 +158,7 @@ func ExampleStringNotContains() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("acd"))
 	fmt.Println(vr.Validate("abc"))
-	fmt.Println(GetErrorLocalization(vr.Validate("abc"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abc"), "en"))
 	// Output:
 	// StringNotContains("b")
 	// <nil>
@@ -171,7 +171,7 @@ func ExampleStringHasPrefix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("bac"))
-	fmt.Println(GetErrorLocalization(vr.Validate("bac"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("bac"), "en"))
 	// Output:
 	// StringHasPrefix("a")
 	// <nil>
@@ -184,7 +184,7 @@ func ExampleStringNotHasPrefix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("bac"))
 	fmt.Println(vr.Validate("abc"))
-	fmt.Println(GetErrorLocalization(vr.Validate("abc"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abc"), "en"))
 	// Output:
 	// StringNotHasPrefix("a")
 	// <nil>
@@ -197,7 +197,7 @@ func ExampleStringHasSuffix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("acb"))
-	fmt.Println(GetErrorLocalization(vr.Validate("acb"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("acb"), "en"))
 	// Output:
 	// StringHasSuffix("c")
 	// <nil>
@@ -210,7 +210,7 @@ func ExampleStringNotHasSuffix() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("acb"))
 	fmt.Println(vr.Validate("abc"))
-	fmt.Println(GetErrorLocalization(vr.Validate("abc"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abc"), "en"))
 	// Output:
 	// StringNotHasSuffix("c")
 	// <nil>

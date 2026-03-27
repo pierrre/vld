@@ -13,7 +13,7 @@ func ExampleMin() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
-	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(0), "en"))
 	// Output:
 	// Min(1)
 	// <nil>
@@ -28,7 +28,7 @@ func ExampleMinCmpFunc() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
-	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(0), "en"))
 	// Output:
 	// MinCmpFunc(1)
 	// <nil>
@@ -43,7 +43,7 @@ func ExampleMax() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
 	// Output:
 	// Max(1)
 	// <nil>
@@ -58,7 +58,7 @@ func ExampleMaxCmpFunc() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
 	// Output:
 	// MaxCmpFunc(1)
 	// <nil>
@@ -75,7 +75,7 @@ func ExampleRange() {
 	fmt.Println(vr.Validate(3))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(4))
-	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(0), "en"))
 	// Output:
 	// Range(1, 3)
 	// <nil>
@@ -94,7 +94,7 @@ func ExampleRangeCmpFunc() {
 	fmt.Println(vr.Validate(3))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(4))
-	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(0), "en"))
 	// Output:
 	// RangeCmpFunc(1, 3)
 	// <nil>
@@ -111,7 +111,7 @@ func ExampleLess() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
 	// Output:
 	// Less(1)
 	// <nil>
@@ -126,7 +126,7 @@ func ExampleLessCmpFunc() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
 	// Output:
 	// LessCmpFunc(1)
 	// <nil>
@@ -141,7 +141,7 @@ func ExampleGreater() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
-	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
 	// Output:
 	// Greater(1)
 	// <nil>
@@ -156,7 +156,7 @@ func ExampleGreaterCmpFunc() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
-	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
 	// Output:
 	// GreaterCmpFunc(1)
 	// <nil>

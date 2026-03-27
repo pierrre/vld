@@ -11,7 +11,7 @@ func ExampleZero() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
-	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
 	// Output:
 	// Zero
 	// <nil>
@@ -24,7 +24,7 @@ func ExampleNotZero() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
-	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(0), "en"))
 	// Output:
 	// NotZero
 	// <nil>
@@ -38,7 +38,7 @@ func ExampleOptional() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
 	// Output:
 	// Optional(Equal(1))
 	// <nil>
@@ -53,7 +53,7 @@ func ExampleRequired() {
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(0), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(0), "en"))
 	// Output:
 	// Required(Equal(1))
 	// <nil>

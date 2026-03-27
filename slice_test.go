@@ -11,7 +11,7 @@ func ExampleSliceLenEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{}), "en"))
 	// Output:
 	// SliceLenEqual(1)
 	// <nil>
@@ -24,7 +24,7 @@ func ExampleSliceLenMin() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{}), "en"))
 	// Output:
 	// SliceLenMin(1)
 	// <nil>
@@ -37,7 +37,7 @@ func ExampleSliceLenMax() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{}))
 	fmt.Println(vr.Validate([]int{1, 2}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{1, 2}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{1, 2}), "en"))
 	// Output:
 	// SliceLenMax(1)
 	// <nil>
@@ -50,7 +50,7 @@ func ExampleSliceLenRange() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{}), "en"))
 	// Output:
 	// SliceLenRange(1, 2)
 	// <nil>
@@ -63,7 +63,7 @@ func ExampleSliceEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{}))
 	fmt.Println(vr.Validate([]int{1}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{1}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{1}), "en"))
 	// Output:
 	// SliceEmpty
 	// <nil>
@@ -76,7 +76,7 @@ func ExampleSliceNotEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{}), "en"))
 	// Output:
 	// SliceNotEmpty
 	// <nil>
@@ -89,7 +89,7 @@ func ExampleSliceContains() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1, 2}))
 	fmt.Println(vr.Validate([]int{2, 3}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{2, 3}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{2, 3}), "en"))
 	// Output:
 	// SliceContains(1)
 	// <nil>
@@ -102,7 +102,7 @@ func ExampleSliceNotContains() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{2, 3}))
 	fmt.Println(vr.Validate([]int{1, 2}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{1, 2}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{1, 2}), "en"))
 	// Output:
 	// SliceNotContains(1)
 	// <nil>
@@ -115,7 +115,7 @@ func ExampleSliceEach() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{2}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{2}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{2}), "en"))
 	// Output:
 	// SliceEach(Equal(vld.KeyValue[int,int]{Key:0, Value:1}))
 	// <nil>
@@ -128,7 +128,7 @@ func ExampleSliceEachValue() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1, 1}))
 	fmt.Println(vr.Validate([]int{1, 2}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{1, 2}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{1, 2}), "en"))
 	// Output:
 	// SliceEachValue(Equal(1))
 	// <nil>
@@ -141,7 +141,7 @@ func ExampleSliceUnique() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1, 2}))
 	fmt.Println(vr.Validate([]int{1, 2, 1}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{1, 2, 1}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{1, 2, 1}), "en"))
 	// Output:
 	// SliceUnique
 	// <nil>
@@ -154,7 +154,7 @@ func ExampleSliceUniqueBy() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate([]int{1, 2}))
 	fmt.Println(vr.Validate([]int{1, 2, 3}))
-	fmt.Println(GetErrorLocalization(vr.Validate([]int{1, 2, 3}), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate([]int{1, 2, 3}), "en"))
 	// Output:
 	// SliceUniqueBy
 	// <nil>

@@ -12,7 +12,7 @@ func ExampleEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
 	// Output:
 	// Equal(1)
 	// <nil>
@@ -25,7 +25,7 @@ func ExampleEqualFunc() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
 	// Output:
 	// EqualFunc(1)
 	// <nil>
@@ -38,7 +38,7 @@ func ExampleEqualCmpFunc() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
 	// Output:
 	// EqualCmpFunc(1)
 	// <nil>
@@ -51,7 +51,7 @@ func ExampleNotEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
-	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
 	// Output:
 	// NotEqual(1)
 	// <nil>
@@ -64,7 +64,7 @@ func ExampleNotEqualFunc() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
-	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
 	// Output:
 	// NotEqualFunc(1)
 	// <nil>
@@ -77,7 +77,7 @@ func ExampleNotEqualCmpFunc() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(2))
 	fmt.Println(vr.Validate(1))
-	fmt.Println(GetErrorLocalization(vr.Validate(1), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
 	// Output:
 	// NotEqualCmpFunc(1)
 	// <nil>

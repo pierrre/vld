@@ -12,7 +12,7 @@ func ExampleTypeOptional() {
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate("1"))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate(2), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
 	// Output:
 	// TypeOptional[int](Equal(1))
 	// <nil>
@@ -27,7 +27,7 @@ func ExampleTypeRequired() {
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate("1"))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalization(vr.Validate("1"), "en"))
+	fmt.Println(GetErrorLocalizedMessage(vr.Validate("1"), "en"))
 	// Output:
 	// TypeRequired[int](Equal(1))
 	// <nil>
