@@ -5,36 +5,66 @@ import (
 	"fmt"
 )
 
-// Min returns a [Validator] that checks if the value is greater than or equal to the minimum value.
-func Min[T cmp.Ordered](minValue T) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Min(%#v)", minValue) }, minCmpFunc(minValue, cmp.Compare[T]))
-}
-
-// MinCmpFunc returns a [Validator] that checks if the value is greater than or equal to the minimum value using a custom comparison function.
-func MinCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MinCmpFunc(%#v)", minValue) }, minCmpFunc(minValue, cmpFunc))
-}
-
-func minCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) func(T) error {
-	return func(v T) error {
-		c := cmpFunc(v, minValue)
-		if c < 0 {
-			return &MinError[T]{
-				Value: v,
-				Min:   minValue,
-			}
-		}
-		return nil
+// Min creates a [MinValidator].
+func Min[T cmp.Ordered](minValue T) *MinValidator[T] {
+	return &MinValidator[T]{
+		Min: minValue,
 	}
 }
 
-// MinError is the error type returned by validators using [minCmpFunc].
+// MinValidator is a [Validator] that checks if the value is greater than or equal to the minimum value.
+type MinValidator[T cmp.Ordered] struct {
+	Min T
+}
+
+// Validate implements [Validator].
+func (vr *MinValidator[T]) Validate(v T) error {
+	return validateMinCmpFunc(v, vr.Min, cmp.Compare[T])
+}
+
+func (vr *MinValidator[T]) String() string {
+	return fmt.Sprintf("Min(%#v)", vr.Min)
+}
+
+// MinCmpFunc creates a [MinCmpFuncValidator].
+func MinCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) *MinCmpFuncValidator[T] {
+	return &MinCmpFuncValidator[T]{
+		Min:  minValue,
+		Func: cmpFunc,
+	}
+}
+
+// MinCmpFuncValidator is a [Validator] that checks if the value is greater than or equal to the minimum value using a custom comparison function.
+type MinCmpFuncValidator[T any] struct {
+	Min  T
+	Func func(a, b T) int
+}
+
+// Validate implements [Validator].
+func (vr *MinCmpFuncValidator[T]) Validate(v T) error {
+	return validateMinCmpFunc(v, vr.Min, vr.Func)
+}
+
+func (vr *MinCmpFuncValidator[T]) String() string {
+	return fmt.Sprintf("MinCmpFunc(%#v)", vr.Min)
+}
+
+func validateMinCmpFunc[T any](v T, minValue T, cmpFunc func(a, b T) int) error {
+	if cmpFunc(v, minValue) < 0 {
+		return &MinError[T]{
+			Value: v,
+			Min:   minValue,
+		}
+	}
+	return nil
+}
+
+// MinError is the error type returned by validators that check for minimum value.
 type MinError[T any] struct {
 	Value T
 	Min   T
 }
 
-// Error implements [error].
 func (e *MinError[T]) Error() string {
 	return fmt.Sprintf("%#v is less than %#v", e.Value, e.Min)
 }
@@ -44,36 +74,66 @@ func (e *MinError[T]) Localization() (key string, args []any) {
 	return "MinError", []any{e.Value, e.Min}
 }
 
-// Max returns a [Validator] that checks if the value is less than or equal to the maximum value.
-func Max[T cmp.Ordered](maxValue T) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Max(%#v)", maxValue) }, maxCmpFunc(maxValue, cmp.Compare[T]))
-}
-
-// MaxCmpFunc returns a [Validator] that checks if the value is less than or equal to the maximum value using a custom comparison function.
-func MaxCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("MaxCmpFunc(%#v)", maxValue) }, maxCmpFunc(maxValue, cmpFunc))
-}
-
-func maxCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) func(T) error {
-	return func(v T) error {
-		c := cmpFunc(v, maxValue)
-		if c > 0 {
-			return &MaxError[T]{
-				Value: v,
-				Max:   maxValue,
-			}
-		}
-		return nil
+// Max creates a [MaxValidator].
+func Max[T cmp.Ordered](maxValue T) *MaxValidator[T] {
+	return &MaxValidator[T]{
+		Max: maxValue,
 	}
 }
 
-// MaxError is the error type returned by validators using [maxCmpFunc].
+// MaxValidator is a [Validator] that checks if the value is less than or equal to the maximum value.
+type MaxValidator[T cmp.Ordered] struct {
+	Max T
+}
+
+// Validate implements [Validator].
+func (vr *MaxValidator[T]) Validate(v T) error {
+	return validateMaxCmpFunc(v, vr.Max, cmp.Compare[T])
+}
+
+func (vr *MaxValidator[T]) String() string {
+	return fmt.Sprintf("Max(%#v)", vr.Max)
+}
+
+// MaxCmpFunc creates a [MaxCmpFuncValidator].
+func MaxCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) *MaxCmpFuncValidator[T] {
+	return &MaxCmpFuncValidator[T]{
+		Max:  maxValue,
+		Func: cmpFunc,
+	}
+}
+
+// MaxCmpFuncValidator is a [Validator] that checks if the value is less than or equal to the maximum value using a custom comparison function.
+type MaxCmpFuncValidator[T any] struct {
+	Max  T
+	Func func(a, b T) int
+}
+
+// Validate implements [Validator].
+func (vr *MaxCmpFuncValidator[T]) Validate(v T) error {
+	return validateMaxCmpFunc(v, vr.Max, vr.Func)
+}
+
+func (vr *MaxCmpFuncValidator[T]) String() string {
+	return fmt.Sprintf("MaxCmpFunc(%#v)", vr.Max)
+}
+
+func validateMaxCmpFunc[T any](v T, maxValue T, cmpFunc func(a, b T) int) error {
+	if cmpFunc(v, maxValue) > 0 {
+		return &MaxError[T]{
+			Value: v,
+			Max:   maxValue,
+		}
+	}
+	return nil
+}
+
+// MaxError is the error type returned by validators that check for maximum value.
 type MaxError[T any] struct {
 	Value T
 	Max   T
 }
 
-// Error implements [error].
 func (e *MaxError[T]) Error() string {
 	return fmt.Sprintf("%#v is greater than %#v", e.Value, e.Max)
 }
@@ -83,39 +143,72 @@ func (e *MaxError[T]) Localization() (key string, args []any) {
 	return "MaxError", []any{e.Value, e.Max}
 }
 
-// Range returns a [Validator] that checks if the value is within the range [minValue, maxValue] (inclusive).
-func Range[T cmp.Ordered](minValue, maxValue T) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Range(%#v, %#v)", minValue, maxValue) }, rangeCmpFunc(minValue, maxValue, cmp.Compare[T]))
-}
-
-// RangeCmpFunc returns a [Validator] that checks if the value is within the range [minValue, maxValue] (inclusive) using a custom comparison function.
-func RangeCmpFunc[T any](minValue, maxValue T, cmpFunc func(a, b T) int) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("RangeCmpFunc(%#v, %#v)", minValue, maxValue) }, rangeCmpFunc(minValue, maxValue, cmpFunc))
-}
-
-func rangeCmpFunc[T any](minValue, maxValue T, cmpFunc func(a, b T) int) func(T) error {
-	return func(v T) error {
-		cMin := cmpFunc(v, minValue)
-		cMax := cmpFunc(v, maxValue)
-		if cMin < 0 || cMax > 0 {
-			return &RangeError[T]{
-				Value: v,
-				Min:   minValue,
-				Max:   maxValue,
-			}
-		}
-		return nil
+// Range creates a [RangeValidator].
+func Range[T cmp.Ordered](minValue, maxValue T) *RangeValidator[T] {
+	return &RangeValidator[T]{
+		Min: minValue,
+		Max: maxValue,
 	}
 }
 
-// RangeError is the error type returned by validators using [rangeCmpFunc].
+// RangeValidator is a [Validator] that checks if the value is within the range [minValue, maxValue] (inclusive).
+type RangeValidator[T cmp.Ordered] struct {
+	Min T
+	Max T
+}
+
+// Validate implements [Validator].
+func (vr *RangeValidator[T]) Validate(v T) error {
+	return validateRangeCmpFunc(v, vr.Min, vr.Max, cmp.Compare[T])
+}
+
+func (vr *RangeValidator[T]) String() string {
+	return fmt.Sprintf("Range(%#v, %#v)", vr.Min, vr.Max)
+}
+
+// RangeCmpFunc creates a [RangeCmpFuncValidator].
+func RangeCmpFunc[T any](minValue, maxValue T, cmpFunc func(a, b T) int) *RangeCmpFuncValidator[T] {
+	return &RangeCmpFuncValidator[T]{
+		Min:  minValue,
+		Max:  maxValue,
+		Func: cmpFunc,
+	}
+}
+
+// RangeCmpFuncValidator is a [Validator] that checks if the value is within the range [minValue, maxValue] (inclusive) using a custom comparison function.
+type RangeCmpFuncValidator[T any] struct {
+	Min  T
+	Max  T
+	Func func(a, b T) int
+}
+
+// Validate implements [Validator].
+func (vr *RangeCmpFuncValidator[T]) Validate(v T) error {
+	return validateRangeCmpFunc(v, vr.Min, vr.Max, vr.Func)
+}
+
+func (vr *RangeCmpFuncValidator[T]) String() string {
+	return fmt.Sprintf("RangeCmpFunc(%#v, %#v)", vr.Min, vr.Max)
+}
+
+func validateRangeCmpFunc[T any](v T, minValue, maxValue T, cmpFunc func(a, b T) int) error {
+	if cmpFunc(v, minValue) < 0 || cmpFunc(v, maxValue) > 0 {
+		return &RangeError[T]{
+			Value: v,
+			Min:   minValue,
+			Max:   maxValue,
+		}
+	}
+	return nil
+}
+
+// RangeError is the error type returned by validators that check for range.
 type RangeError[T any] struct {
 	Value T
 	Min   T
 	Max   T
 }
 
-// Error implements [error].
 func (e *RangeError[T]) Error() string {
 	return fmt.Sprintf("%#v is not in the range [%#v, %#v]", e.Value, e.Min, e.Max)
 }
@@ -125,36 +218,66 @@ func (e *RangeError[T]) Localization() (key string, args []any) {
 	return "RangeError", []any{e.Value, e.Min, e.Max}
 }
 
-// Less returns a [Validator] that checks if the value is less than the maximum value.
-func Less[T cmp.Ordered](maxValue T) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Less(%#v)", maxValue) }, lessCmpFunc(maxValue, cmp.Compare[T]))
-}
-
-// LessCmpFunc returns a [Validator] that checks if the value is less than the maximum value using a custom comparison function.
-func LessCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("LessCmpFunc(%#v)", maxValue) }, lessCmpFunc(maxValue, cmpFunc))
-}
-
-func lessCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) func(T) error {
-	return func(v T) error {
-		c := cmpFunc(v, maxValue)
-		if c >= 0 {
-			return &LessError[T]{
-				Value: v,
-				Max:   maxValue,
-			}
-		}
-		return nil
+// Less creates a [LessValidator].
+func Less[T cmp.Ordered](maxValue T) *LessValidator[T] {
+	return &LessValidator[T]{
+		Max: maxValue,
 	}
 }
 
-// LessError is the error type returned by validators using [lessCmpFunc].
+// LessValidator is a [Validator] that checks if the value is less than the maximum value.
+type LessValidator[T cmp.Ordered] struct {
+	Max T
+}
+
+// Validate implements [Validator].
+func (vr *LessValidator[T]) Validate(v T) error {
+	return validateLessCmpFunc(v, vr.Max, cmp.Compare[T])
+}
+
+func (vr *LessValidator[T]) String() string {
+	return fmt.Sprintf("Less(%#v)", vr.Max)
+}
+
+// LessCmpFunc creates a [LessCmpFuncValidator].
+func LessCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) *LessCmpFuncValidator[T] {
+	return &LessCmpFuncValidator[T]{
+		Max:  maxValue,
+		Func: cmpFunc,
+	}
+}
+
+// LessCmpFuncValidator is a [Validator] that checks if the value is less than the maximum value using a custom comparison function.
+type LessCmpFuncValidator[T any] struct {
+	Max  T
+	Func func(a, b T) int
+}
+
+// Validate implements [Validator].
+func (vr *LessCmpFuncValidator[T]) Validate(v T) error {
+	return validateLessCmpFunc(v, vr.Max, vr.Func)
+}
+
+func (vr *LessCmpFuncValidator[T]) String() string {
+	return fmt.Sprintf("LessCmpFunc(%#v)", vr.Max)
+}
+
+func validateLessCmpFunc[T any](v T, maxValue T, cmpFunc func(a, b T) int) error {
+	if cmpFunc(v, maxValue) >= 0 {
+		return &LessError[T]{
+			Value: v,
+			Max:   maxValue,
+		}
+	}
+	return nil
+}
+
+// LessError is the error type returned by validators that check for maximum value.
 type LessError[T any] struct {
 	Value T
 	Max   T
 }
 
-// Error implements [error].
 func (e *LessError[T]) Error() string {
 	return fmt.Sprintf("%#v is not less than %#v", e.Value, e.Max)
 }
@@ -164,36 +287,66 @@ func (e *LessError[T]) Localization() (key string, args []any) {
 	return "LessError", []any{e.Value, e.Max}
 }
 
-// Greater returns a [Validator] that checks if the value is greater than the minimum value.
-func Greater[T cmp.Ordered](minValue T) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Greater(%#v)", minValue) }, greaterCmpFunc(minValue, cmp.Compare[T]))
-}
-
-// GreaterCmpFunc returns a [Validator] that checks if the value is greater than the minimum value using a custom comparison function.
-func GreaterCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("GreaterCmpFunc(%#v)", minValue) }, greaterCmpFunc(minValue, cmpFunc))
-}
-
-func greaterCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) func(T) error {
-	return func(v T) error {
-		c := cmpFunc(v, minValue)
-		if c <= 0 {
-			return &GreaterError[T]{
-				Value: v,
-				Min:   minValue,
-			}
-		}
-		return nil
+// Greater creates a [GreaterValidator].
+func Greater[T cmp.Ordered](minValue T) *GreaterValidator[T] {
+	return &GreaterValidator[T]{
+		Min: minValue,
 	}
 }
 
-// GreaterError is the error type returned by validators using [greaterCmpFunc].
+// GreaterValidator is a [Validator] that checks if the value is greater than the minimum value.
+type GreaterValidator[T cmp.Ordered] struct {
+	Min T
+}
+
+// Validate implements [Validator].
+func (vr *GreaterValidator[T]) Validate(v T) error {
+	return validateGreaterCmpFunc(v, vr.Min, cmp.Compare[T])
+}
+
+func (vr *GreaterValidator[T]) String() string {
+	return fmt.Sprintf("Greater(%#v)", vr.Min)
+}
+
+// GreaterCmpFunc creates a [GreaterCmpFuncValidator].
+func GreaterCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) *GreaterCmpFuncValidator[T] {
+	return &GreaterCmpFuncValidator[T]{
+		Min:  minValue,
+		Func: cmpFunc,
+	}
+}
+
+// GreaterCmpFuncValidator is a [Validator] that checks if the value is greater than the minimum value using a custom comparison function.
+type GreaterCmpFuncValidator[T any] struct {
+	Min  T
+	Func func(a, b T) int
+}
+
+// Validate implements [Validator].
+func (vr *GreaterCmpFuncValidator[T]) Validate(v T) error {
+	return validateGreaterCmpFunc(v, vr.Min, vr.Func)
+}
+
+func (vr *GreaterCmpFuncValidator[T]) String() string {
+	return fmt.Sprintf("GreaterCmpFunc(%#v)", vr.Min)
+}
+
+func validateGreaterCmpFunc[T any](v T, minValue T, cmpFunc func(a, b T) int) error {
+	if cmpFunc(v, minValue) <= 0 {
+		return &GreaterError[T]{
+			Value: v,
+			Min:   minValue,
+		}
+	}
+	return nil
+}
+
+// GreaterError is the error type returned by validators that check for minimum value.
 type GreaterError[T any] struct {
 	Value T
 	Min   T
 }
 
-// Error implements [error].
 func (e *GreaterError[T]) Error() string {
 	return fmt.Sprintf("%#v is not greater than %#v", e.Value, e.Min)
 }

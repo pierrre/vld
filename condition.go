@@ -5,29 +5,63 @@ import (
 	"strings"
 )
 
-// If returns a [Validator] that validates the value if the condition is true.
-func If[T any](cond func(v T) bool, vr Validator[T]) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("If(%s, %v)", getFuncName(cond), vr) }, func(v T) error {
-		if !cond(v) {
-			return nil
-		}
-		return vr.Validate(v)
-	})
+// If creates a [IfValidator].
+func If[T any](cond func(v T) bool, vr Validator[T]) *IfValidator[T] {
+	return &IfValidator[T]{
+		Condition: cond,
+		Validator: vr,
+	}
 }
 
-// IfElse returns a [Validator] that validates the value with the thenVr validator if the condition is true, or with the elseVr validator if the condition is false.
-func IfElse[T any](cond func(v T) bool, thenVr Validator[T], elseVr Validator[T]) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("IfElse(%s, %v, %v)", getFuncName(cond), thenVr, elseVr) }, func(v T) error {
-		if cond(v) {
-			return thenVr.Validate(v)
-		}
-		return elseVr.Validate(v)
-	})
+// IfValidator is a [Validator] that validates the value if the condition is true.
+type IfValidator[T any] struct {
+	Condition func(v T) bool
+	Validator Validator[T]
 }
 
-// Switch returns a new [SwitchValidator] with the given cases.
-func Switch[T any](cases ...*SwitchCase[T]) SwitchValidator[T] {
-	return SwitchValidator[T]{
+// Validate implements [Validator].
+func (vr *IfValidator[T]) Validate(v T) error {
+	if !vr.Condition(v) {
+		return nil
+	}
+	return vr.Validator.Validate(v) //nolint:wrapcheck // Not needed.
+}
+
+func (vr *IfValidator[T]) String() string {
+	return fmt.Sprintf("If(%s, %v)", getFuncName(vr.Condition), vr.Validator)
+}
+
+// IfElse creates a [IfElseValidator].
+func IfElse[T any](cond func(v T) bool, thenVr Validator[T], elseVr Validator[T]) *IfElseValidator[T] {
+	return &IfElseValidator[T]{
+		Condition: cond,
+		Then:      thenVr,
+		Else:      elseVr,
+	}
+}
+
+// IfElseValidator is a [Validator] that validates the value with the Then validator if the condition is true, or with the Else validator if the condition is false.
+type IfElseValidator[T any] struct {
+	Condition func(v T) bool
+	Then      Validator[T]
+	Else      Validator[T]
+}
+
+// Validate implements [Validator].
+func (vr *IfElseValidator[T]) Validate(v T) error {
+	if vr.Condition(v) {
+		return vr.Then.Validate(v) //nolint:wrapcheck // Not needed.
+	}
+	return vr.Else.Validate(v) //nolint:wrapcheck // Not needed.
+}
+
+func (vr *IfElseValidator[T]) String() string {
+	return fmt.Sprintf("IfElse(%s, %v, %v)", getFuncName(vr.Condition), vr.Then, vr.Else)
+}
+
+// Switch creates a [SwitchValidator].
+func Switch[T any](cases ...*SwitchCase[T]) *SwitchValidator[T] {
+	return &SwitchValidator[T]{
 		Cases: cases,
 	}
 }
@@ -38,7 +72,7 @@ type SwitchValidator[T any] struct {
 }
 
 // Validate implements [Validator].
-func (sv SwitchValidator[T]) Validate(v T) error {
+func (sv *SwitchValidator[T]) Validate(v T) error {
 	for _, c := range sv.Cases {
 		if c.Condition(v) {
 			return c.Validator.Validate(v) //nolint:wrapcheck // Not needed.
@@ -47,7 +81,7 @@ func (sv SwitchValidator[T]) Validate(v T) error {
 	return nil
 }
 
-func (sv SwitchValidator[T]) String() string {
+func (sv *SwitchValidator[T]) String() string {
 	sb := new(strings.Builder)
 	sb.WriteString("Switch(")
 	if len(sv.Cases) > 0 {

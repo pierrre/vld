@@ -21,27 +21,39 @@ func getRegexp[RS RegexpString](rs RS) *regexp.Regexp {
 	return r
 }
 
-// RegexpMatch returns a [Validator] that checks if the string matches the regular expression.
-func RegexpMatch[RS RegexpString](rs RS) Validator[string] {
-	r := getRegexp(rs)
-	return WithStringFunc(func() string { return fmt.Sprintf("RegexpMatch(%q)", r) }, func(s string) error {
-		if !r.MatchString(s) {
-			return &RegexpMatchError{
-				Value:  s,
-				Regexp: r,
-			}
-		}
-		return nil
-	})
+// RegexpMatch creates a [RegexpMatchValidator].
+func RegexpMatch[RS RegexpString](rs RS) *RegexpMatchValidator {
+	return &RegexpMatchValidator{
+		Regexp: getRegexp(rs),
+	}
 }
 
-// RegexpMatchError is the error type returned by [RegexpMatch].
+// RegexpMatchValidator is a [Validator] that checks if the string matches the regular expression.
+type RegexpMatchValidator struct {
+	Regexp *regexp.Regexp
+}
+
+// Validate implements [Validator].
+func (vr *RegexpMatchValidator) Validate(s string) error {
+	if !vr.Regexp.MatchString(s) {
+		return &RegexpMatchError{
+			Value:  s,
+			Regexp: vr.Regexp,
+		}
+	}
+	return nil
+}
+
+func (vr *RegexpMatchValidator) String() string {
+	return fmt.Sprintf("RegexpMatch(%q)", vr.Regexp)
+}
+
+// RegexpMatchError is the error type returned by [RegexpMatchValidator].
 type RegexpMatchError struct {
 	Value  string
 	Regexp *regexp.Regexp
 }
 
-// Error implements [error].
 func (e *RegexpMatchError) Error() string {
 	return fmt.Sprintf("%q does not match regexp %q", e.Value, e.Regexp)
 }
@@ -51,27 +63,39 @@ func (e *RegexpMatchError) Localization() (key string, args []any) {
 	return "RegexpMatchError", []any{e.Value, e.Regexp}
 }
 
-// RegexpNotMatch returns a [Validator] that checks if the string does not match the regular expression.
-func RegexpNotMatch[RS RegexpString](rs RS) Validator[string] {
-	r := getRegexp(rs)
-	return WithStringFunc(func() string { return fmt.Sprintf("RegexpNotMatch(%q)", r) }, func(s string) error {
-		if r.MatchString(s) {
-			return &RegexpNotMatchError{
-				Value:  s,
-				Regexp: r,
-			}
-		}
-		return nil
-	})
+// RegexpNotMatch creates a [RegexpNotMatchValidator].
+func RegexpNotMatch[RS RegexpString](rs RS) *RegexpNotMatchValidator {
+	return &RegexpNotMatchValidator{
+		Regexp: getRegexp(rs),
+	}
 }
 
-// RegexpNotMatchError is the error type returned by [RegexpNotMatch].
+// RegexpNotMatchValidator is a [Validator] that checks if the string does not match the regular expression.
+type RegexpNotMatchValidator struct {
+	Regexp *regexp.Regexp
+}
+
+// Validate implements [Validator].
+func (vr *RegexpNotMatchValidator) Validate(s string) error {
+	if vr.Regexp.MatchString(s) {
+		return &RegexpNotMatchError{
+			Value:  s,
+			Regexp: vr.Regexp,
+		}
+	}
+	return nil
+}
+
+func (vr *RegexpNotMatchValidator) String() string {
+	return fmt.Sprintf("RegexpNotMatch(%q)", vr.Regexp)
+}
+
+// RegexpNotMatchError is the error type returned by [RegexpNotMatchValidator].
 type RegexpNotMatchError struct {
 	Value  string
 	Regexp *regexp.Regexp
 }
 
-// Error implements [error].
 func (e *RegexpNotMatchError) Error() string {
 	return fmt.Sprintf("%q matches regexp %q", e.Value, e.Regexp)
 }

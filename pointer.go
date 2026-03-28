@@ -4,38 +4,65 @@ import (
 	"fmt"
 )
 
-// PointerOptional returns a [Validator] that validates the dereferenced value if the pointer is not nil.
-func PointerOptional[T any](vr Validator[T]) Validator[*T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("PointerOptional(%v)", vr) }, func(v *T) error {
-		if v == nil {
-			return nil
-		}
-		err := vr.Validate(*v)
-		if err != nil {
-			return ErrorWrapPathElem(err, &PointerPathElem{})
-		}
-		return nil
-	})
+// PointerOptional creates a [PointerOptionalValidator].
+func PointerOptional[T any](vr Validator[T]) *PointerOptionalValidator[T] {
+	return &PointerOptionalValidator[T]{
+		Validator: vr,
+	}
 }
 
-// PointerRequired returns a [Validator] that checks if the pointer is not nil, and validates the dereferenced value.
-func PointerRequired[T any](vr Validator[T]) Validator[*T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("PointerRequired(%v)", vr) }, func(v *T) error {
-		if v == nil {
-			return &PointerRequiredError{}
-		}
-		err := vr.Validate(*v)
-		if err != nil {
-			return ErrorWrapPathElem(err, &PointerPathElem{})
-		}
-		return nil
-	})
+// PointerOptionalValidator is a [Validator] that validates the dereferenced value if the pointer is not nil.
+type PointerOptionalValidator[T any] struct {
+	Validator Validator[T]
 }
 
-// PointerRequiredError is the error type returned by [PointerRequired].
+// Validate implements [Validator].
+func (vr *PointerOptionalValidator[T]) Validate(v *T) error {
+	if v == nil {
+		return nil
+	}
+	err := vr.Validator.Validate(*v)
+	if err != nil {
+		return ErrorWrapPathElem(err, &PointerPathElem{})
+	}
+	return nil
+}
+
+func (vr *PointerOptionalValidator[T]) String() string {
+	return fmt.Sprintf("PointerOptional(%v)", vr.Validator)
+}
+
+// PointerRequired creates a [PointerRequiredValidator].
+func PointerRequired[T any](vr Validator[T]) *PointerRequiredValidator[T] {
+	return &PointerRequiredValidator[T]{
+		Validator: vr,
+	}
+}
+
+// PointerRequiredValidator is a [Validator] that checks if the pointer is not nil, and validates the dereferenced value.
+type PointerRequiredValidator[T any] struct {
+	Validator Validator[T]
+}
+
+// Validate implements [Validator].
+func (vr *PointerRequiredValidator[T]) Validate(v *T) error {
+	if v == nil {
+		return &PointerRequiredError{}
+	}
+	err := vr.Validator.Validate(*v)
+	if err != nil {
+		return ErrorWrapPathElem(err, &PointerPathElem{})
+	}
+	return nil
+}
+
+func (vr *PointerRequiredValidator[T]) String() string {
+	return fmt.Sprintf("PointerRequired(%v)", vr.Validator)
+}
+
+// PointerRequiredError is the error type returned by [PointerRequiredValidator].
 type PointerRequiredError struct{}
 
-// Error implements [error].
 func (e *PointerRequiredError) Error() string {
 	return "pointer is nil"
 }

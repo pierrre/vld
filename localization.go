@@ -39,11 +39,11 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Length %[1]d is not in the range [%[2]d, %[3]d].",
 		"fr": "La longueur %[1]d n'est pas dans l'intervalle [%[2]d, %[3]d].",
 	},
-	"NotEmptyError": {
+	"EmptyError": {
 		"en": "Value is not empty (%[1]d).",
 		"fr": "La valeur n'est pas vide (%[1]d).",
 	},
-	"EmptyError": {
+	"NotEmptyError": {
 		"en": "Value is empty.",
 		"fr": "La valeur est vide.",
 	},

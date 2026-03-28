@@ -9,24 +9,33 @@ func isZero[T comparable](v T) bool {
 	return v == zero
 }
 
-// Zero returns a [Validator] that checks if the value is the zero value.
-func Zero[T comparable]() Validator[T] {
-	return WithStringFunc(func() string { return "Zero" }, func(v T) error {
-		if !isZero(v) {
-			return &ZeroError[T]{
-				Value: v,
-			}
-		}
-		return nil
-	})
+// Zero creates a [ZeroValidator].
+func Zero[T comparable]() *ZeroValidator[T] {
+	return &ZeroValidator[T]{}
 }
 
-// ZeroError is the error type returned by [Zero].
+// ZeroValidator is a [Validator] that checks if the value is the zero value.
+type ZeroValidator[T comparable] struct{}
+
+// Validate implements [Validator].
+func (vr *ZeroValidator[T]) Validate(v T) error {
+	if !isZero(v) {
+		return &ZeroError[T]{
+			Value: v,
+		}
+	}
+	return nil
+}
+
+func (vr *ZeroValidator[T]) String() string {
+	return "Zero"
+}
+
+// ZeroError is the error type returned by [ZeroValidator].
 type ZeroError[T comparable] struct {
 	Value T
 }
 
-// Error implements [error].
 func (e *ZeroError[T]) Error() string {
 	return fmt.Sprintf("%#v is not zero", e.Value)
 }
@@ -36,20 +45,29 @@ func (e *ZeroError[T]) Localization() (key string, args []any) {
 	return "ZeroError", []any{e.Value}
 }
 
-// NotZero returns a [Validator] that checks if the value is not the zero value.
-func NotZero[T comparable]() Validator[T] {
-	return WithStringFunc(func() string { return "NotZero" }, func(v T) error {
-		if isZero(v) {
-			return &NotZeroError{}
-		}
-		return nil
-	})
+// NotZero creates a [NotZeroValidator].
+func NotZero[T comparable]() *NotZeroValidator[T] {
+	return &NotZeroValidator[T]{}
 }
 
-// NotZeroError is the error type returned by [NotZero].
+// NotZeroValidator is a [Validator] that checks if the value is not the zero value.
+type NotZeroValidator[T comparable] struct{}
+
+// Validate implements [Validator].
+func (vr *NotZeroValidator[T]) Validate(v T) error {
+	if isZero(v) {
+		return &NotZeroError{}
+	}
+	return nil
+}
+
+func (vr *NotZeroValidator[T]) String() string {
+	return "NotZero"
+}
+
+// NotZeroError is the error type returned by [NotZeroValidator].
 type NotZeroError struct{}
 
-// Error implements [error].
 func (e *NotZeroError) Error() string {
 	return "is zero"
 }
@@ -59,30 +77,57 @@ func (e *NotZeroError) Localization() (key string, args []any) {
 	return "NotZeroError", nil
 }
 
-// Optional returns a [Validator] that validates the value if it's not the zero value.
-func Optional[T comparable](vr Validator[T]) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Optional(%v)", vr) }, func(v T) error {
-		if isZero(v) {
-			return nil
-		}
-		return vr.Validate(v)
-	})
+// Optional creates a [OptionalValidator].
+func Optional[T comparable](vr Validator[T]) *OptionalValidator[T] {
+	return &OptionalValidator[T]{
+		Validator: vr,
+	}
 }
 
-// Required returns a [Validator] that checks if the value is not the zero value, and validates the value.
-func Required[T comparable](vr Validator[T]) Validator[T] {
-	return WithStringFunc(func() string { return fmt.Sprintf("Required(%v)", vr) }, func(v T) error {
-		if isZero(v) {
-			return &RequiredError{}
-		}
-		return vr.Validate(v)
-	})
+// OptionalValidator is a [Validator] that validates the value if it's not the zero value.
+type OptionalValidator[T comparable] struct {
+	Validator Validator[T]
 }
 
-// RequiredError is the error type returned by [Required].
+// Validate implements [Validator].
+func (vr *OptionalValidator[T]) Validate(v T) error {
+	if isZero(v) {
+		return nil
+	}
+	return vr.Validator.Validate(v) //nolint:wrapcheck // Not needed.
+}
+
+func (vr *OptionalValidator[T]) String() string {
+	return fmt.Sprintf("Optional(%v)", vr.Validator)
+}
+
+// Required creates a [RequiredValidator].
+func Required[T comparable](vr Validator[T]) *RequiredValidator[T] {
+	return &RequiredValidator[T]{
+		Validator: vr,
+	}
+}
+
+// RequiredValidator is a [Validator] that checks if the value is not the zero value, and validates the value.
+type RequiredValidator[T comparable] struct {
+	Validator Validator[T]
+}
+
+// Validate implements [Validator].
+func (vr *RequiredValidator[T]) Validate(v T) error {
+	if isZero(v) {
+		return &RequiredError{}
+	}
+	return vr.Validator.Validate(v) //nolint:wrapcheck // Not needed.
+}
+
+func (vr *RequiredValidator[T]) String() string {
+	return fmt.Sprintf("Required(%v)", vr.Validator)
+}
+
+// RequiredError is the error type returned by [RequiredValidator].
 type RequiredError struct{}
 
-// Error implements [error].
 func (e *RequiredError) Error() string {
 	return "required"
 }

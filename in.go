@@ -2,33 +2,42 @@ package vld
 
 import (
 	"fmt"
+	"slices"
 )
 
-// In returns a [Validator] that checks if the value is in a list of values.
-func In[T comparable](vs ...T) Validator[T] {
-	m := make(map[T]struct{}, len(vs))
-	for _, v := range vs {
-		m[v] = struct{}{}
+// In creates a [InValidator].
+func In[T comparable](vs ...T) *InValidator[T] {
+	return &InValidator[T]{
+		Values: vs,
 	}
-	return WithStringFunc(func() string { return fmt.Sprintf("In(%#v)", vs) }, func(v T) error {
-		_, ok := m[v]
-		if !ok {
-			return &InError[T]{
-				Value:  v,
-				Values: vs,
-			}
-		}
-		return nil
-	})
 }
 
-// InError is the error type returned by [In].
+// InValidator is a [Validator] that checks if the value is in a list of values.
+type InValidator[T comparable] struct {
+	Values []T
+}
+
+// Validate implements [Validator].
+func (vr *InValidator[T]) Validate(v T) error {
+	if !slices.Contains(vr.Values, v) {
+		return &InError[T]{
+			Value:  v,
+			Values: vr.Values,
+		}
+	}
+	return nil
+}
+
+func (vr *InValidator[T]) String() string {
+	return fmt.Sprintf("In(%#v)", vr.Values)
+}
+
+// InError is the error type returned by [InValidator].
 type InError[T comparable] struct {
 	Value  T
 	Values []T
 }
 
-// Error implements [error].
 func (e *InError[T]) Error() string {
 	return fmt.Sprintf("%#v is not in %#v", e.Value, e.Values)
 }
@@ -38,31 +47,39 @@ func (e *InError[T]) Localization() (key string, args []any) {
 	return "InError", []any{e.Value, e.Values}
 }
 
-// NotIn returns a [Validator] that checks if the value is not in a list of values.
-func NotIn[T comparable](vs ...T) Validator[T] {
-	m := make(map[T]struct{}, len(vs))
-	for _, v := range vs {
-		m[v] = struct{}{}
+// NotIn creates a [NotInValidator].
+func NotIn[T comparable](vs ...T) *NotInValidator[T] {
+	return &NotInValidator[T]{
+		Values: vs,
 	}
-	return WithStringFunc(func() string { return fmt.Sprintf("NotIn(%#v)", vs) }, func(v T) error {
-		_, ok := m[v]
-		if ok {
-			return &NotInError[T]{
-				Value:  v,
-				Values: vs,
-			}
-		}
-		return nil
-	})
 }
 
-// NotInError is the error type returned by [NotIn].
+// NotInValidator is a [Validator] that checks if the value is not in a list of values.
+type NotInValidator[T comparable] struct {
+	Values []T
+}
+
+// Validate implements [Validator].
+func (vr *NotInValidator[T]) Validate(v T) error {
+	if slices.Contains(vr.Values, v) {
+		return &NotInError[T]{
+			Value:  v,
+			Values: vr.Values,
+		}
+	}
+	return nil
+}
+
+func (vr *NotInValidator[T]) String() string {
+	return fmt.Sprintf("NotIn(%#v)", vr.Values)
+}
+
+// NotInError is the error type returned by [NotInValidator].
 type NotInError[T comparable] struct {
 	Value  T
 	Values []T
 }
 
-// Error implements [error].
 func (e *NotInError[T]) Error() string {
 	return fmt.Sprintf("%#v is in %#v", e.Value, e.Values)
 }
