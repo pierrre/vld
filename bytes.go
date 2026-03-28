@@ -5,20 +5,34 @@ import (
 	"fmt"
 )
 
-// BytesEqual returns a [Validator] that checks if the byte slice is equal to the specified byte slice.
-func BytesEqual(s []byte) Validator[[]byte] {
-	return WithStringFunc(func() string { return fmt.Sprintf("BytesEqual(%q)", s) }, func(b []byte) error {
-		if !bytes.Equal(b, s) {
-			return &BytesEqualError{
-				Value:    b,
-				Expected: s,
-			}
-		}
-		return nil
-	})
+// BytesEqual creates a [BytesEqualValidator].
+func BytesEqual(s []byte) *BytesEqualValidator {
+	return &BytesEqualValidator{
+		Expected: s,
+	}
 }
 
-// BytesEqualError is the error type returned by [BytesEqual].
+// BytesEqualValidator is a [Validator] that checks if the byte slice is equal to the expected byte slice.
+type BytesEqualValidator struct {
+	Expected []byte
+}
+
+// Validate implements [Validator].
+func (vr *BytesEqualValidator) Validate(v []byte) error {
+	if !bytes.Equal(v, vr.Expected) {
+		return &BytesEqualError{
+			Value:    v,
+			Expected: vr.Expected,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesEqualValidator) String() string {
+	return fmt.Sprintf("BytesEqual(%q)", vr.Expected)
+}
+
+// BytesEqualError is the error type returned by [BytesEqualValidator].
 type BytesEqualError struct {
 	Value    []byte
 	Expected []byte
@@ -34,20 +48,34 @@ func (e *BytesEqualError) Localization() (key string, args []any) {
 	return "BytesEqualError", []any{e.Value, e.Expected}
 }
 
-// BytesNotEqual returns a [Validator] that checks if the byte slice is not equal to the specified byte slice.
-func BytesNotEqual(s []byte) Validator[[]byte] {
-	return WithStringFunc(func() string { return fmt.Sprintf("BytesNotEqual(%q)", s) }, func(b []byte) error {
-		if bytes.Equal(b, s) {
-			return &BytesNotEqualError{
-				Value:    b,
-				Expected: s,
-			}
-		}
-		return nil
-	})
+// BytesNotEqual creates a [BytesNotEqualValidator].
+func BytesNotEqual(s []byte) *BytesNotEqualValidator {
+	return &BytesNotEqualValidator{
+		Expected: s,
+	}
 }
 
-// BytesNotEqualError is the error type returned by [BytesNotEqual].
+// BytesNotEqualValidator is a [Validator] that checks if the byte slice is not equal to the expected byte slice.
+type BytesNotEqualValidator struct {
+	Expected []byte
+}
+
+// Validate implements [Validator].
+func (vr *BytesNotEqualValidator) Validate(v []byte) error {
+	if bytes.Equal(v, vr.Expected) {
+		return &BytesNotEqualError{
+			Value:    v,
+			Expected: vr.Expected,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesNotEqualValidator) String() string {
+	return fmt.Sprintf("BytesNotEqual(%q)", vr.Expected)
+}
+
+// BytesNotEqualError is the error type returned by [BytesNotEqualValidator].
 type BytesNotEqualError struct {
 	Value    []byte
 	Expected []byte
@@ -63,20 +91,34 @@ func (e *BytesNotEqualError) Localization() (key string, args []any) {
 	return "BytesNotEqualError", []any{e.Value, e.Expected}
 }
 
-// BytesContains returns a [Validator] that checks if the byte slice contains the specified byte slice.
-func BytesContains(sub []byte) Validator[[]byte] {
-	return WithStringFunc(func() string { return fmt.Sprintf("BytesContains(%q)", sub) }, func(b []byte) error {
-		if !bytes.Contains(b, sub) {
-			return &BytesContainsError{
-				Value: b,
-				Sub:   sub,
-			}
-		}
-		return nil
-	})
+// BytesContains creates a [BytesContainsValidator].
+func BytesContains(sub []byte) *BytesContainsValidator {
+	return &BytesContainsValidator{
+		Sub: sub,
+	}
 }
 
-// BytesContainsError is the error type returned by [BytesContains].
+// BytesContainsValidator is a [Validator] that checks if the byte slice contains the specified byte slice.
+type BytesContainsValidator struct {
+	Sub []byte
+}
+
+// Validate implements [Validator].
+func (vr *BytesContainsValidator) Validate(v []byte) error {
+	if !bytes.Contains(v, vr.Sub) {
+		return &BytesContainsError{
+			Value: v,
+			Sub:   vr.Sub,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesContainsValidator) String() string {
+	return fmt.Sprintf("BytesContains(%q)", vr.Sub)
+}
+
+// BytesContainsError is the error type returned by [BytesContainsValidator].
 type BytesContainsError struct {
 	Value []byte
 	Sub   []byte
@@ -92,20 +134,34 @@ func (e *BytesContainsError) Localization() (key string, args []any) {
 	return "BytesContainsError", []any{e.Value, e.Sub}
 }
 
-// BytesNotContains returns a [Validator] that checks if the byte slice does not contain the specified byte slice.
-func BytesNotContains(sub []byte) Validator[[]byte] {
-	return WithStringFunc(func() string { return fmt.Sprintf("BytesNotContains(%q)", sub) }, func(b []byte) error {
-		if bytes.Contains(b, sub) {
-			return &BytesNotContainsError{
-				Value: b,
-				Sub:   sub,
-			}
-		}
-		return nil
-	})
+// BytesNotContains creates a [BytesNotContainsValidator].
+func BytesNotContains(sub []byte) *BytesNotContainsValidator {
+	return &BytesNotContainsValidator{
+		Sub: sub,
+	}
 }
 
-// BytesNotContainsError is the error type returned by [BytesNotContains].
+// BytesNotContainsValidator is a [Validator] that checks if the byte slice does not contain the specified byte slice.
+type BytesNotContainsValidator struct {
+	Sub []byte
+}
+
+// Validate implements [Validator].
+func (vr *BytesNotContainsValidator) Validate(v []byte) error {
+	if bytes.Contains(v, vr.Sub) {
+		return &BytesNotContainsError{
+			Value: v,
+			Sub:   vr.Sub,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesNotContainsValidator) String() string {
+	return fmt.Sprintf("BytesNotContains(%q)", vr.Sub)
+}
+
+// BytesNotContainsError is the error type returned by [BytesNotContainsValidator].
 type BytesNotContainsError struct {
 	Value []byte
 	Sub   []byte
@@ -121,20 +177,34 @@ func (e *BytesNotContainsError) Localization() (key string, args []any) {
 	return "BytesNotContainsError", []any{e.Value, e.Sub}
 }
 
-// BytesHasPrefix returns a [Validator] that checks if the byte slice has the specified prefix.
-func BytesHasPrefix(prefix []byte) Validator[[]byte] {
-	return WithStringFunc(func() string { return fmt.Sprintf("BytesHasPrefix(%q)", prefix) }, func(b []byte) error {
-		if !bytes.HasPrefix(b, prefix) {
-			return &BytesHasPrefixError{
-				Value:  b,
-				Prefix: prefix,
-			}
-		}
-		return nil
-	})
+// BytesHasPrefix creates a [BytesHasPrefixValidator].
+func BytesHasPrefix(prefix []byte) *BytesHasPrefixValidator {
+	return &BytesHasPrefixValidator{
+		Prefix: prefix,
+	}
 }
 
-// BytesHasPrefixError is the error type returned by [BytesHasPrefix].
+// BytesHasPrefixValidator is a [Validator] that checks if the byte slice has the specified prefix.
+type BytesHasPrefixValidator struct {
+	Prefix []byte
+}
+
+// Validate implements [Validator].
+func (vr *BytesHasPrefixValidator) Validate(v []byte) error {
+	if !bytes.HasPrefix(v, vr.Prefix) {
+		return &BytesHasPrefixError{
+			Value:  v,
+			Prefix: vr.Prefix,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesHasPrefixValidator) String() string {
+	return fmt.Sprintf("BytesHasPrefix(%q)", vr.Prefix)
+}
+
+// BytesHasPrefixError is the error type returned by [BytesHasPrefixValidator].
 type BytesHasPrefixError struct {
 	Value  []byte
 	Prefix []byte
@@ -150,20 +220,34 @@ func (e *BytesHasPrefixError) Localization() (key string, args []any) {
 	return "BytesHasPrefixError", []any{e.Value, e.Prefix}
 }
 
-// BytesNotHasPrefix returns a [Validator] that checks if the byte slice does not have the specified prefix.
-func BytesNotHasPrefix(prefix []byte) Validator[[]byte] {
-	return WithStringFunc(func() string { return fmt.Sprintf("BytesNotHasPrefix(%q)", prefix) }, func(b []byte) error {
-		if bytes.HasPrefix(b, prefix) {
-			return &BytesNotHasPrefixError{
-				Value:  b,
-				Prefix: prefix,
-			}
-		}
-		return nil
-	})
+// BytesNotHasPrefix creates a [BytesNotHasPrefixValidator].
+func BytesNotHasPrefix(prefix []byte) *BytesNotHasPrefixValidator {
+	return &BytesNotHasPrefixValidator{
+		Prefix: prefix,
+	}
 }
 
-// BytesNotHasPrefixError is the error type returned by [BytesNotHasPrefix].
+// BytesNotHasPrefixValidator is a [Validator] that checks if the byte slice does not have the specified prefix.
+type BytesNotHasPrefixValidator struct {
+	Prefix []byte
+}
+
+// Validate implements [Validator].
+func (vr *BytesNotHasPrefixValidator) Validate(v []byte) error {
+	if bytes.HasPrefix(v, vr.Prefix) {
+		return &BytesNotHasPrefixError{
+			Value:  v,
+			Prefix: vr.Prefix,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesNotHasPrefixValidator) String() string {
+	return fmt.Sprintf("BytesNotHasPrefix(%q)", vr.Prefix)
+}
+
+// BytesNotHasPrefixError is the error type returned by [BytesNotHasPrefixValidator].
 type BytesNotHasPrefixError struct {
 	Value  []byte
 	Prefix []byte
@@ -179,20 +263,34 @@ func (e *BytesNotHasPrefixError) Localization() (key string, args []any) {
 	return "BytesNotHasPrefixError", []any{e.Value, e.Prefix}
 }
 
-// BytesHasSuffix returns a [Validator] that checks if the byte slice has the specified suffix.
-func BytesHasSuffix(suffix []byte) Validator[[]byte] {
-	return WithStringFunc(func() string { return fmt.Sprintf("BytesHasSuffix(%q)", suffix) }, func(b []byte) error {
-		if !bytes.HasSuffix(b, suffix) {
-			return &BytesHasSuffixError{
-				Value:  b,
-				Suffix: suffix,
-			}
-		}
-		return nil
-	})
+// BytesHasSuffix creates a [BytesHasSuffixValidator].
+func BytesHasSuffix(suffix []byte) *BytesHasSuffixValidator {
+	return &BytesHasSuffixValidator{
+		Suffix: suffix,
+	}
 }
 
-// BytesHasSuffixError is the error type returned by [BytesHasSuffix].
+// BytesHasSuffixValidator is a [Validator] that checks if the byte slice has the specified suffix.
+type BytesHasSuffixValidator struct {
+	Suffix []byte
+}
+
+// Validate implements [Validator].
+func (vr *BytesHasSuffixValidator) Validate(v []byte) error {
+	if !bytes.HasSuffix(v, vr.Suffix) {
+		return &BytesHasSuffixError{
+			Value:  v,
+			Suffix: vr.Suffix,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesHasSuffixValidator) String() string {
+	return fmt.Sprintf("BytesHasSuffix(%q)", vr.Suffix)
+}
+
+// BytesHasSuffixError is the error type returned by [BytesHasSuffixValidator].
 type BytesHasSuffixError struct {
 	Value  []byte
 	Suffix []byte
@@ -208,20 +306,34 @@ func (e *BytesHasSuffixError) Localization() (key string, args []any) {
 	return "BytesHasSuffixError", []any{e.Value, e.Suffix}
 }
 
-// BytesNotHasSuffix returns a [Validator] that checks if the byte slice does not have the specified suffix.
-func BytesNotHasSuffix(suffix []byte) Validator[[]byte] {
-	return WithStringFunc(func() string { return fmt.Sprintf("BytesNotHasSuffix(%q)", suffix) }, func(b []byte) error {
-		if bytes.HasSuffix(b, suffix) {
-			return &BytesNotHasSuffixError{
-				Value:  b,
-				Suffix: suffix,
-			}
-		}
-		return nil
-	})
+// BytesNotHasSuffix creates a [BytesNotHasSuffixValidator].
+func BytesNotHasSuffix(suffix []byte) *BytesNotHasSuffixValidator {
+	return &BytesNotHasSuffixValidator{
+		Suffix: suffix,
+	}
 }
 
-// BytesNotHasSuffixError is the error type returned by [BytesNotHasSuffix].
+// BytesNotHasSuffixValidator is a [Validator] that checks if the byte slice does not have the specified suffix.
+type BytesNotHasSuffixValidator struct {
+	Suffix []byte
+}
+
+// Validate implements [Validator].
+func (vr *BytesNotHasSuffixValidator) Validate(v []byte) error {
+	if bytes.HasSuffix(v, vr.Suffix) {
+		return &BytesNotHasSuffixError{
+			Value:  v,
+			Suffix: vr.Suffix,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesNotHasSuffixValidator) String() string {
+	return fmt.Sprintf("BytesNotHasSuffix(%q)", vr.Suffix)
+}
+
+// BytesNotHasSuffixError is the error type returned by [BytesNotHasSuffixValidator].
 type BytesNotHasSuffixError struct {
 	Value  []byte
 	Suffix []byte
