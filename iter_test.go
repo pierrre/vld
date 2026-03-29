@@ -12,7 +12,7 @@ func ExampleSeqEach() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(slices.Values([]int{1})))
 	fmt.Println(vr.Validate(slices.Values([]int{2})))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(slices.Values([]int{2})), "en"))
+	fmt.Println(LocalizeError(vr.Validate(slices.Values([]int{2})), "en"))
 	// Output:
 	// SeqEach(Equal(vld.KeyValue[int,int]{Key:0, Value:1}))
 	// <nil>
@@ -25,7 +25,7 @@ func ExampleSeqEachValue() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(slices.Values([]int{1})))
 	fmt.Println(vr.Validate(slices.Values([]int{2})))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(slices.Values([]int{2})), "en"))
+	fmt.Println(LocalizeError(vr.Validate(slices.Values([]int{2})), "en"))
 	// Output:
 	// SeqEachValue(Equal(1))
 	// <nil>
@@ -38,7 +38,7 @@ func ExampleSeq2Each() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(slices.All([]int{1})))
 	fmt.Println(vr.Validate(slices.All([]int{2})))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(slices.All([]int{2})), "en"))
+	fmt.Println(LocalizeError(vr.Validate(slices.All([]int{2})), "en"))
 	// Output:
 	// Seq2Each(Equal(vld.KeyValue[int,int]{Key:0, Value:1}))
 	// <nil>
@@ -51,7 +51,7 @@ func ExampleSeq2EachKey() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(slices.All([]int{1})))
 	fmt.Println(vr.Validate(slices.All([]int{1, 1})))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(slices.All([]int{1, 1})), "en"))
+	fmt.Println(LocalizeError(vr.Validate(slices.All([]int{1, 1})), "en"))
 	// Output:
 	// Seq2EachKey(Equal(0))
 	// <nil>
@@ -64,7 +64,7 @@ func ExampleSeq2EachValue() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(slices.All([]int{1})))
 	fmt.Println(vr.Validate(slices.All([]int{2})))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(slices.All([]int{2})), "en"))
+	fmt.Println(LocalizeError(vr.Validate(slices.All([]int{2})), "en"))
 	// Output:
 	// Seq2EachValue(Equal(1))
 	// <nil>

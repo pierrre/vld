@@ -11,7 +11,7 @@ func ExampleIn() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(4))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(4), "en"))
+	fmt.Println(LocalizeError(vr.Validate(4), "en"))
 	// Output:
 	// In([]int{1, 2, 3})
 	// <nil>
@@ -24,7 +24,7 @@ func ExampleNotIn() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(4))
 	fmt.Println(vr.Validate(1))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(1), "en"))
+	fmt.Println(LocalizeError(vr.Validate(1), "en"))
 	// Output:
 	// NotIn([]int{1, 2, 3})
 	// <nil>

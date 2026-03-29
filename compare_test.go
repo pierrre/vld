@@ -18,7 +18,7 @@ func ExampleCmpEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(intComparer(2)), "en"))
+	fmt.Println(LocalizeError(vr.Validate(intComparer(2)), "en"))
 	// Output:
 	// CmpEqual(1)
 	// <nil>
@@ -31,7 +31,7 @@ func ExampleCmpNotEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(intComparer(2)))
 	fmt.Println(vr.Validate(intComparer(1)))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(intComparer(1)), "en"))
+	fmt.Println(LocalizeError(vr.Validate(intComparer(1)), "en"))
 	// Output:
 	// CmpNotEqual(1)
 	// <nil>
@@ -45,7 +45,7 @@ func ExampleCmpMin() {
 	fmt.Println(vr.Validate(intComparer(2)))
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(0)))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(intComparer(0)), "en"))
+	fmt.Println(LocalizeError(vr.Validate(intComparer(0)), "en"))
 	// Output:
 	// CmpMin(1)
 	// <nil>
@@ -60,7 +60,7 @@ func ExampleCmpMax() {
 	fmt.Println(vr.Validate(intComparer(0)))
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(intComparer(2)), "en"))
+	fmt.Println(LocalizeError(vr.Validate(intComparer(2)), "en"))
 	// Output:
 	// CmpMax(1)
 	// <nil>
@@ -77,7 +77,7 @@ func ExampleCmpRange() {
 	fmt.Println(vr.Validate(intComparer(3)))
 	fmt.Println(vr.Validate(intComparer(0)))
 	fmt.Println(vr.Validate(intComparer(4)))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(intComparer(0)), "en"))
+	fmt.Println(LocalizeError(vr.Validate(intComparer(0)), "en"))
 	// Output:
 	// CmpRange(1, 3)
 	// <nil>
@@ -94,7 +94,7 @@ func ExampleCmpLess() {
 	fmt.Println(vr.Validate(intComparer(0)))
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(intComparer(1)), "en"))
+	fmt.Println(LocalizeError(vr.Validate(intComparer(1)), "en"))
 	// Output:
 	// CmpLess(1)
 	// <nil>
@@ -109,7 +109,7 @@ func ExampleCmpGreater() {
 	fmt.Println(vr.Validate(intComparer(2)))
 	fmt.Println(vr.Validate(intComparer(1)))
 	fmt.Println(vr.Validate(intComparer(0)))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(intComparer(1)), "en"))
+	fmt.Println(LocalizeError(vr.Validate(intComparer(1)), "en"))
 	// Output:
 	// CmpGreater(1)
 	// <nil>

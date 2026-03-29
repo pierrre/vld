@@ -11,7 +11,7 @@ func ExampleMapLenEqual() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenEqual(1)
 	// <nil>
@@ -24,7 +24,7 @@ func ExampleMapLenMin() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenMin(1)
 	// <nil>
@@ -37,7 +37,7 @@ func ExampleMapLenMax() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(vr.Validate(map[string]int{"a": 1, "b": 2}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{"a": 1, "b": 2}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{"a": 1, "b": 2}), "en"))
 	// Output:
 	// MapLenMax(1)
 	// <nil>
@@ -50,7 +50,7 @@ func ExampleMapLenRange() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenRange(1, 2)
 	// <nil>
@@ -63,7 +63,7 @@ func ExampleMapEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{"a": 1}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{"a": 1}), "en"))
 	// Output:
 	// MapEmpty
 	// <nil>
@@ -76,7 +76,7 @@ func ExampleMapNotEmpty() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapNotEmpty
 	// <nil>
@@ -89,7 +89,7 @@ func ExampleMapEach() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{"b": 2}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapEach(Equal(vld.KeyValue[string,int]{Key:"a", Value:1}))
 	// <nil>
@@ -102,7 +102,7 @@ func ExampleMapEachKey() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{"b": 2}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapEachKey(Equal("a"))
 	// <nil>
@@ -115,7 +115,7 @@ func ExampleMapEachValue() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{"b": 2}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapEachValue(Equal(1))
 	// <nil>
@@ -128,7 +128,7 @@ func ExampleMapSortedEach() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{"b": 2}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapSortedEach(Equal(vld.KeyValue[string,int]{Key:"a", Value:1}))
 	// <nil>
@@ -141,7 +141,7 @@ func ExampleMapSortedEachKey() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{"b": 2}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapSortedEachKey(Equal("a"))
 	// <nil>
@@ -154,7 +154,7 @@ func ExampleMapSortedEachValue() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{"b": 2}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(map[string]int{"b": 2}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(map[string]int{"b": 2}), "en"))
 	// Output:
 	// MapSortedEachValue(Equal(1))
 	// <nil>

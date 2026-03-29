@@ -173,19 +173,29 @@ var LocalizationMessages = map[string]map[string]string{
 	},
 }
 
-// GetLocalizedMessage returns the localized message for a given key and arguments, using the provided locales (by order of preference).
-func GetLocalizedMessage(key string, args []any, locales ...string) string {
+// GetLocalizationMessage returns the localization message for a given key and locales (by order of preference).
+// The bool return value indicates whether a message was found for the given key and locales.
+func GetLocalizationMessage(key string, locales ...string) (string, bool) {
 	formats, ok := LocalizationMessages[key]
 	if !ok {
-		return ""
+		return "", false
 	}
 	for _, locale := range locales {
 		format, ok := formats[locale]
 		if ok {
-			return fmt.Sprintf(format, args...)
+			return format, true
 		}
 	}
-	return ""
+	return "", false
+}
+
+// Localize returns the localized message for a given key and arguments, using the provided locales (by order of preference).
+func Localize(key string, args []any, locales ...string) string {
+	format, ok := GetLocalizationMessage(key, locales...)
+	if !ok {
+		return ""
+	}
+	return fmt.Sprintf(format, args...)
 }
 
 // Localizable is an interface for types that can provide a localization key and arguments.
@@ -193,10 +203,10 @@ type Localizable interface {
 	Localization() (key string, args []any)
 }
 
-// GetLocalizableMessage returns the localized message for a given [Localizable] and locales (by order of preference).
-func GetLocalizableMessage(l Localizable, locales ...string) string {
+// LocalizeLocalizable returns the localized message for a given [Localizable] and locales (by order of preference).
+func LocalizeLocalizable(l Localizable, locales ...string) string {
 	key, args := l.Localization()
-	return GetLocalizedMessage(key, args, locales...)
+	return Localize(key, args, locales...)
 }
 
 // LocalizableError is an interface for errors that can provide localized messages.
@@ -205,8 +215,8 @@ type LocalizableError interface {
 	Localizable
 }
 
-// GetErrorLocalizedMessage returns the localized message for a given error and locales (by order of preference).
-func GetErrorLocalizedMessage(err error, locales ...string) string {
+// LocalizeError returns the localized message for a given error and locales (by order of preference).
+func LocalizeError(err error, locales ...string) string {
 	if err == nil {
 		return ""
 	}
@@ -214,5 +224,5 @@ func GetErrorLocalizedMessage(err error, locales ...string) string {
 	if !ok {
 		return ""
 	}
-	return GetLocalizableMessage(lv, locales...)
+	return LocalizeLocalizable(lv, locales...)
 }

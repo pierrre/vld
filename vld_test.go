@@ -11,7 +11,7 @@ func ExampleValidatorFunc() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
+	fmt.Println(LocalizeError(vr.Validate(2), "en"))
 	// Output:
 	// ValidatorFunc
 	// <nil>

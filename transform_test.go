@@ -14,7 +14,7 @@ func ExampleGet() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(User{Name: "Alice"}))
 	fmt.Println(vr.Validate(User{Name: "Charlie"}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(User{Name: "Charlie"}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(User{Name: "Charlie"}), "en"))
 	// Output:
 	// Get(github.com/pierrre/vld_test.ExampleGet.func1, StringLenMax(5))
 	// <nil>
@@ -27,7 +27,7 @@ func ExampleWrap() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(2))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(2), "en"))
+	fmt.Println(LocalizeError(vr.Validate(2), "en"))
 	// Output:
 	// Wrap("message", Equal(1))
 	// <nil>
@@ -43,7 +43,7 @@ func ExampleField() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate(User{Name: "Alice"}))
 	fmt.Println(vr.Validate(User{Name: "Charlie"}))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate(User{Name: "Charlie"}), "en"))
+	fmt.Println(LocalizeError(vr.Validate(User{Name: "Charlie"}), "en"))
 	// Output:
 	// Field("Name", StringLenMax(5))
 	// <nil>

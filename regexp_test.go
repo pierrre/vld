@@ -11,7 +11,7 @@ func ExampleRegexpMatch() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc"))
 	fmt.Println(vr.Validate("abc123"))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abc123"), "en"))
+	fmt.Println(LocalizeError(vr.Validate("abc123"), "en"))
 	// Output:
 	// RegexpMatch("^[a-z]+$")
 	// <nil>
@@ -24,7 +24,7 @@ func ExampleRegexpNotMatch() {
 	fmt.Println(vr)
 	fmt.Println(vr.Validate("abc123"))
 	fmt.Println(vr.Validate("abc"))
-	fmt.Println(GetErrorLocalizedMessage(vr.Validate("abc"), "en"))
+	fmt.Println(LocalizeError(vr.Validate("abc"), "en"))
 	// Output:
 	// RegexpNotMatch("^[a-z]+$")
 	// <nil>

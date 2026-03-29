@@ -31,7 +31,7 @@ func Example() {
 		}
 		fmt.Println(err)
 		for _, err := range GetErrors(err) {
-			fmt.Printf("%v : %s\n", GetErrorPath(err), GetErrorLocalizedMessage(err, "en"))
+			fmt.Printf("%v : %s\n", GetErrorPath(err), LocalizeError(err, "en"))
 		}
 	}
 	// Output:
