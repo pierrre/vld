@@ -29,6 +29,11 @@ func (vr *TypeOptionalValidator[In, Out]) String() string {
 	return fmt.Sprintf("TypeOptional[%T](%v)", *new(Out), vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *TypeOptionalValidator[In, Out]) Localization() (key string, args []any) {
+	return "TypeOptionalValidator", []any{*new(Out), vr.Validator}
+}
+
 // TypeRequired creates a [TypeRequiredValidator].
 func TypeRequired[In, Out any](vr Validator[Out]) *TypeRequiredValidator[In, Out] {
 	return &TypeRequiredValidator[In, Out]{
@@ -54,6 +59,11 @@ func (vr *TypeRequiredValidator[In, Out]) Validate(v In) error {
 
 func (vr *TypeRequiredValidator[In, Out]) String() string {
 	return fmt.Sprintf("TypeRequired[%T](%v)", *new(Out), vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *TypeRequiredValidator[In, Out]) Localization() (key string, args []any) {
+	return "TypeRequiredValidator", []any{*new(Out), vr.Validator}
 }
 
 // TypeRequiredError is the error type returned by [TypeRequiredValidator] when conversion fails.

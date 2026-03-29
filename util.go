@@ -31,21 +31,6 @@ func getFuncName(f any) string {
 	return s
 }
 
-func getMultiValidatorString[T any](name string, vrs ...Validator[T]) string {
-	sb := new(strings.Builder)
-	sb.WriteString(name)
-	sb.WriteString("(")
-	if len(vrs) > 0 {
-		sb.WriteString("\n")
-		for _, vr := range vrs {
-			writeStringIndent(sb, vr.String())
-			sb.WriteString(",\n")
-		}
-	}
-	sb.WriteString(")")
-	return sb.String()
-}
-
 func writeStringIndent(sb *strings.Builder, s string) {
 	for line := range strings.Lines(s) {
 		sb.WriteString("\t")

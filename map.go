@@ -27,6 +27,11 @@ func (vr *MapLenEqualValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapLenEqual(%d)", vr.Length)
 }
 
+// Localization implements [Localizable].
+func (vr *MapLenEqualValidator[M, K, V]) Localization() (key string, args []any) {
+	return "LenEqualValidator", []any{vr.Length}
+}
+
 // MapLenMin creates a [MapLenMinValidator].
 func MapLenMin[M ~map[K]V, K comparable, V any](minLen int) *MapLenMinValidator[M, K, V] {
 	return &MapLenMinValidator[M, K, V]{
@@ -48,6 +53,11 @@ func (vr *MapLenMinValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapLenMin(%d)", vr.Min)
 }
 
+// Localization implements [Localizable].
+func (vr *MapLenMinValidator[M, K, V]) Localization() (key string, args []any) {
+	return "LenMinValidator", []any{vr.Min}
+}
+
 // MapLenMax creates a [MapLenMaxValidator].
 func MapLenMax[M ~map[K]V, K comparable, V any](maxLen int) *MapLenMaxValidator[M, K, V] {
 	return &MapLenMaxValidator[M, K, V]{
@@ -67,6 +77,11 @@ func (vr *MapLenMaxValidator[M, K, V]) Validate(m M) error {
 
 func (vr *MapLenMaxValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapLenMax(%d)", vr.Max)
+}
+
+// Localization implements [Localizable].
+func (vr *MapLenMaxValidator[M, K, V]) Localization() (key string, args []any) {
+	return "LenMaxValidator", []any{vr.Max}
 }
 
 // MapLenRange creates a [MapLenRangeValidator].
@@ -92,6 +107,11 @@ func (vr *MapLenRangeValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapLenRange(%d, %d)", vr.Min, vr.Max)
 }
 
+// Localization implements [Localizable].
+func (vr *MapLenRangeValidator[M, K, V]) Localization() (key string, args []any) {
+	return "LenRangeValidator", []any{vr.Min, vr.Max}
+}
+
 // MapEmpty creates a [MapEmptyValidator].
 func MapEmpty[M ~map[K]V, K comparable, V any]() *MapEmptyValidator[M, K, V] {
 	return &MapEmptyValidator[M, K, V]{}
@@ -109,6 +129,11 @@ func (vr *MapEmptyValidator[M, K, V]) String() string {
 	return "MapEmpty"
 }
 
+// Localization implements [Localizable].
+func (vr *MapEmptyValidator[M, K, V]) Localization() (key string, args []any) {
+	return "EmptyValidator", nil
+}
+
 // MapNotEmpty creates a [MapNotEmptyValidator].
 func MapNotEmpty[M ~map[K]V, K comparable, V any]() *MapNotEmptyValidator[M, K, V] {
 	return &MapNotEmptyValidator[M, K, V]{}
@@ -124,6 +149,11 @@ func (vr *MapNotEmptyValidator[M, K, V]) Validate(m M) error {
 
 func (vr *MapNotEmptyValidator[M, K, V]) String() string {
 	return "MapNotEmpty"
+}
+
+// Localization implements [Localizable].
+func (vr *MapNotEmptyValidator[M, K, V]) Localization() (key string, args []any) {
+	return "NotEmptyValidator", nil
 }
 
 // MapEach creates a [MapEachValidator].
@@ -147,6 +177,11 @@ func (vr *MapEachValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapEach(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *MapEachValidator[M, K, V]) Localization() (key string, args []any) {
+	return "MapEachValidator", []any{vr.Validator}
+}
+
 // MapEachKey creates a [MapEachKeyValidator].
 func MapEachKey[M ~map[K]V, K comparable, V any](vr Validator[K]) *MapEachKeyValidator[M, K, V] {
 	return &MapEachKeyValidator[M, K, V]{
@@ -168,6 +203,11 @@ func (vr *MapEachKeyValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapEachKey(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *MapEachKeyValidator[M, K, V]) Localization() (key string, args []any) {
+	return "MapEachKeyValidator", []any{vr.Validator}
+}
+
 // MapEachValue creates a [MapEachValueValidator].
 func MapEachValue[M ~map[K]V, K comparable, V any](vr Validator[V]) *MapEachValueValidator[M, K, V] {
 	return &MapEachValueValidator[M, K, V]{
@@ -187,6 +227,11 @@ func (vr *MapEachValueValidator[M, K, V]) Validate(m M) error {
 
 func (vr *MapEachValueValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapEachValue(%v)", vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *MapEachValueValidator[M, K, V]) Localization() (key string, args []any) {
+	return "MapEachValueValidator", []any{vr.Validator}
 }
 
 func validateMapEach[M ~map[K]V, K comparable, V any](m M, f func(KeyValue[K, V]) error) error {
@@ -221,6 +266,11 @@ func (vr *MapSortedEachValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapSortedEach(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *MapSortedEachValidator[M, K, V]) Localization() (key string, args []any) {
+	return "MapEachValidator", []any{vr.Validator}
+}
+
 // MapSortedEachKey creates a [MapSortedEachKeyValidator].
 func MapSortedEachKey[M ~map[K]V, K cmp.Ordered, V any](vr Validator[K]) *MapSortedEachKeyValidator[M, K, V] {
 	return &MapSortedEachKeyValidator[M, K, V]{
@@ -242,6 +292,11 @@ func (vr *MapSortedEachKeyValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapSortedEachKey(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *MapSortedEachKeyValidator[M, K, V]) Localization() (key string, args []any) {
+	return "MapEachKeyValidator", []any{vr.Validator}
+}
+
 // MapSortedEachValue creates a [MapSortedEachValueValidator].
 func MapSortedEachValue[M ~map[K]V, K cmp.Ordered, V any](vr Validator[V]) *MapSortedEachValueValidator[M, K, V] {
 	return &MapSortedEachValueValidator[M, K, V]{
@@ -261,6 +316,11 @@ func (vr *MapSortedEachValueValidator[M, K, V]) Validate(m M) error {
 
 func (vr *MapSortedEachValueValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapSortedEachValue(%v)", vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *MapSortedEachValueValidator[M, K, V]) Localization() (key string, args []any) {
+	return "MapEachValueValidator", []any{vr.Validator}
 }
 
 func validateMapSortedEach[M ~map[K]V, K cmp.Ordered, V any](m M, f func(KeyValue[K, V]) error) error {

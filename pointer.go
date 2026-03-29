@@ -32,6 +32,11 @@ func (vr *PointerOptionalValidator[T]) String() string {
 	return fmt.Sprintf("PointerOptional(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *PointerOptionalValidator[T]) Localization() (key string, args []any) {
+	return "PointerOptionalValidator", []any{vr.Validator}
+}
+
 // PointerRequired creates a [PointerRequiredValidator].
 func PointerRequired[T any](vr Validator[T]) *PointerRequiredValidator[T] {
 	return &PointerRequiredValidator[T]{
@@ -58,6 +63,11 @@ func (vr *PointerRequiredValidator[T]) Validate(v *T) error {
 
 func (vr *PointerRequiredValidator[T]) String() string {
 	return fmt.Sprintf("PointerRequired(%v)", vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *PointerRequiredValidator[T]) Localization() (key string, args []any) {
+	return "PointerRequiredValidator", []any{vr.Validator}
 }
 
 // PointerRequiredError is the error type returned by [PointerRequiredValidator].

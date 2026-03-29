@@ -9,12 +9,14 @@ import (
 func ExampleTypeOptional() {
 	vr := TypeOptional[any](Equal(1))
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate("1"))
 	fmt.Println(vr.Validate(2))
 	fmt.Println(LocalizeError(vr.Validate(2), "en"))
 	// Output:
 	// TypeOptional[int](Equal(1))
+	// Value must satisfy the following validator if it is of type int: Value must be equal to 1.
 	// <nil>
 	// <nil>
 	// 2 is not equal to 1
@@ -24,12 +26,14 @@ func ExampleTypeOptional() {
 func ExampleTypeRequired() {
 	vr := TypeRequired[any](Equal(1))
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate("1"))
 	fmt.Println(vr.Validate(2))
 	fmt.Println(LocalizeError(vr.Validate("1"), "en"))
 	// Output:
 	// TypeRequired[int](Equal(1))
+	// Value must be of type int and satisfy the following validator: Value must be equal to 1.
 	// <nil>
 	// string cannot be converted to int
 	// 2 is not equal to 1

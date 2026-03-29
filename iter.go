@@ -26,6 +26,11 @@ func (vr *SeqEachValidator[T]) String() string {
 	return fmt.Sprintf("SeqEach(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *SeqEachValidator[T]) Localization() (key string, args []any) {
+	return "SeqEachValidator", []any{vr.Validator}
+}
+
 // SeqEachValue creates a [SeqEachValueValidator].
 func SeqEachValue[T any](vr Validator[T]) *SeqEachValueValidator[T] {
 	return &SeqEachValueValidator[T]{
@@ -45,6 +50,11 @@ func (vr *SeqEachValueValidator[T]) Validate(s iter.Seq[T]) error {
 
 func (vr *SeqEachValueValidator[T]) String() string {
 	return fmt.Sprintf("SeqEachValue(%v)", vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *SeqEachValueValidator[T]) Localization() (key string, args []any) {
+	return "SeqEachValueValidator", []any{vr.Validator}
 }
 
 func validateSeqEach[T any](s iter.Seq[T], f func(KeyValue[int, T]) error) error {
@@ -81,6 +91,11 @@ func (vr *Seq2EachValidator[K, V]) String() string {
 	return fmt.Sprintf("Seq2Each(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *Seq2EachValidator[K, V]) Localization() (key string, args []any) {
+	return "Seq2EachValidator", []any{vr.Validator}
+}
+
 // Seq2EachKey creates a [Seq2EachKeyValidator].
 func Seq2EachKey[K, V any](vr Validator[K]) *Seq2EachKeyValidator[K, V] {
 	return &Seq2EachKeyValidator[K, V]{
@@ -102,6 +117,11 @@ func (vr *Seq2EachKeyValidator[K, V]) String() string {
 	return fmt.Sprintf("Seq2EachKey(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *Seq2EachKeyValidator[K, V]) Localization() (key string, args []any) {
+	return "Seq2EachKeyValidator", []any{vr.Validator}
+}
+
 // Seq2EachValue creates a [Seq2EachValueValidator].
 func Seq2EachValue[K, V any](vr Validator[V]) *Seq2EachValueValidator[K, V] {
 	return &Seq2EachValueValidator[K, V]{
@@ -121,6 +141,11 @@ func (vr *Seq2EachValueValidator[K, V]) Validate(s iter.Seq2[K, V]) error {
 
 func (vr *Seq2EachValueValidator[K, V]) String() string {
 	return fmt.Sprintf("Seq2EachValue(%v)", vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *Seq2EachValueValidator[K, V]) Localization() (key string, args []any) {
+	return "Seq2EachValueValidator", []any{vr.Validator}
 }
 
 func validateSeq2Each[K, V any](s iter.Seq2[K, V], f func(KeyValue[K, V]) error) error {

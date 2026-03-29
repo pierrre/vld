@@ -31,6 +31,11 @@ func (vr *ZeroValidator[T]) String() string {
 	return "Zero"
 }
 
+// Localization implements [Localizable].
+func (vr *ZeroValidator[T]) Localization() (key string, args []any) {
+	return "ZeroValidator", nil
+}
+
 // ZeroError is the error type returned by [ZeroValidator].
 type ZeroError[T comparable] struct {
 	Value T
@@ -63,6 +68,11 @@ func (vr *NotZeroValidator[T]) Validate(v T) error {
 
 func (vr *NotZeroValidator[T]) String() string {
 	return "NotZero"
+}
+
+// Localization implements [Localizable].
+func (vr *NotZeroValidator[T]) Localization() (key string, args []any) {
+	return "NotZeroValidator", nil
 }
 
 // NotZeroError is the error type returned by [NotZeroValidator].
@@ -101,6 +111,11 @@ func (vr *OptionalValidator[T]) String() string {
 	return fmt.Sprintf("Optional(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *OptionalValidator[T]) Localization() (key string, args []any) {
+	return "OptionalValidator", []any{vr.Validator}
+}
+
 // Required creates a [RequiredValidator].
 func Required[T comparable](vr Validator[T]) *RequiredValidator[T] {
 	return &RequiredValidator[T]{
@@ -123,6 +138,11 @@ func (vr *RequiredValidator[T]) Validate(v T) error {
 
 func (vr *RequiredValidator[T]) String() string {
 	return fmt.Sprintf("Required(%v)", vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *RequiredValidator[T]) Localization() (key string, args []any) {
+	return "RequiredValidator", []any{vr.Validator}
 }
 
 // RequiredError is the error type returned by [RequiredValidator].

@@ -26,6 +26,11 @@ func (vr *SliceLenEqualValidator[S, E]) String() string {
 	return fmt.Sprintf("SliceLenEqual(%d)", vr.Length)
 }
 
+// Localization implements [Localizable].
+func (vr *SliceLenEqualValidator[S, E]) Localization() (key string, args []any) {
+	return "LenEqualValidator", []any{vr.Length}
+}
+
 // SliceLenMin creates a [SliceLenMinValidator].
 func SliceLenMin[S ~[]E, E any](minLen int) *SliceLenMinValidator[S, E] {
 	return &SliceLenMinValidator[S, E]{
@@ -47,6 +52,11 @@ func (vr *SliceLenMinValidator[S, E]) String() string {
 	return fmt.Sprintf("SliceLenMin(%d)", vr.Min)
 }
 
+// Localization implements [Localizable].
+func (vr *SliceLenMinValidator[S, E]) Localization() (key string, args []any) {
+	return "LenMinValidator", []any{vr.Min}
+}
+
 // SliceLenMax creates a [SliceLenMaxValidator].
 func SliceLenMax[S ~[]E, E any](maxLen int) *SliceLenMaxValidator[S, E] {
 	return &SliceLenMaxValidator[S, E]{
@@ -66,6 +76,11 @@ func (vr *SliceLenMaxValidator[S, E]) Validate(s S) error {
 
 func (vr *SliceLenMaxValidator[S, E]) String() string {
 	return fmt.Sprintf("SliceLenMax(%d)", vr.Max)
+}
+
+// Localization implements [Localizable].
+func (vr *SliceLenMaxValidator[S, E]) Localization() (key string, args []any) {
+	return "LenMaxValidator", []any{vr.Max}
 }
 
 // SliceLenRange creates a [SliceLenRangeValidator].
@@ -91,6 +106,11 @@ func (vr *SliceLenRangeValidator[S, E]) String() string {
 	return fmt.Sprintf("SliceLenRange(%d, %d)", vr.Min, vr.Max)
 }
 
+// Localization implements [Localizable].
+func (vr *SliceLenRangeValidator[S, E]) Localization() (key string, args []any) {
+	return "LenRangeValidator", []any{vr.Min, vr.Max}
+}
+
 // SliceEmpty creates a [SliceEmptyValidator].
 func SliceEmpty[S ~[]E, E any]() *SliceEmptyValidator[S, E] {
 	return &SliceEmptyValidator[S, E]{}
@@ -108,6 +128,11 @@ func (vr *SliceEmptyValidator[S, E]) String() string {
 	return "SliceEmpty"
 }
 
+// Localization implements [Localizable].
+func (vr *SliceEmptyValidator[S, E]) Localization() (key string, args []any) {
+	return "EmptyValidator", nil
+}
+
 // SliceNotEmpty creates a [SliceNotEmptyValidator].
 func SliceNotEmpty[S ~[]E, E any]() *SliceNotEmptyValidator[S, E] {
 	return &SliceNotEmptyValidator[S, E]{}
@@ -123,6 +148,11 @@ func (vr *SliceNotEmptyValidator[S, E]) Validate(s S) error {
 
 func (vr *SliceNotEmptyValidator[S, E]) String() string {
 	return "SliceNotEmpty"
+}
+
+// Localization implements [Localizable].
+func (vr *SliceNotEmptyValidator[S, E]) Localization() (key string, args []any) {
+	return "NotEmptyValidator", nil
 }
 
 // SliceContains creates a [SliceContainsValidator].
@@ -149,6 +179,11 @@ func (vr *SliceContainsValidator[S, E]) Validate(s S) error {
 
 func (vr *SliceContainsValidator[S, E]) String() string {
 	return fmt.Sprintf("SliceContains(%#v)", vr.Element)
+}
+
+// Localization implements [Localizable].
+func (vr *SliceContainsValidator[S, E]) Localization() (key string, args []any) {
+	return "SliceContainsValidator", []any{vr.Element}
 }
 
 // SliceContainsError is the error type returned by [SliceContainsValidator].
@@ -191,6 +226,11 @@ func (vr *SliceNotContainsValidator[S, E]) String() string {
 	return fmt.Sprintf("SliceNotContains(%#v)", vr.Element)
 }
 
+// Localization implements [Localizable].
+func (vr *SliceNotContainsValidator[S, E]) Localization() (key string, args []any) {
+	return "SliceNotContainsValidator", []any{vr.Element}
+}
+
 // SliceNotContainsError is the error type returned by [SliceNotContainsValidator].
 type SliceNotContainsError[E comparable] struct {
 	Element E
@@ -226,6 +266,11 @@ func (vr *SliceEachValidator[S, E]) String() string {
 	return fmt.Sprintf("SliceEach(%v)", vr.Validator)
 }
 
+// Localization implements [Localizable].
+func (vr *SliceEachValidator[S, E]) Localization() (key string, args []any) {
+	return "SliceEachValidator", []any{vr.Validator}
+}
+
 // SliceEachValue creates a [SliceEachValueValidator].
 func SliceEachValue[S ~[]E, E any](vr Validator[E]) *SliceEachValueValidator[S, E] {
 	return &SliceEachValueValidator[S, E]{
@@ -245,6 +290,11 @@ func (vr *SliceEachValueValidator[S, E]) Validate(s S) error {
 
 func (vr *SliceEachValueValidator[S, E]) String() string {
 	return fmt.Sprintf("SliceEachValue(%v)", vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *SliceEachValueValidator[S, E]) Localization() (key string, args []any) {
+	return "SliceEachValueValidator", []any{vr.Validator}
 }
 
 func validateSliceEach[S ~[]E, E any](s S, f func(KeyValue[int, E]) error) error {
@@ -293,6 +343,11 @@ func (vr *SliceUniqueValidator[S, E]) String() string {
 	return "SliceUnique"
 }
 
+// Localization implements [Localizable].
+func (vr *SliceUniqueValidator[S, E]) Localization() (key string, args []any) {
+	return "SliceUniqueValidator", nil
+}
+
 // SliceUniqueBy creates a [SliceUniqueByValidator].
 func SliceUniqueBy[S ~[]E, E any, K comparable](getKey func(E) K) *SliceUniqueByValidator[S, E, K] {
 	return &SliceUniqueByValidator[S, E, K]{
@@ -331,6 +386,11 @@ func (vr *SliceUniqueByValidator[S, E, K]) Validate(s S) error {
 
 func (vr *SliceUniqueByValidator[S, E, K]) String() string {
 	return fmt.Sprintf("SliceUniqueBy(%s)", getFuncName(vr.GetKey))
+}
+
+// Localization implements [Localizable].
+func (vr *SliceUniqueByValidator[S, E, K]) Localization() (key string, args []any) {
+	return "SliceUniqueByValidator", []any{getFuncName(vr.GetKey)}
 }
 
 // SliceUniqueError is the error type returned by [SliceUniqueValidator] and [SliceUniqueByValidator].
