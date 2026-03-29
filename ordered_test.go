@@ -30,7 +30,7 @@ func ExampleMinCmpFunc() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(LocalizeError(vr.Validate(0), "en"))
 	// Output:
-	// MinCmpFunc(1)
+	// MinCmpFunc(1, cmp.Compare[...])
 	// <nil>
 	// <nil>
 	// 0 is less than 1
@@ -60,7 +60,7 @@ func ExampleMaxCmpFunc() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(LocalizeError(vr.Validate(2), "en"))
 	// Output:
-	// MaxCmpFunc(1)
+	// MaxCmpFunc(1, cmp.Compare[...])
 	// <nil>
 	// <nil>
 	// 2 is greater than 1
@@ -96,7 +96,7 @@ func ExampleRangeCmpFunc() {
 	fmt.Println(vr.Validate(4))
 	fmt.Println(LocalizeError(vr.Validate(0), "en"))
 	// Output:
-	// RangeCmpFunc(1, 3)
+	// RangeCmpFunc(1, 3, cmp.Compare[...])
 	// <nil>
 	// <nil>
 	// <nil>
@@ -128,7 +128,7 @@ func ExampleLessCmpFunc() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(LocalizeError(vr.Validate(1), "en"))
 	// Output:
-	// LessCmpFunc(1)
+	// LessCmpFunc(1, cmp.Compare[...])
 	// <nil>
 	// 1 is not less than 1
 	// 2 is not less than 1
@@ -158,7 +158,7 @@ func ExampleGreaterCmpFunc() {
 	fmt.Println(vr.Validate(0))
 	fmt.Println(LocalizeError(vr.Validate(1), "en"))
 	// Output:
-	// GreaterCmpFunc(1)
+	// GreaterCmpFunc(1, cmp.Compare[...])
 	// <nil>
 	// 1 is not greater than 1
 	// 0 is not greater than 1

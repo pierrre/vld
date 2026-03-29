@@ -36,12 +36,12 @@ func Example() {
 	}
 	// Output:
 	// All(
-	// 	Field("Name", And(
+	// 	Field("Name", github.com/pierrre/vld_test.User.GetName, And(
 	// 		StringNotEmpty,
 	// 		RegexpMatch("^[a-z]+$"),
 	// 	)),
-	// 	Field("Age", Range(18, 130)),
-	// 	Field("Roles", And(
+	// 	Field("Age", github.com/pierrre/vld_test.User.GetAge, Range(18, 130)),
+	// 	Field("Roles", github.com/pierrre/vld_test.User.GetRoles, And(
 	// 		SliceNotEmpty,
 	// 		SliceEachValue(In([]string{"admin", "member"})),
 	// 	)),

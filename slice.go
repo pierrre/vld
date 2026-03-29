@@ -330,7 +330,7 @@ func (vr *SliceUniqueByValidator[S, E, K]) Validate(s S) error {
 }
 
 func (vr *SliceUniqueByValidator[S, E, K]) String() string {
-	return "SliceUniqueBy"
+	return fmt.Sprintf("SliceUniqueBy(%s)", getFuncName(vr.GetKey))
 }
 
 // SliceUniqueError is the error type returned by [SliceUniqueValidator] and [SliceUniqueByValidator].

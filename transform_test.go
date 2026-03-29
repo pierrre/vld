@@ -45,7 +45,7 @@ func ExampleField() {
 	fmt.Println(vr.Validate(User{Name: "Charlie"}))
 	fmt.Println(LocalizeError(vr.Validate(User{Name: "Charlie"}), "en"))
 	// Output:
-	// Field("Name", StringLenMax(5))
+	// Field("Name", github.com/pierrre/vld_test.ExampleField.func1, StringLenMax(5))
 	// <nil>
 	// path field "Name": length 7 is greater than 5
 	// Length 7 is greater than 5.

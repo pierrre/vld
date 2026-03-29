@@ -86,7 +86,7 @@ func (vr *FieldValidator[In, Out]) Validate(v In) error {
 }
 
 func (vr *FieldValidator[In, Out]) String() string {
-	return fmt.Sprintf("Field(%q, %v)", vr.Name, vr.Validator)
+	return fmt.Sprintf("Field(%q, %s, %v)", vr.Name, getFuncName(vr.Func), vr.Validator)
 }
 
 func field[In, Out any](name string, getFunc func(In) Out, f func(Out) error) func(In) error {

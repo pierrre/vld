@@ -55,7 +55,7 @@ func validateEqualFunc[T any](v T, expected T, eqFunc func(a, b T) bool) error {
 }
 
 func (vr *EqualFuncValidator[T]) String() string {
-	return fmt.Sprintf("EqualFunc(%#v)", vr.Expected)
+	return fmt.Sprintf("EqualFunc(%#v, %s)", vr.Expected, getFuncName(vr.Func))
 }
 
 // EqualCmpFunc creates a [EqualCmpFuncValidator].
@@ -82,7 +82,7 @@ func validateEqualCmpFunc[T any](v T, expected T, cmpFunc func(a, b T) int) erro
 }
 
 func (vr *EqualCmpFuncValidator[T]) String() string {
-	return fmt.Sprintf("EqualCmpFunc(%#v)", vr.Expected)
+	return fmt.Sprintf("EqualCmpFunc(%#v, %s)", vr.Expected, getFuncName(vr.Func))
 }
 
 // EqualError is the error type returned by validators that check for equality.
@@ -151,7 +151,7 @@ func validateNotEqualFunc[T any](v T, expected T, eqFunc func(a, b T) bool) erro
 }
 
 func (vr *NotEqualFuncValidator[T]) String() string {
-	return fmt.Sprintf("NotEqualFunc(%#v)", vr.Expected)
+	return fmt.Sprintf("NotEqualFunc(%#v, %s)", vr.Expected, getFuncName(vr.Func))
 }
 
 // NotEqualCmpFunc creates a [NotEqualCmpFuncValidator].
@@ -178,7 +178,7 @@ func validateNotEqualCmpFunc[T any](v T, expected T, cmpFunc func(a, b T) int) e
 }
 
 func (vr *NotEqualCmpFuncValidator[T]) String() string {
-	return fmt.Sprintf("NotEqualCmpFunc(%#v)", vr.Expected)
+	return fmt.Sprintf("NotEqualCmpFunc(%#v, %s)", vr.Expected, getFuncName(vr.Func))
 }
 
 // NotEqualError is the error type returned by validators that check for inequality.

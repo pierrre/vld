@@ -156,7 +156,7 @@ func ExampleSliceUniqueBy() {
 	fmt.Println(vr.Validate([]int{1, 2, 3}))
 	fmt.Println(LocalizeError(vr.Validate([]int{1, 2, 3}), "en"))
 	// Output:
-	// SliceUniqueBy
+	// SliceUniqueBy(github.com/pierrre/vld_test.ExampleSliceUniqueBy.func1)
 	// <nil>
 	// path index 2: duplicate 3 (index 0)
 	// Duplicate 3 (index 0).

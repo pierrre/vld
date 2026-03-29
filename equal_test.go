@@ -27,7 +27,7 @@ func ExampleEqualFunc() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(LocalizeError(vr.Validate(2), "en"))
 	// Output:
-	// EqualFunc(1)
+	// EqualFunc(1, github.com/pierrre/vld_test.ExampleEqualFunc.func1)
 	// <nil>
 	// 2 is not equal to 1
 	// Value 2 is not equal to 1.
@@ -40,7 +40,7 @@ func ExampleEqualCmpFunc() {
 	fmt.Println(vr.Validate(2))
 	fmt.Println(LocalizeError(vr.Validate(2), "en"))
 	// Output:
-	// EqualCmpFunc(1)
+	// EqualCmpFunc(1, cmp.Compare[...])
 	// <nil>
 	// 2 is not equal to 1
 	// Value 2 is not equal to 1.
@@ -66,7 +66,7 @@ func ExampleNotEqualFunc() {
 	fmt.Println(vr.Validate(1))
 	fmt.Println(LocalizeError(vr.Validate(1), "en"))
 	// Output:
-	// NotEqualFunc(1)
+	// NotEqualFunc(1, github.com/pierrre/vld_test.ExampleNotEqualFunc.func1)
 	// <nil>
 	// 1 is equal to 1
 	// Value 1 is equal to 1.
@@ -79,7 +79,7 @@ func ExampleNotEqualCmpFunc() {
 	fmt.Println(vr.Validate(1))
 	fmt.Println(LocalizeError(vr.Validate(1), "en"))
 	// Output:
-	// NotEqualCmpFunc(1)
+	// NotEqualCmpFunc(1, cmp.Compare[...])
 	// <nil>
 	// 1 is equal to 1
 	// Value 1 is equal to 1.

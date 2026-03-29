@@ -46,7 +46,7 @@ func (vr *MinCmpFuncValidator[T]) Validate(v T) error {
 }
 
 func (vr *MinCmpFuncValidator[T]) String() string {
-	return fmt.Sprintf("MinCmpFunc(%#v)", vr.Min)
+	return fmt.Sprintf("MinCmpFunc(%#v, %s)", vr.Min, getFuncName(vr.Func))
 }
 
 func validateMinCmpFunc[T any](v T, minValue T, cmpFunc func(a, b T) int) error {
@@ -115,7 +115,7 @@ func (vr *MaxCmpFuncValidator[T]) Validate(v T) error {
 }
 
 func (vr *MaxCmpFuncValidator[T]) String() string {
-	return fmt.Sprintf("MaxCmpFunc(%#v)", vr.Max)
+	return fmt.Sprintf("MaxCmpFunc(%#v, %s)", vr.Max, getFuncName(vr.Func))
 }
 
 func validateMaxCmpFunc[T any](v T, maxValue T, cmpFunc func(a, b T) int) error {
@@ -188,7 +188,7 @@ func (vr *RangeCmpFuncValidator[T]) Validate(v T) error {
 }
 
 func (vr *RangeCmpFuncValidator[T]) String() string {
-	return fmt.Sprintf("RangeCmpFunc(%#v, %#v)", vr.Min, vr.Max)
+	return fmt.Sprintf("RangeCmpFunc(%#v, %#v, %s)", vr.Min, vr.Max, getFuncName(vr.Func))
 }
 
 func validateRangeCmpFunc[T any](v T, minValue, maxValue T, cmpFunc func(a, b T) int) error {
@@ -259,7 +259,7 @@ func (vr *LessCmpFuncValidator[T]) Validate(v T) error {
 }
 
 func (vr *LessCmpFuncValidator[T]) String() string {
-	return fmt.Sprintf("LessCmpFunc(%#v)", vr.Max)
+	return fmt.Sprintf("LessCmpFunc(%#v, %s)", vr.Max, getFuncName(vr.Func))
 }
 
 func validateLessCmpFunc[T any](v T, maxValue T, cmpFunc func(a, b T) int) error {
@@ -328,7 +328,7 @@ func (vr *GreaterCmpFuncValidator[T]) Validate(v T) error {
 }
 
 func (vr *GreaterCmpFuncValidator[T]) String() string {
-	return fmt.Sprintf("GreaterCmpFunc(%#v)", vr.Min)
+	return fmt.Sprintf("GreaterCmpFunc(%#v, %s)", vr.Min, getFuncName(vr.Func))
 }
 
 func validateGreaterCmpFunc[T any](v T, minValue T, cmpFunc func(a, b T) int) error {
