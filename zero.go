@@ -31,6 +31,11 @@ func (vr *ZeroValidator[T]) String() string {
 	return "Zero"
 }
 
+// Localization implements [Localizable].
+func (vr *ZeroValidator[T]) Localization() (key string, args []any) {
+	return "Zero", nil
+}
+
 // ZeroError is the error type returned by [ZeroValidator].
 type ZeroError[T comparable] struct {
 	Value T
@@ -63,6 +68,11 @@ func (vr *NotZeroValidator[T]) Validate(v T) error {
 
 func (vr *NotZeroValidator[T]) String() string {
 	return "NotZero"
+}
+
+// Localization implements [Localizable].
+func (vr *NotZeroValidator[T]) Localization() (key string, args []any) {
+	return "NotZero", nil
 }
 
 // NotZeroError is the error type returned by [NotZeroValidator].

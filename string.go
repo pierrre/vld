@@ -27,6 +27,11 @@ func (vr *StringLenEqualValidator) String() string {
 	return fmt.Sprintf("StringLenEqual(%d)", vr.Length)
 }
 
+// Localization implements [Localizable].
+func (vr *StringLenEqualValidator) Localization() (key string, args []any) {
+	return "LenEqual", []any{vr.Length}
+}
+
 // StringLenMin creates a [StringLenMinValidator].
 func StringLenMin(minLen int) *StringLenMinValidator {
 	return &StringLenMinValidator{
@@ -48,6 +53,11 @@ func (vr *StringLenMinValidator) String() string {
 	return fmt.Sprintf("StringLenMin(%d)", vr.Min)
 }
 
+// Localization implements [Localizable].
+func (vr *StringLenMinValidator) Localization() (key string, args []any) {
+	return "LenMin", []any{vr.Min}
+}
+
 // StringLenMax creates a [StringLenMaxValidator].
 func StringLenMax(maxLen int) *StringLenMaxValidator {
 	return &StringLenMaxValidator{
@@ -67,6 +77,11 @@ func (vr *StringLenMaxValidator) Validate(s string) error {
 
 func (vr *StringLenMaxValidator) String() string {
 	return fmt.Sprintf("StringLenMax(%d)", vr.Max)
+}
+
+// Localization implements [Localizable].
+func (vr *StringLenMaxValidator) Localization() (key string, args []any) {
+	return "LenMax", []any{vr.Max}
 }
 
 // StringLenRange creates a [StringLenRangeValidator].
@@ -92,6 +107,11 @@ func (vr *StringLenRangeValidator) String() string {
 	return fmt.Sprintf("StringLenRange(%d, %d)", vr.Min, vr.Max)
 }
 
+// Localization implements [Localizable].
+func (vr *StringLenRangeValidator) Localization() (key string, args []any) {
+	return "LenRange", []any{vr.Min, vr.Max}
+}
+
 // StringEmpty creates a [StringEmptyValidator].
 func StringEmpty() *StringEmptyValidator {
 	return &StringEmptyValidator{}
@@ -109,6 +129,11 @@ func (vr *StringEmptyValidator) String() string {
 	return "StringEmpty"
 }
 
+// Localization implements [Localizable].
+func (vr *StringEmptyValidator) Localization() (key string, args []any) {
+	return "Empty", nil
+}
+
 // StringNotEmpty creates a [StringNotEmptyValidator].
 func StringNotEmpty() *StringNotEmptyValidator {
 	return &StringNotEmptyValidator{}
@@ -124,6 +149,11 @@ func (vr *StringNotEmptyValidator) Validate(s string) error {
 
 func (vr *StringNotEmptyValidator) String() string {
 	return "StringNotEmpty"
+}
+
+// Localization implements [Localizable].
+func (vr *StringNotEmptyValidator) Localization() (key string, args []any) {
+	return "NotEmpty", nil
 }
 
 // StringRunesEqual creates a [StringRunesEqualValidator].
@@ -147,6 +177,11 @@ func (vr *StringRunesEqualValidator) String() string {
 	return fmt.Sprintf("StringRunesEqual(%d)", vr.Length)
 }
 
+// Localization implements [Localizable].
+func (vr *StringRunesEqualValidator) Localization() (key string, args []any) {
+	return "LenEqual", []any{vr.Length}
+}
+
 // StringRunesMin creates a [StringRunesMinValidator].
 func StringRunesMin(minLength int) *StringRunesMinValidator {
 	return &StringRunesMinValidator{
@@ -166,6 +201,11 @@ func (vr *StringRunesMinValidator) Validate(s string) error {
 
 func (vr *StringRunesMinValidator) String() string {
 	return fmt.Sprintf("StringRunesMin(%d)", vr.Min)
+}
+
+// Localization implements [Localizable].
+func (vr *StringRunesMinValidator) Localization() (key string, args []any) {
+	return "LenMin", []any{vr.Min}
 }
 
 // StringRunesMax creates a [StringRunesMaxValidator].
@@ -189,6 +229,11 @@ func (vr *StringRunesMaxValidator) String() string {
 	return fmt.Sprintf("StringRunesMax(%d)", vr.Max)
 }
 
+// Localization implements [Localizable].
+func (vr *StringRunesMaxValidator) Localization() (key string, args []any) {
+	return "LenMax", []any{vr.Max}
+}
+
 // StringRunesRange creates a [StringRunesRangeValidator].
 func StringRunesRange(minLength, maxLength int) *StringRunesRangeValidator {
 	return &StringRunesRangeValidator{
@@ -210,6 +255,11 @@ func (vr *StringRunesRangeValidator) Validate(s string) error {
 
 func (vr *StringRunesRangeValidator) String() string {
 	return fmt.Sprintf("StringRunesRange(%d, %d)", vr.Min, vr.Max)
+}
+
+// Localization implements [Localizable].
+func (vr *StringRunesRangeValidator) Localization() (key string, args []any) {
+	return "LenRange", []any{vr.Min, vr.Max}
 }
 
 // StringContains creates a [StringContainsValidator].
@@ -237,6 +287,11 @@ func (vr *StringContainsValidator) Validate(s string) error {
 
 func (vr *StringContainsValidator) String() string {
 	return fmt.Sprintf("StringContains(%q)", vr.Sub)
+}
+
+// Localization implements [Localizable].
+func (vr *StringContainsValidator) Localization() (key string, args []any) {
+	return "StringContains", []any{vr.Sub}
 }
 
 // StringContainsError is the error type returned by [StringContainsValidator].
@@ -281,6 +336,11 @@ func (vr *StringNotContainsValidator) String() string {
 	return fmt.Sprintf("StringNotContains(%q)", vr.Sub)
 }
 
+// Localization implements [Localizable].
+func (vr *StringNotContainsValidator) Localization() (key string, args []any) {
+	return "StringNotContains", []any{vr.Sub}
+}
+
 // StringNotContainsError is the error type returned by [StringNotContainsValidator].
 type StringNotContainsError struct {
 	Value    string
@@ -321,6 +381,11 @@ func (vr *StringHasPrefixValidator) Validate(s string) error {
 
 func (vr *StringHasPrefixValidator) String() string {
 	return fmt.Sprintf("StringHasPrefix(%q)", vr.Prefix)
+}
+
+// Localization implements [Localizable].
+func (vr *StringHasPrefixValidator) Localization() (key string, args []any) {
+	return "StringHasPrefix", []any{vr.Prefix}
 }
 
 // StringHasPrefixError is the error type returned by [StringHasPrefixValidator].
@@ -365,6 +430,11 @@ func (vr *StringNotHasPrefixValidator) String() string {
 	return fmt.Sprintf("StringNotHasPrefix(%q)", vr.Prefix)
 }
 
+// Localization implements [Localizable].
+func (vr *StringNotHasPrefixValidator) Localization() (key string, args []any) {
+	return "StringNotHasPrefix", []any{vr.Prefix}
+}
+
 // StringNotHasPrefixError is the error type returned by [StringNotHasPrefixValidator].
 type StringNotHasPrefixError struct {
 	Value  string
@@ -407,6 +477,11 @@ func (vr *StringHasSuffixValidator) String() string {
 	return fmt.Sprintf("StringHasSuffix(%q)", vr.Suffix)
 }
 
+// Localization implements [Localizable].
+func (vr *StringHasSuffixValidator) Localization() (key string, args []any) {
+	return "StringHasSuffix", []any{vr.Suffix}
+}
+
 // StringHasSuffixError is the error type returned by [StringHasSuffixValidator].
 type StringHasSuffixError struct {
 	Value  string
@@ -447,6 +522,11 @@ func (vr *StringNotHasSuffixValidator) Validate(s string) error {
 
 func (vr *StringNotHasSuffixValidator) String() string {
 	return fmt.Sprintf("StringNotHasSuffix(%q)", vr.Suffix)
+}
+
+// Localization implements [Localizable].
+func (vr *StringNotHasSuffixValidator) Localization() (key string, args []any) {
+	return "StringNotHasSuffix", []any{vr.Suffix}
 }
 
 // StringNotHasSuffixError is the error type returned by [StringNotHasSuffixValidator].

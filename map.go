@@ -27,6 +27,11 @@ func (vr *MapLenEqualValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapLenEqual(%d)", vr.Length)
 }
 
+// Localization implements [Localizable].
+func (vr *MapLenEqualValidator[M, K, V]) Localization() (key string, args []any) {
+	return "LenEqual", []any{vr.Length}
+}
+
 // MapLenMin creates a [MapLenMinValidator].
 func MapLenMin[M ~map[K]V, K comparable, V any](minLen int) *MapLenMinValidator[M, K, V] {
 	return &MapLenMinValidator[M, K, V]{
@@ -48,6 +53,11 @@ func (vr *MapLenMinValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapLenMin(%d)", vr.Min)
 }
 
+// Localization implements [Localizable].
+func (vr *MapLenMinValidator[M, K, V]) Localization() (key string, args []any) {
+	return "LenMin", []any{vr.Min}
+}
+
 // MapLenMax creates a [MapLenMaxValidator].
 func MapLenMax[M ~map[K]V, K comparable, V any](maxLen int) *MapLenMaxValidator[M, K, V] {
 	return &MapLenMaxValidator[M, K, V]{
@@ -67,6 +77,11 @@ func (vr *MapLenMaxValidator[M, K, V]) Validate(m M) error {
 
 func (vr *MapLenMaxValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapLenMax(%d)", vr.Max)
+}
+
+// Localization implements [Localizable].
+func (vr *MapLenMaxValidator[M, K, V]) Localization() (key string, args []any) {
+	return "LenMax", []any{vr.Max}
 }
 
 // MapLenRange creates a [MapLenRangeValidator].
@@ -92,6 +107,11 @@ func (vr *MapLenRangeValidator[M, K, V]) String() string {
 	return fmt.Sprintf("MapLenRange(%d, %d)", vr.Min, vr.Max)
 }
 
+// Localization implements [Localizable].
+func (vr *MapLenRangeValidator[M, K, V]) Localization() (key string, args []any) {
+	return "LenRange", []any{vr.Min, vr.Max}
+}
+
 // MapEmpty creates a [MapEmptyValidator].
 func MapEmpty[M ~map[K]V, K comparable, V any]() *MapEmptyValidator[M, K, V] {
 	return &MapEmptyValidator[M, K, V]{}
@@ -109,6 +129,11 @@ func (vr *MapEmptyValidator[M, K, V]) String() string {
 	return "MapEmpty"
 }
 
+// Localization implements [Localizable].
+func (vr *MapEmptyValidator[M, K, V]) Localization() (key string, args []any) {
+	return "Empty", nil
+}
+
 // MapNotEmpty creates a [MapNotEmptyValidator].
 func MapNotEmpty[M ~map[K]V, K comparable, V any]() *MapNotEmptyValidator[M, K, V] {
 	return &MapNotEmptyValidator[M, K, V]{}
@@ -124,6 +149,11 @@ func (vr *MapNotEmptyValidator[M, K, V]) Validate(m M) error {
 
 func (vr *MapNotEmptyValidator[M, K, V]) String() string {
 	return "MapNotEmpty"
+}
+
+// Localization implements [Localizable].
+func (vr *MapNotEmptyValidator[M, K, V]) Localization() (key string, args []any) {
+	return "NotEmpty", nil
 }
 
 // MapEach creates a [MapEachValidator].

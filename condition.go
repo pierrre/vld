@@ -31,6 +31,15 @@ func (vr *IfValidator[T]) String() string {
 	return fmt.Sprintf("If(%s, %v)", getFuncName(vr.Condition), vr.Validator)
 }
 
+// Localize implements [Localizer].
+func (vr *IfValidator[T]) Localize(locales ...string) string {
+	sb := new(strings.Builder)
+	sb.WriteString(Localize("If", []any{getFuncName(vr.Condition)}, locales...))
+	sb.WriteString("\n")
+	writeStringIndent(sb, LocalizeValidator(vr.Validator, locales...))
+	return sb.String()
+}
+
 // IfElse creates a [IfElseValidator].
 func IfElse[T any](cond func(v T) bool, thenVr Validator[T], elseVr Validator[T]) *IfElseValidator[T] {
 	return &IfElseValidator[T]{
@@ -56,7 +65,26 @@ func (vr *IfElseValidator[T]) Validate(v T) error {
 }
 
 func (vr *IfElseValidator[T]) String() string {
-	return fmt.Sprintf("IfElse(%s, %v, %v)", getFuncName(vr.Condition), vr.Then, vr.Else)
+	sb := new(strings.Builder)
+	sb.WriteString("IfElse(")
+	sb.WriteString(getFuncName(vr.Condition))
+	sb.WriteString(",\n")
+	writeStringIndent(sb, vr.Then.String())
+	sb.WriteString(",\n")
+	writeStringIndent(sb, vr.Else.String())
+	sb.WriteString(",\n)")
+	return sb.String()
+}
+
+// Localize implements [Localizer].
+func (vr *IfElseValidator[T]) Localize(locales ...string) string {
+	sb := new(strings.Builder)
+	sb.WriteString(Localize("IfElse", []any{getFuncName(vr.Condition)}, locales...))
+	sb.WriteString("\n")
+	writeStringIndent(sb, LocalizeValidator(vr.Then, locales...))
+	sb.WriteString("\n")
+	writeStringIndent(sb, LocalizeValidator(vr.Else, locales...))
+	return sb.String()
 }
 
 // Switch creates a [SwitchValidator].
@@ -95,6 +123,17 @@ func (sv *SwitchValidator[T]) String() string {
 	return sb.String()
 }
 
+// Localize implements [Localizer].
+func (sv *SwitchValidator[T]) Localize(locales ...string) string {
+	sb := new(strings.Builder)
+	sb.WriteString(Localize("Switch", nil, locales...))
+	for _, c := range sv.Cases {
+		sb.WriteString("\n")
+		writeStringIndent(sb, c.Localize(locales...))
+	}
+	return sb.String()
+}
+
 // Case returns a new [SwitchCase] with the given condition and [Validator].
 func Case[T any](cond func(v T) bool, vr Validator[T]) *SwitchCase[T] {
 	return &SwitchCase[T]{
@@ -111,4 +150,13 @@ type SwitchCase[T any] struct {
 
 func (sc *SwitchCase[T]) String() string {
 	return fmt.Sprintf("Case(%s, %v)", getFuncName(sc.Condition), sc.Validator)
+}
+
+// Localize implements [Localizer].
+func (sc *SwitchCase[T]) Localize(locales ...string) string {
+	sb := new(strings.Builder)
+	sb.WriteString(getFuncName(sc.Condition))
+	sb.WriteString(": ")
+	sb.WriteString(LocalizeValidator(sc.Validator, locales...))
+	return sb.String()
 }

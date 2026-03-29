@@ -30,6 +30,11 @@ func (vr *CmpEqualValidator[T]) String() string {
 	return fmt.Sprintf("CmpEqual(%#v)", vr.Expected)
 }
 
+// Localization implements [Localizable].
+func (vr *CmpEqualValidator[T]) Localization() (key string, args []any) {
+	return "Equal", []any{vr.Expected}
+}
+
 // CmpNotEqual creates a [CmpNotEqualValidator].
 func CmpNotEqual[T Comparer[T]](v T) *CmpNotEqualValidator[T] {
 	return &CmpNotEqualValidator[T]{
@@ -49,6 +54,11 @@ func (vr *CmpNotEqualValidator[T]) Validate(v T) error {
 
 func (vr *CmpNotEqualValidator[T]) String() string {
 	return fmt.Sprintf("CmpNotEqual(%#v)", vr.Expected)
+}
+
+// Localization implements [Localizable].
+func (vr *CmpNotEqualValidator[T]) Localization() (key string, args []any) {
+	return "NotEqual", []any{vr.Expected}
 }
 
 // CmpMin creates a [CmpMinValidator].
@@ -72,6 +82,11 @@ func (vr *CmpMinValidator[T]) String() string {
 	return fmt.Sprintf("CmpMin(%#v)", vr.Min)
 }
 
+// Localization implements [Localizable].
+func (vr *CmpMinValidator[T]) Localization() (key string, args []any) {
+	return "Min", []any{vr.Min}
+}
+
 // CmpMax creates a [CmpMaxValidator].
 func CmpMax[T Comparer[T]](maxValue T) *CmpMaxValidator[T] {
 	return &CmpMaxValidator[T]{
@@ -91,6 +106,11 @@ func (vr *CmpMaxValidator[T]) Validate(v T) error {
 
 func (vr *CmpMaxValidator[T]) String() string {
 	return fmt.Sprintf("CmpMax(%#v)", vr.Max)
+}
+
+// Localization implements [Localizable].
+func (vr *CmpMaxValidator[T]) Localization() (key string, args []any) {
+	return "Max", []any{vr.Max}
 }
 
 // CmpRange creates a [CmpRangeValidator].
@@ -116,6 +136,11 @@ func (vr *CmpRangeValidator[T]) String() string {
 	return fmt.Sprintf("CmpRange(%#v, %#v)", vr.Min, vr.Max)
 }
 
+// Localization implements [Localizable].
+func (vr *CmpRangeValidator[T]) Localization() (key string, args []any) {
+	return "Range", []any{vr.Min, vr.Max}
+}
+
 // CmpLess creates a [CmpLessValidator].
 func CmpLess[T Comparer[T]](maxValue T) *CmpLessValidator[T] {
 	return &CmpLessValidator[T]{
@@ -137,6 +162,11 @@ func (vr *CmpLessValidator[T]) String() string {
 	return fmt.Sprintf("CmpLess(%#v)", vr.Max)
 }
 
+// Localization implements [Localizable].
+func (vr *CmpLessValidator[T]) Localization() (key string, args []any) {
+	return "Less", []any{vr.Max}
+}
+
 // CmpGreater creates a [CmpGreaterValidator].
 func CmpGreater[T Comparer[T]](minValue T) *CmpGreaterValidator[T] {
 	return &CmpGreaterValidator[T]{
@@ -156,4 +186,9 @@ func (vr *CmpGreaterValidator[T]) Validate(v T) error {
 
 func (vr *CmpGreaterValidator[T]) String() string {
 	return fmt.Sprintf("CmpGreater(%#v)", vr.Min)
+}
+
+// Localization implements [Localizable].
+func (vr *CmpGreaterValidator[T]) Localization() (key string, args []any) {
+	return "Greater", []any{vr.Min}
 }

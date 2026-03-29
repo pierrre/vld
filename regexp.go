@@ -48,6 +48,11 @@ func (vr *RegexpMatchValidator) String() string {
 	return fmt.Sprintf("RegexpMatch(%q)", vr.Regexp)
 }
 
+// Localization implements [Localizable].
+func (vr *RegexpMatchValidator) Localization() (key string, args []any) {
+	return "RegexpMatch", []any{vr.Regexp}
+}
+
 // RegexpMatchError is the error type returned by [RegexpMatchValidator].
 type RegexpMatchError struct {
 	Value  string
@@ -88,6 +93,11 @@ func (vr *RegexpNotMatchValidator) Validate(s string) error {
 
 func (vr *RegexpNotMatchValidator) String() string {
 	return fmt.Sprintf("RegexpNotMatch(%q)", vr.Regexp)
+}
+
+// Localization implements [Localizable].
+func (vr *RegexpNotMatchValidator) Localization() (key string, args []any) {
+	return "RegexpNotMatch", []any{vr.Regexp}
 }
 
 // RegexpNotMatchError is the error type returned by [RegexpNotMatchValidator].

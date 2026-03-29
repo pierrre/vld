@@ -9,11 +9,13 @@ import (
 func ExampleSliceLenEqual() {
 	vr := SliceLenEqual[[]int](1)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{}))
 	fmt.Println(LocalizeError(vr.Validate([]int{}), "en"))
 	// Output:
 	// SliceLenEqual(1)
+	// Length must be equal to 1.
 	// <nil>
 	// length 0 is not equal to 1
 	// Length 0 is not equal to 1.
@@ -22,11 +24,13 @@ func ExampleSliceLenEqual() {
 func ExampleSliceLenMin() {
 	vr := SliceLenMin[[]int](1)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{}))
 	fmt.Println(LocalizeError(vr.Validate([]int{}), "en"))
 	// Output:
 	// SliceLenMin(1)
+	// Length must be greater than or equal to 1.
 	// <nil>
 	// length 0 is less than 1
 	// Length 0 is less than 1.
@@ -35,11 +39,13 @@ func ExampleSliceLenMin() {
 func ExampleSliceLenMax() {
 	vr := SliceLenMax[[]int](1)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{}))
 	fmt.Println(vr.Validate([]int{1, 2}))
 	fmt.Println(LocalizeError(vr.Validate([]int{1, 2}), "en"))
 	// Output:
 	// SliceLenMax(1)
+	// Length must be less than or equal to 1.
 	// <nil>
 	// length 2 is greater than 1
 	// Length 2 is greater than 1.
@@ -48,11 +54,13 @@ func ExampleSliceLenMax() {
 func ExampleSliceLenRange() {
 	vr := SliceLenRange[[]int](1, 2)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{}))
 	fmt.Println(LocalizeError(vr.Validate([]int{}), "en"))
 	// Output:
 	// SliceLenRange(1, 2)
+	// Length must be in the range [1, 2].
 	// <nil>
 	// length 0 is not in the range [1, 2]
 	// Length 0 is not in the range [1, 2].
@@ -61,11 +69,13 @@ func ExampleSliceLenRange() {
 func ExampleSliceEmpty() {
 	vr := SliceEmpty[[]int]()
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{}))
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(LocalizeError(vr.Validate([]int{1}), "en"))
 	// Output:
 	// SliceEmpty
+	// Value must be empty.
 	// <nil>
 	// is not empty (1)
 	// Value is not empty (1).
@@ -74,11 +84,13 @@ func ExampleSliceEmpty() {
 func ExampleSliceNotEmpty() {
 	vr := SliceNotEmpty[[]int]()
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{1}))
 	fmt.Println(vr.Validate([]int{}))
 	fmt.Println(LocalizeError(vr.Validate([]int{}), "en"))
 	// Output:
 	// SliceNotEmpty
+	// Value must not be empty.
 	// <nil>
 	// is empty
 	// Value is empty.
@@ -87,11 +99,13 @@ func ExampleSliceNotEmpty() {
 func ExampleSliceContains() {
 	vr := SliceContains[[]int](1)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{1, 2}))
 	fmt.Println(vr.Validate([]int{2, 3}))
 	fmt.Println(LocalizeError(vr.Validate([]int{2, 3}), "en"))
 	// Output:
 	// SliceContains(1)
+	// Slice must contain 1.
 	// <nil>
 	// does not contain 1
 	// Slice does not contain 1.
@@ -100,11 +114,13 @@ func ExampleSliceContains() {
 func ExampleSliceNotContains() {
 	vr := SliceNotContains[[]int](1)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{2, 3}))
 	fmt.Println(vr.Validate([]int{1, 2}))
 	fmt.Println(LocalizeError(vr.Validate([]int{1, 2}), "en"))
 	// Output:
 	// SliceNotContains(1)
+	// Slice must not contain 1.
 	// <nil>
 	// contains 1
 	// Slice contains 1.
@@ -139,11 +155,13 @@ func ExampleSliceEachValue() {
 func ExampleSliceUnique() {
 	vr := SliceUnique[[]int]()
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{1, 2}))
 	fmt.Println(vr.Validate([]int{1, 2, 1}))
 	fmt.Println(LocalizeError(vr.Validate([]int{1, 2, 1}), "en"))
 	// Output:
 	// SliceUnique
+	// Slice must have unique elements.
 	// <nil>
 	// path index 2: duplicate 1 (index 0)
 	// Duplicate 1 (index 0).
@@ -152,11 +170,13 @@ func ExampleSliceUnique() {
 func ExampleSliceUniqueBy() {
 	vr := SliceUniqueBy[[]int](func(v int) int { return v % 2 })
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate([]int{1, 2}))
 	fmt.Println(vr.Validate([]int{1, 2, 3}))
 	fmt.Println(LocalizeError(vr.Validate([]int{1, 2, 3}), "en"))
 	// Output:
 	// SliceUniqueBy(github.com/pierrre/vld_test.ExampleSliceUniqueBy.func1)
+	// Slice must have unique elements with function github.com/pierrre/vld_test.ExampleSliceUniqueBy.func1.
 	// <nil>
 	// path index 2: duplicate 3 (index 0)
 	// Duplicate 3 (index 0).

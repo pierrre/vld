@@ -9,11 +9,13 @@ import (
 func ExampleZero() {
 	vr := Zero[int]()
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(LocalizeError(vr.Validate(1), "en"))
 	// Output:
 	// Zero
+	// Value must be zero.
 	// <nil>
 	// 1 is not zero
 	// Value 1 is not zero.
@@ -22,11 +24,13 @@ func ExampleZero() {
 func ExampleNotZero() {
 	vr := NotZero[int]()
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(1))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(LocalizeError(vr.Validate(0), "en"))
 	// Output:
 	// NotZero
+	// Value must not be zero.
 	// <nil>
 	// is zero
 	// Value is zero.

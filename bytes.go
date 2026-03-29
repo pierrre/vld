@@ -32,6 +32,11 @@ func (vr *BytesEqualValidator) String() string {
 	return fmt.Sprintf("BytesEqual(%q)", vr.Expected)
 }
 
+// Localization implements [Localizable].
+func (vr *BytesEqualValidator) Localization() (key string, args []any) {
+	return "BytesEqual", []any{vr.Expected}
+}
+
 // BytesEqualError is the error type returned by [BytesEqualValidator].
 type BytesEqualError struct {
 	Value    []byte
@@ -72,6 +77,11 @@ func (vr *BytesNotEqualValidator) Validate(v []byte) error {
 
 func (vr *BytesNotEqualValidator) String() string {
 	return fmt.Sprintf("BytesNotEqual(%q)", vr.Expected)
+}
+
+// Localization implements [Localizable].
+func (vr *BytesNotEqualValidator) Localization() (key string, args []any) {
+	return "BytesNotEqual", []any{vr.Expected}
 }
 
 // BytesNotEqualError is the error type returned by [BytesNotEqualValidator].
@@ -116,6 +126,11 @@ func (vr *BytesContainsValidator) String() string {
 	return fmt.Sprintf("BytesContains(%q)", vr.Sub)
 }
 
+// Localization implements [Localizable].
+func (vr *BytesContainsValidator) Localization() (key string, args []any) {
+	return "BytesContains", []any{vr.Sub}
+}
+
 // BytesContainsError is the error type returned by [BytesContainsValidator].
 type BytesContainsError struct {
 	Value []byte
@@ -156,6 +171,11 @@ func (vr *BytesNotContainsValidator) Validate(v []byte) error {
 
 func (vr *BytesNotContainsValidator) String() string {
 	return fmt.Sprintf("BytesNotContains(%q)", vr.Sub)
+}
+
+// Localization implements [Localizable].
+func (vr *BytesNotContainsValidator) Localization() (key string, args []any) {
+	return "BytesNotContains", []any{vr.Sub}
 }
 
 // BytesNotContainsError is the error type returned by [BytesNotContainsValidator].
@@ -200,6 +220,11 @@ func (vr *BytesHasPrefixValidator) String() string {
 	return fmt.Sprintf("BytesHasPrefix(%q)", vr.Prefix)
 }
 
+// Localization implements [Localizable].
+func (vr *BytesHasPrefixValidator) Localization() (key string, args []any) {
+	return "BytesHasPrefix", []any{vr.Prefix}
+}
+
 // BytesHasPrefixError is the error type returned by [BytesHasPrefixValidator].
 type BytesHasPrefixError struct {
 	Value  []byte
@@ -240,6 +265,11 @@ func (vr *BytesNotHasPrefixValidator) Validate(v []byte) error {
 
 func (vr *BytesNotHasPrefixValidator) String() string {
 	return fmt.Sprintf("BytesNotHasPrefix(%q)", vr.Prefix)
+}
+
+// Localization implements [Localizable].
+func (vr *BytesNotHasPrefixValidator) Localization() (key string, args []any) {
+	return "BytesNotHasPrefix", []any{vr.Prefix}
 }
 
 // BytesNotHasPrefixError is the error type returned by [BytesNotHasPrefixValidator].
@@ -284,6 +314,11 @@ func (vr *BytesHasSuffixValidator) String() string {
 	return fmt.Sprintf("BytesHasSuffix(%q)", vr.Suffix)
 }
 
+// Localization implements [Localizable].
+func (vr *BytesHasSuffixValidator) Localization() (key string, args []any) {
+	return "BytesHasSuffix", []any{vr.Suffix}
+}
+
 // BytesHasSuffixError is the error type returned by [BytesHasSuffixValidator].
 type BytesHasSuffixError struct {
 	Value  []byte
@@ -324,6 +359,11 @@ func (vr *BytesNotHasSuffixValidator) Validate(v []byte) error {
 
 func (vr *BytesNotHasSuffixValidator) String() string {
 	return fmt.Sprintf("BytesNotHasSuffix(%q)", vr.Suffix)
+}
+
+// Localization implements [Localizable].
+func (vr *BytesNotHasSuffixValidator) Localization() (key string, args []any) {
+	return "BytesNotHasSuffix", []any{vr.Suffix}
 }
 
 // BytesNotHasSuffixError is the error type returned by [BytesNotHasSuffixValidator].

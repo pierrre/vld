@@ -31,6 +31,11 @@ func (vr *PositiveValidator[T]) String() string {
 	return "Positive"
 }
 
+// Localization implements [Localizable].
+func (vr *PositiveValidator[T]) Localization() (key string, args []any) {
+	return "Positive", nil
+}
+
 // PositiveError is the error type returned by [PositiveValidator].
 type PositiveError[T Signed] struct {
 	Value T
@@ -65,6 +70,11 @@ func (vr *NegativeValidator[T]) Validate(v T) error {
 
 func (vr *NegativeValidator[T]) String() string {
 	return "Negative"
+}
+
+// Localization implements [Localizable].
+func (vr *NegativeValidator[T]) Localization() (key string, args []any) {
+	return "Negative", nil
 }
 
 // NegativeError is the error type returned by [NegativeValidator].

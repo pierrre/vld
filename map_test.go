@@ -9,11 +9,13 @@ import (
 func ExampleMapLenEqual() {
 	vr := MapLenEqual[map[string]int](1)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(LocalizeError(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenEqual(1)
+	// Length must be equal to 1.
 	// <nil>
 	// length 0 is not equal to 1
 	// Length 0 is not equal to 1.
@@ -22,11 +24,13 @@ func ExampleMapLenEqual() {
 func ExampleMapLenMin() {
 	vr := MapLenMin[map[string]int](1)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(LocalizeError(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenMin(1)
+	// Length must be greater than or equal to 1.
 	// <nil>
 	// length 0 is less than 1
 	// Length 0 is less than 1.
@@ -35,11 +39,13 @@ func ExampleMapLenMin() {
 func ExampleMapLenMax() {
 	vr := MapLenMax[map[string]int](1)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(vr.Validate(map[string]int{"a": 1, "b": 2}))
 	fmt.Println(LocalizeError(vr.Validate(map[string]int{"a": 1, "b": 2}), "en"))
 	// Output:
 	// MapLenMax(1)
+	// Length must be less than or equal to 1.
 	// <nil>
 	// length 2 is greater than 1
 	// Length 2 is greater than 1.
@@ -48,11 +54,13 @@ func ExampleMapLenMax() {
 func ExampleMapLenRange() {
 	vr := MapLenRange[map[string]int](1, 2)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(LocalizeError(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapLenRange(1, 2)
+	// Length must be in the range [1, 2].
 	// <nil>
 	// length 0 is not in the range [1, 2]
 	// Length 0 is not in the range [1, 2].
@@ -61,11 +69,13 @@ func ExampleMapLenRange() {
 func ExampleMapEmpty() {
 	vr := MapEmpty[map[string]int]()
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(LocalizeError(vr.Validate(map[string]int{"a": 1}), "en"))
 	// Output:
 	// MapEmpty
+	// Value must be empty.
 	// <nil>
 	// is not empty (1)
 	// Value is not empty (1).
@@ -74,11 +84,13 @@ func ExampleMapEmpty() {
 func ExampleMapNotEmpty() {
 	vr := MapNotEmpty[map[string]int]()
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(map[string]int{"a": 1}))
 	fmt.Println(vr.Validate(map[string]int{}))
 	fmt.Println(LocalizeError(vr.Validate(map[string]int{}), "en"))
 	// Output:
 	// MapNotEmpty
+	// Value must not be empty.
 	// <nil>
 	// is empty
 	// Value is empty.

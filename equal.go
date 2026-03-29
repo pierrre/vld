@@ -25,6 +25,11 @@ func (vr *EqualValidator[T]) String() string {
 	return fmt.Sprintf("Equal(%#v)", vr.Expected)
 }
 
+// Localization implements [Localizable].
+func (vr *EqualValidator[T]) Localization() (key string, args []any) {
+	return "Equal", []any{vr.Expected}
+}
+
 // EqualFunc creates a [EqualFuncValidator].
 func EqualFunc[T any](v T, eqFunc func(a, b T) bool) *EqualFuncValidator[T] {
 	return &EqualFuncValidator[T]{
@@ -58,6 +63,11 @@ func (vr *EqualFuncValidator[T]) String() string {
 	return fmt.Sprintf("EqualFunc(%#v, %s)", vr.Expected, getFuncName(vr.Func))
 }
 
+// Localization implements [Localizable].
+func (vr *EqualFuncValidator[T]) Localization() (key string, args []any) {
+	return "EqualFunc", []any{vr.Expected, getFuncName(vr.Func)}
+}
+
 // EqualCmpFunc creates a [EqualCmpFuncValidator].
 func EqualCmpFunc[T any](v T, cmpFunc func(a, b T) int) *EqualCmpFuncValidator[T] {
 	return &EqualCmpFuncValidator[T]{
@@ -83,6 +93,11 @@ func validateEqualCmpFunc[T any](v T, expected T, cmpFunc func(a, b T) int) erro
 
 func (vr *EqualCmpFuncValidator[T]) String() string {
 	return fmt.Sprintf("EqualCmpFunc(%#v, %s)", vr.Expected, getFuncName(vr.Func))
+}
+
+// Localization implements [Localizable].
+func (vr *EqualCmpFuncValidator[T]) Localization() (key string, args []any) {
+	return "EqualFunc", []any{vr.Expected, getFuncName(vr.Func)}
 }
 
 // EqualError is the error type returned by validators that check for equality.
@@ -121,6 +136,11 @@ func (vr *NotEqualValidator[T]) String() string {
 	return fmt.Sprintf("NotEqual(%#v)", vr.Expected)
 }
 
+// Localization implements [Localizable].
+func (vr *NotEqualValidator[T]) Localization() (key string, args []any) {
+	return "NotEqual", []any{vr.Expected}
+}
+
 // NotEqualFunc creates a [NotEqualFuncValidator].
 func NotEqualFunc[T any](v T, eqFunc func(a, b T) bool) *NotEqualFuncValidator[T] {
 	return &NotEqualFuncValidator[T]{
@@ -154,6 +174,11 @@ func (vr *NotEqualFuncValidator[T]) String() string {
 	return fmt.Sprintf("NotEqualFunc(%#v, %s)", vr.Expected, getFuncName(vr.Func))
 }
 
+// Localization implements [Localizable].
+func (vr *NotEqualFuncValidator[T]) Localization() (key string, args []any) {
+	return "NotEqualFunc", []any{vr.Expected, getFuncName(vr.Func)}
+}
+
 // NotEqualCmpFunc creates a [NotEqualCmpFuncValidator].
 func NotEqualCmpFunc[T any](v T, cmpFunc func(a, b T) int) *NotEqualCmpFuncValidator[T] {
 	return &NotEqualCmpFuncValidator[T]{
@@ -179,6 +204,11 @@ func validateNotEqualCmpFunc[T any](v T, expected T, cmpFunc func(a, b T) int) e
 
 func (vr *NotEqualCmpFuncValidator[T]) String() string {
 	return fmt.Sprintf("NotEqualCmpFunc(%#v, %s)", vr.Expected, getFuncName(vr.Func))
+}
+
+// Localization implements [Localizable].
+func (vr *NotEqualCmpFuncValidator[T]) Localization() (key string, args []any) {
+	return "NotEqualFunc", []any{vr.Expected, getFuncName(vr.Func)}
 }
 
 // NotEqualError is the error type returned by validators that check for inequality.

@@ -10,11 +10,14 @@ func ExampleIf() {
 	cond := func(v int) bool { return v != 0 }
 	vr := If(cond, Min(1))
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(0))
 	fmt.Println(vr.Validate(5))
 	fmt.Println(vr.Validate(-1))
 	// Output:
 	// If(github.com/pierrre/vld_test.ExampleIf.func1, Min(1))
+	// Value must satisfy the following validator if the condition (github.com/pierrre/vld_test.ExampleIf.func1) is true:
+	// 	Value must be greater than or equal to 1.
 	// <nil>
 	// <nil>
 	// -1 is less than 1
@@ -24,12 +27,19 @@ func ExampleIfElse() {
 	cond := func(v int) bool { return v > 0 }
 	vr := IfElse(cond, Max(10), Min(-10))
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(5))
 	fmt.Println(vr.Validate(11))
 	fmt.Println(vr.Validate(-5))
 	fmt.Println(vr.Validate(-11))
 	// Output:
-	// IfElse(github.com/pierrre/vld_test.ExampleIfElse.func1, Max(10), Min(-10))
+	// IfElse(github.com/pierrre/vld_test.ExampleIfElse.func1,
+	// 	Max(10),
+	// 	Min(-10),
+	// )
+	// Value must satisfy the first validator if the condition (github.com/pierrre/vld_test.ExampleIfElse.func1) is true, or the second validator otherwise:
+	// 	Value must be less than or equal to 10.
+	// 	Value must be greater than or equal to -10.
 	// <nil>
 	// 11 is greater than 10
 	// <nil>
@@ -42,6 +52,7 @@ func ExampleSwitch() {
 		Case(func(v int) bool { return v < 0 }, Min(-10)),
 	)
 	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
 	fmt.Println(vr.Validate(5))
 	fmt.Println(vr.Validate(-5))
 	fmt.Println(vr.Validate(0))
@@ -52,6 +63,9 @@ func ExampleSwitch() {
 	// 	Case(github.com/pierrre/vld_test.ExampleSwitch.func1, Max(10)),
 	// 	Case(github.com/pierrre/vld_test.ExampleSwitch.func2, Min(-10)),
 	// )
+	// Value must satisfy the validator of the first case whose condition is true:
+	// 	github.com/pierrre/vld_test.ExampleSwitch.func1: Value must be less than or equal to 10.
+	// 	github.com/pierrre/vld_test.ExampleSwitch.func2: Value must be greater than or equal to -10.
 	// <nil>
 	// <nil>
 	// <nil>

@@ -32,6 +32,11 @@ func (vr *InValidator[T]) String() string {
 	return fmt.Sprintf("In(%#v)", vr.Values)
 }
 
+// Localization implements [Localizable].
+func (vr *InValidator[T]) Localization() (key string, args []any) {
+	return "In", []any{vr.Values}
+}
+
 // InError is the error type returned by [InValidator].
 type InError[T comparable] struct {
 	Value  T
@@ -72,6 +77,11 @@ func (vr *NotInValidator[T]) Validate(v T) error {
 
 func (vr *NotInValidator[T]) String() string {
 	return fmt.Sprintf("NotIn(%#v)", vr.Values)
+}
+
+// Localization implements [Localizable].
+func (vr *NotInValidator[T]) Localization() (key string, args []any) {
+	return "NotIn", []any{vr.Values}
 }
 
 // NotInError is the error type returned by [NotInValidator].
