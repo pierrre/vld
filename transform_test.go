@@ -1,7 +1,9 @@
 package vld_test
 
 import (
+	"errors"
 	"fmt"
+	"strconv"
 
 	. "github.com/pierrre/vld"
 )
@@ -22,6 +24,25 @@ func ExampleGet() {
 	// <nil>
 	// length 7 is greater than 5
 	// Length 7 is greater than 5.
+}
+
+func ExampleParse() {
+	vr := Parse(strconv.Atoi, Equal(1))
+	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
+	fmt.Println(vr.Validate("1"))
+	fmt.Println(vr.Validate("2"))
+	fmt.Println(vr.Validate("a"))
+	fmt.Println(errors.Unwrap(vr.Validate("a")))
+	fmt.Println(LocalizeError(vr.Validate("a"), "en"))
+	// Output:
+	// Parse(strconv.Atoi, Equal(1))
+	// Parsing value with function strconv.Atoi must succeed and the parsed value must satisfy the following validator: Value must be equal to 1.
+	// <nil>
+	// 2 is not equal to 1
+	// parse "a" with strconv.Atoi: strconv.Atoi: parsing "a": invalid syntax
+	// strconv.Atoi: parsing "a": invalid syntax
+	// Parsing value "a" with function strconv.Atoi failed: strconv.Atoi: parsing "a": invalid syntax
 }
 
 func ExampleWrap() {

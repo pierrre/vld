@@ -36,6 +36,14 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Value returned by function %[1]s must satisfy the following validator: %[2]s",
 		"fr": "La valeur retournée par la fonction %[1]s doit satisfaire le validateur suivant: %[2]s",
 	},
+	"ParseValidator": {
+		"en": "Parsing value with function %[1]s must succeed and the parsed value must satisfy the following validator: %[2]s",
+		"fr": "Le parsing de la valeur avec la fonction %[1]s doit réussir et la valeur parsée doit satisfaire le validateur suivant: %[2]s",
+	},
+	"ParseError": {
+		"en": "Parsing value %#[1]v with function %[2]s failed: %[3]s",
+		"fr": "Le parsing de la valeur %#[1]v avec la fonction %[2]s a échoué: %[3]s",
+	},
 	"WrapValidator": {
 		"en": "Value must satisfy the following validator, with error wrapped by message %[1]q: %[2]s",
 		"fr": "La valeur doit satisfaire le validateur suivant, avec l'erreur enveloppée par le message %[1]q: %[2]s",

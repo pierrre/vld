@@ -42,6 +42,62 @@ func validateGet[In, Out any](v In, getFunc func(In) Out, f func(Out) error) err
 	return f(getFunc(v))
 }
 
+// Parse creates a [ParseValidator].
+func Parse[In, Out any](parseFunc func(In) (Out, error), vr Validator[Out]) *ParseValidator[In, Out] {
+	return &ParseValidator[In, Out]{
+		Func:      parseFunc,
+		Validator: vr,
+	}
+}
+
+// ParseValidator is a [Validator] that parses the value with the function and validates the result.
+type ParseValidator[In, Out any] struct {
+	Func      func(In) (Out, error)
+	Validator Validator[Out]
+}
+
+// Validate implements [Validator].
+func (vr *ParseValidator[In, Out]) Validate(v In) error {
+	pv, err := vr.Func(v)
+	if err != nil {
+		return &ParseError[In, Out]{
+			Err:   err,
+			Value: v,
+			Func:  vr.Func,
+		}
+	}
+	return vr.Validator.Validate(pv) //nolint:wrapcheck // Not needed.
+}
+
+func (vr *ParseValidator[In, Out]) String() string {
+	return fmt.Sprintf("Parse(%s, %v)", getFuncName(vr.Func), vr.Validator)
+}
+
+// Localization implements [Localizable].
+func (vr *ParseValidator[In, Out]) Localization() (key string, args []any) {
+	return "ParseValidator", []any{getFuncName(vr.Func), vr.Validator}
+}
+
+// ParseError is the error type returned by [ParseValidator] when the parsing fails.
+type ParseError[In, Out any] struct {
+	Err   error
+	Value In
+	Func  func(In) (Out, error)
+}
+
+func (e *ParseError[In, Out]) Error() string {
+	return fmt.Sprintf("parse %#v with %s: %v", e.Value, getFuncName(e.Func), e.Err)
+}
+
+// Localization implements [Localizable].
+func (e *ParseError[In, Out]) Localization() (key string, args []any) {
+	return "ParseError", []any{e.Value, getFuncName(e.Func), e.Err}
+}
+
+func (e *ParseError[In, Out]) Unwrap() error {
+	return e.Err
+}
+
 // Wrap creates a [WrapValidator].
 func Wrap[T any](msg string, vr Validator[T]) *WrapValidator[T] {
 	return &WrapValidator[T]{
