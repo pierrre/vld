@@ -1,0 +1,29 @@
+MapLenRange(1, 2)
+	========== assertauto ==========
+en: Length must be in the range [1, 2].
+	========== assertauto ==========
+fr: La longueur doit être dans l'intervalle [1, 2].
+	========== assertauto ==========
+[map[string]int] (len=1) {
+	"a": 1,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[map[string]int] (len=0) {}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+length 0 is not in the range [1, 2]
+	========== assertauto ==========
+en: Length 0 is not in the range [1, 2].
+	========== assertauto ==========
+fr: La longueur 0 n'est pas dans l'intervalle [1, 2].

@@ -1,127 +1,39 @@
 package vld_test
 
 import (
-	"fmt"
+	"testing"
 
 	. "github.com/pierrre/vld"
 )
 
-func ExampleBytesEqual() {
-	vr := BytesEqual([]byte("abc"))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(vr.Validate([]byte("abd")))
-	fmt.Println(LocalizeError(vr.Validate([]byte("abd")), "en"))
-	// Output:
-	// BytesEqual("abc")
-	// Bytes must be equal to "abc".
-	// <nil>
-	// "abd" is not equal to "abc"
-	// Bytes "abd" is not equal to "abc".
+func TestBytesEqual(t *testing.T) {
+	testValidator(t, BytesEqual([]byte("abc")), []byte("abc"), []byte("abd"))
 }
 
-func ExampleBytesNotEqual() {
-	vr := BytesNotEqual([]byte("abc"))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate([]byte("abd")))
-	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(LocalizeError(vr.Validate([]byte("abc")), "en"))
-	// Output:
-	// BytesNotEqual("abc")
-	// Bytes must not be equal to "abc".
-	// <nil>
-	// "abc" is equal to "abc"
-	// Bytes "abc" is equal to "abc".
+func TestBytesNotEqual(t *testing.T) {
+	testValidator(t, BytesNotEqual([]byte("abc")), []byte("abd"), []byte("abc"))
 }
 
-func ExampleBytesContains() {
-	vr := BytesContains([]byte("b"))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(vr.Validate([]byte("acd")))
-	fmt.Println(LocalizeError(vr.Validate([]byte("acd")), "en"))
-	// Output:
-	// BytesContains("b")
-	// Bytes must contain "b".
-	// <nil>
-	// "acd" does not contain "b"
-	// Bytes "acd" does not contain "b".
+func TestBytesContains(t *testing.T) {
+	testValidator(t, BytesContains([]byte("b")), []byte("abc"), []byte("acd"))
 }
 
-func ExampleBytesNotContains() {
-	vr := BytesNotContains([]byte("b"))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate([]byte("acd")))
-	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(LocalizeError(vr.Validate([]byte("abc")), "en"))
-	// Output:
-	// BytesNotContains("b")
-	// Bytes must not contain "b".
-	// <nil>
-	// "abc" contains "b"
-	// Bytes "abc" contains "b".
+func TestBytesNotContains(t *testing.T) {
+	testValidator(t, BytesNotContains([]byte("b")), []byte("acd"), []byte("abc"))
 }
 
-func ExampleBytesHasPrefix() {
-	vr := BytesHasPrefix([]byte("a"))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(vr.Validate([]byte("bac")))
-	fmt.Println(LocalizeError(vr.Validate([]byte("bac")), "en"))
-	// Output:
-	// BytesHasPrefix("a")
-	// Bytes must have prefix "a".
-	// <nil>
-	// "bac" does not have prefix "a"
-	// Bytes "bac" does not have prefix "a".
+func TestBytesHasPrefix(t *testing.T) {
+	testValidator(t, BytesHasPrefix([]byte("a")), []byte("abc"), []byte("bac"))
 }
 
-func ExampleBytesNotHasPrefix() {
-	vr := BytesNotHasPrefix([]byte("a"))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate([]byte("bac")))
-	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(LocalizeError(vr.Validate([]byte("abc")), "en"))
-	// Output:
-	// BytesNotHasPrefix("a")
-	// Bytes must not have prefix "a".
-	// <nil>
-	// "abc" has prefix "a"
-	// Bytes "abc" has prefix "a".
+func TestBytesNotHasPrefix(t *testing.T) {
+	testValidator(t, BytesNotHasPrefix([]byte("a")), []byte("bac"), []byte("abc"))
 }
 
-func ExampleBytesHasSuffix() {
-	vr := BytesHasSuffix([]byte("c"))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(vr.Validate([]byte("acb")))
-	fmt.Println(LocalizeError(vr.Validate([]byte("acb")), "en"))
-	// Output:
-	// BytesHasSuffix("c")
-	// Bytes must have suffix "c".
-	// <nil>
-	// "acb" does not have suffix "c"
-	// Bytes "acb" does not have suffix "c".
+func TestBytesHasSuffix(t *testing.T) {
+	testValidator(t, BytesHasSuffix([]byte("c")), []byte("abc"), []byte("acb"))
 }
 
-func ExampleBytesNotHasSuffix() {
-	vr := BytesNotHasSuffix([]byte("c"))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate([]byte("acb")))
-	fmt.Println(vr.Validate([]byte("abc")))
-	fmt.Println(LocalizeError(vr.Validate([]byte("abc")), "en"))
-	// Output:
-	// BytesNotHasSuffix("c")
-	// Bytes must not have suffix "c".
-	// <nil>
-	// "abc" has suffix "c"
-	// Bytes "abc" has suffix "c".
+func TestBytesNotHasSuffix(t *testing.T) {
+	testValidator(t, BytesNotHasSuffix([]byte("c")), []byte("acb"), []byte("abc"))
 }

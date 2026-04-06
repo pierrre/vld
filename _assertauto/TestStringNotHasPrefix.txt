@@ -1,0 +1,27 @@
+StringNotHasPrefix("a")
+	========== assertauto ==========
+en: String must not begin with "a".
+	========== assertauto ==========
+fr: La chaîne ne doit pas commencer par "a".
+	========== assertauto ==========
+[string] (len=3) "bac"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[string] (len=3) "abc"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+"abc" begins with "a"
+	========== assertauto ==========
+en: String "abc" begins with "a".
+	========== assertauto ==========
+fr: La chaîne "abc" commence par "a".

@@ -1,0 +1,31 @@
+MapSortedEachValue(Equal(1))
+	========== assertauto ==========
+en: Each value of the map must satisfy the following validator: Value must be equal to 1.
+	========== assertauto ==========
+fr: Chaque valeur de la map doit satisfaire le validateur suivant: La valeur doit être égale à 1.
+	========== assertauto ==========
+[map[string]int] (len=1) {
+	"a": 1,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[map[string]int] (len=1) {
+	"b": 2,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 8,
+}
+	========== assertauto ==========
+path key "b": path field "value": 2 is not equal to 1
+	========== assertauto ==========
+en: Value 2 is not equal to 1.
+	========== assertauto ==========
+fr: La valeur 2 n'est pas égale à 1.

@@ -1,0 +1,65 @@
+Switch(
+	Case(github.com/pierrre/vld_test.TestSwitch.func1, Max(10)),
+	Case(github.com/pierrre/vld_test.TestSwitch.func2, Min(-10)),
+)
+	========== assertauto ==========
+en: Value must satisfy the validator of the first case whose condition is true:
+	github.com/pierrre/vld_test.TestSwitch.func1: Value must be less than or equal to 10.
+	github.com/pierrre/vld_test.TestSwitch.func2: Value must be greater than or equal to -10.
+	========== assertauto ==========
+fr: La valeur doit satisfaire le validateur du premier cas dont la condition est vraie:
+	github.com/pierrre/vld_test.TestSwitch.func1: La valeur doit être inférieure ou égale à 10.
+	github.com/pierrre/vld_test.TestSwitch.func2: La valeur doit être supérieure ou égale à -10.
+	========== assertauto ==========
+[int] 5
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] -5
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 11
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+11 is greater than 10
+	========== assertauto ==========
+en: Value 11 is greater than 10.
+	========== assertauto ==========
+fr: La valeur 11 est supérieure à 10.
+	========== assertauto ==========
+[int] -11
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+-11 is less than -10
+	========== assertauto ==========
+en: Value -11 is less than -10.
+	========== assertauto ==========
+fr: La valeur -11 est inférieure à -10.

@@ -1,0 +1,31 @@
+BytesEqual("abc")
+	========== assertauto ==========
+en: Bytes must be equal to "abc".
+	========== assertauto ==========
+fr: Les bytes doivent être égaux à "abc".
+	========== assertauto ==========
+[[]uint8] (len=3)
+	00000000  61 62 63                                          |abc|
+
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[[]uint8] (len=3)
+	00000000  61 62 64                                          |abd|
+
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+"abd" is not equal to "abc"
+	========== assertauto ==========
+en: Bytes "abd" is not equal to "abc".
+	========== assertauto ==========
+fr: Les bytes "abd" ne sont pas égaux à "abc".

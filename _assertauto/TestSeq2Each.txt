@@ -1,0 +1,31 @@
+Seq2Each(Equal(vld.KeyValue[int,int]{Key:0, Value:1}))
+	========== assertauto ==========
+en: Each key/value of the sequence must satisfy the following validator: Value must be equal to vld.KeyValue[int,int]{Key:0, Value:1}.
+	========== assertauto ==========
+fr: Chaque clé/valeur de la séquence doit satisfaire le validateur suivant: La valeur doit être égale à vld.KeyValue[int,int]{Key:0, Value:1}.
+	========== assertauto ==========
+[iter.Seq2[int,int]](func(func(int, int) bool)) {
+	0: 1,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 4,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[iter.Seq2[int,int]](func(func(int, int) bool)) {
+	0: 2,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 10,
+}
+	========== assertauto ==========
+path index 0: vld.KeyValue[int,int]{Key:0, Value:2} is not equal to vld.KeyValue[int,int]{Key:0, Value:1}
+	========== assertauto ==========
+en: Value vld.KeyValue[int,int]{Key:0, Value:2} is not equal to vld.KeyValue[int,int]{Key:0, Value:1}.
+	========== assertauto ==========
+fr: La valeur vld.KeyValue[int,int]{Key:0, Value:2} n'est pas égale à vld.KeyValue[int,int]{Key:0, Value:1}.

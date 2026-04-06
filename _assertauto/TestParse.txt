@@ -1,0 +1,40 @@
+Parse(strconv.Atoi, Equal(1))
+	========== assertauto ==========
+en: Parsing value with function strconv.Atoi must succeed and the parsed value must satisfy the following validator: Value must be equal to 1.
+	========== assertauto ==========
+fr: Le parsing de la valeur avec la fonction strconv.Atoi doit réussir et la valeur parsée doit satisfaire le validateur suivant: La valeur doit être égale à 1.
+	========== assertauto ==========
+[string] (len=1) "1"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[string] (len=1) "2"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+2 is not equal to 1
+	========== assertauto ==========
+en: Value 2 is not equal to 1.
+	========== assertauto ==========
+fr: La valeur 2 n'est pas égale à 1.
+	========== assertauto ==========
+[string] (len=1) "a"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 3,
+}
+	========== assertauto ==========
+parse "a" with strconv.Atoi: strconv.Atoi: parsing "a": invalid syntax
+	========== assertauto ==========
+en: Parsing value "a" with function strconv.Atoi failed: strconv.Atoi: parsing "a": invalid syntax
+	========== assertauto ==========
+fr: Le parsing de la valeur "a" avec la fonction strconv.Atoi a échoué: strconv.Atoi: parsing "a": invalid syntax

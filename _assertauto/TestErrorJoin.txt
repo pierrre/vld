@@ -1,0 +1,14 @@
+[*errors.joinError] {
+	Error(): "error 1\nerror 2\nerror 3",
+	Unwrap(): [[]error] (len=3) {
+		[*errors.errorString] {
+			Error(): "error 1",
+		},
+		[*errors.errorString] {
+			Error(): "error 2",
+		},
+		[*errors.errorString] {
+			Error(): "error 3",
+		},
+	},
+}

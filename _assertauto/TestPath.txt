@@ -1,0 +1,11 @@
+.
+	========== assertauto ==========
+.User[0]["name"]*
+	========== assertauto ==========
+field "User"
+	========== assertauto ==========
+index 0
+	========== assertauto ==========
+key "name"
+	========== assertauto ==========
+pointer

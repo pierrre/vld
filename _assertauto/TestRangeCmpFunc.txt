@@ -1,0 +1,58 @@
+RangeCmpFunc(1, 3, cmp.Compare[...])
+	========== assertauto ==========
+en: Value must be in the range [1, 3] with function cmp.Compare[...].
+	========== assertauto ==========
+fr: La valeur doit être dans l'intervalle [1, 3] avec la fonction cmp.Compare[...].
+	========== assertauto ==========
+[int] 2
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 3
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+0 is not in the range [1, 3]
+	========== assertauto ==========
+en: Value 0 is not in the range [1, 3].
+	========== assertauto ==========
+fr: La valeur 0 n'est pas dans l'intervalle [1, 3].
+	========== assertauto ==========
+[int] 4
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+4 is not in the range [1, 3]
+	========== assertauto ==========
+en: Value 4 is not in the range [1, 3].
+	========== assertauto ==========
+fr: La valeur 4 n'est pas dans l'intervalle [1, 3].

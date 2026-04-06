@@ -1,0 +1,31 @@
+BytesNotHasSuffix("c")
+	========== assertauto ==========
+en: Bytes must not have suffix "c".
+	========== assertauto ==========
+fr: Les bytes ne doivent pas avoir le suffixe "c".
+	========== assertauto ==========
+[[]uint8] (len=3)
+	00000000  61 63 62                                          |acb|
+
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[[]uint8] (len=3)
+	00000000  61 62 63                                          |abc|
+
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+"abc" has suffix "c"
+	========== assertauto ==========
+en: Bytes "abc" has suffix "c".
+	========== assertauto ==========
+fr: Les bytes "abc" ont le suffixe "c".

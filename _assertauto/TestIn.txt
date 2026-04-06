@@ -1,0 +1,27 @@
+In([]int{1, 2, 3})
+	========== assertauto ==========
+en: Value must be in []int{1, 2, 3}.
+	========== assertauto ==========
+fr: La valeur doit être dans []int{1, 2, 3}.
+	========== assertauto ==========
+[int] 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 4
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+4 is not in []int{1, 2, 3}
+	========== assertauto ==========
+en: Value 4 is not in []int{1, 2, 3}.
+	========== assertauto ==========
+fr: La valeur 4 n'est pas dans []int{1, 2, 3}.

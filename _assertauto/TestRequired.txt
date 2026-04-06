@@ -1,0 +1,40 @@
+Required(Equal(1))
+	========== assertauto ==========
+en: Value must not be zero and must satisfy the following validator: Value must be equal to 1.
+	========== assertauto ==========
+fr: La valeur ne doit pas être zéro et doit satisfaire le validateur suivant: La valeur doit être égale à 1.
+	========== assertauto ==========
+[int] 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+required
+	========== assertauto ==========
+en: Value is required.
+	========== assertauto ==========
+fr: La valeur est requise.
+	========== assertauto ==========
+[int] 2
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+2 is not equal to 1
+	========== assertauto ==========
+en: Value 2 is not equal to 1.
+	========== assertauto ==========
+fr: La valeur 2 n'est pas égale à 1.

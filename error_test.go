@@ -3,56 +3,40 @@ package vld_test
 import (
 	"errors"
 	"fmt"
+	"testing"
 
+	"github.com/pierrre/assert"
+	"github.com/pierrre/assert/assertauto"
 	. "github.com/pierrre/vld"
 )
 
-func ExampleErrorWrap() {
+func TestErrorWrap(t *testing.T) {
 	wrapFunc := func(err error) error {
-		return fmt.Errorf("example: %w", err)
+		return fmt.Errorf("test: %w", err)
 	}
-	fmt.Println(ErrorWrap(nil, wrapFunc))
-	fmt.Println(ErrorWrap(errors.New("error"), wrapFunc))
-	fmt.Println(ErrorWrap(errors.Join(errors.New("error 1"), errors.New("error 2")), wrapFunc))
-	// Output:
-	// <nil>
-	// example: error
-	// example: error 1
-	// example: error 2
+	assert.Zero(t, ErrorWrap(nil, wrapFunc))
+	assertauto.Equal(t, ErrorWrap(errors.New("error"), wrapFunc))
+	assertauto.Equal(t, ErrorWrap(errors.Join(errors.New("error 1"), errors.New("error 2")), wrapFunc))
 }
 
-func ExampleErrorWrapMessage() {
-	fmt.Println(ErrorWrapMessage(nil, "example"))
-	fmt.Println(ErrorWrapMessage(errors.New("error"), "example"))
-	// Output:
-	// <nil>
-	// example: error
+func TestErrorWrapMessage(t *testing.T) {
+	assert.Zero(t, ErrorWrapMessage(nil, "test"))
+	assertauto.Equal(t, ErrorWrapMessage(errors.New("error"), "test"))
 }
 
-func ExampleErrorWrapMessagef() {
-	fmt.Println(ErrorWrapMessagef(nil, "example %d", 1))
-	fmt.Println(ErrorWrapMessagef(errors.New("error"), "example %d", 1))
-	// Output:
-	// <nil>
-	// example 1: error
+func TestErrorWrapMessagef(t *testing.T) {
+	assert.Zero(t, ErrorWrapMessagef(nil, "test %d", 1))
+	assertauto.Equal(t, ErrorWrapMessagef(errors.New("error"), "test %d", 1))
 }
 
-func ExampleErrorJoin() {
-	fmt.Println(ErrorJoin())
-	fmt.Println(ErrorJoin(nil))
-	fmt.Println(ErrorJoin(errors.Join(errors.New("error"))))
-	// Output:
-	// <nil>
-	// <nil>
-	// error
+func TestErrorJoin(t *testing.T) {
+	assert.Zero(t, ErrorJoin())
+	assert.Zero(t, ErrorJoin(nil))
+	assertauto.Equal(t, ErrorJoin(errors.Join(errors.New("error 1"), errors.New("error 2")), errors.New("error 3")))
 }
 
-func ExampleGetErrors() {
-	fmt.Println(GetErrors(nil))
-	fmt.Println(GetErrors(errors.New("error")))
-	fmt.Println(GetErrors(errors.Join(errors.New("error1"), errors.New("error2"))))
-	// Output:
-	// []
-	// [error]
-	// [error1 error2]
+func TestGetErrors(t *testing.T) {
+	assert.SliceEmpty(t, GetErrors(nil))
+	assertauto.Equal(t, GetErrors(errors.New("error")))
+	assertauto.Equal(t, GetErrors(errors.Join(errors.New("error1"), errors.New("error2"))))
 }

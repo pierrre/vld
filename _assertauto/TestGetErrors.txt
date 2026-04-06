@@ -1,0 +1,14 @@
+[[]error] (len=1) {
+	[*errors.errorString] {
+		Error(): "error",
+	},
+}
+	========== assertauto ==========
+[[]error] (len=2) {
+	[*errors.errorString] {
+		Error(): "error1",
+	},
+	[*errors.errorString] {
+		Error(): "error2",
+	},
+}

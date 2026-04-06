@@ -1,0 +1,40 @@
+CmpLess(1)
+	========== assertauto ==========
+en: Value must be less than 1.
+	========== assertauto ==========
+fr: La valeur doit être inférieure à 1.
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+1 is not less than 1
+	========== assertauto ==========
+en: Value 1 is not less than 1.
+	========== assertauto ==========
+fr: La valeur 1 n'est pas inférieure à 1.
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 2
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+2 is not less than 1
+	========== assertauto ==========
+en: Value 2 is not less than 1.
+	========== assertauto ==========
+fr: La valeur 2 n'est pas inférieure à 1.

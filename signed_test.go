@@ -1,41 +1,15 @@
 package vld_test
 
 import (
-	"fmt"
+	"testing"
 
 	. "github.com/pierrre/vld"
 )
 
-func ExamplePositive() {
-	vr := Positive[int]()
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(1))
-	fmt.Println(vr.Validate(0))
-	fmt.Println(vr.Validate(-1))
-	fmt.Println(LocalizeError(vr.Validate(0), "en"))
-	// Output:
-	// Positive
-	// Value must be positive.
-	// <nil>
-	// 0 is not positive
-	// -1 is not positive
-	// Value 0 is not positive.
+func TestPositive(t *testing.T) {
+	testValidator(t, Positive[int](), 1, 0, -1)
 }
 
-func ExampleNegative() {
-	vr := Negative[int]()
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(-1))
-	fmt.Println(vr.Validate(0))
-	fmt.Println(vr.Validate(1))
-	fmt.Println(LocalizeError(vr.Validate(0), "en"))
-	// Output:
-	// Negative
-	// Value must be negative.
-	// <nil>
-	// 0 is not negative
-	// 1 is not negative
-	// Value 0 is not negative.
+func TestNegative(t *testing.T) {
+	testValidator(t, Negative[int](), -1, 0, 1)
 }

@@ -1,0 +1,1 @@
+La valeur 1 n'est pas égale à 2.

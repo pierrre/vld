@@ -1,0 +1,8 @@
+[*github.com/pierrre/vld.PathElemError] {
+	Error(): "path field \"Test\": error",
+	Unwrap(): [*errors.errorString] {
+		Error(): "error",
+	},
+}
+	========== assertauto ==========
+.Test

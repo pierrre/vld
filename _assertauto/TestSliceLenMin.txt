@@ -1,0 +1,29 @@
+SliceLenMin(1)
+	========== assertauto ==========
+en: Length must be greater than or equal to 1.
+	========== assertauto ==========
+fr: La longueur doit être supérieure ou égale à 1.
+	========== assertauto ==========
+[[]int] (len=1) {
+	1,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[[]int] (len=0) {}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+length 0 is less than 1
+	========== assertauto ==========
+en: Length 0 is less than 1.
+	========== assertauto ==========
+fr: La longueur 0 est inférieure à 1.

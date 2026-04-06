@@ -1,0 +1,40 @@
+Negative
+	========== assertauto ==========
+en: Value must be negative.
+	========== assertauto ==========
+fr: La valeur doit être négative.
+	========== assertauto ==========
+[int] -1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+0 is not negative
+	========== assertauto ==========
+en: Value 0 is not negative.
+	========== assertauto ==========
+fr: La valeur 0 n'est pas négative.
+	========== assertauto ==========
+[int] 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+1 is not negative
+	========== assertauto ==========
+en: Value 1 is not negative.
+	========== assertauto ==========
+fr: La valeur 1 n'est pas négative.

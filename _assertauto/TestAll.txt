@@ -1,0 +1,34 @@
+All(
+	Min(1),
+	Max(10),
+)
+	========== assertauto ==========
+en: The value must satisfy all of the following validators:
+	Value must be greater than or equal to 1.
+	Value must be less than or equal to 10.
+	========== assertauto ==========
+fr: La valeur doit satisfaire tous les validateurs suivants:
+	La valeur doit être supérieure ou égale à 1.
+	La valeur doit être inférieure ou égale à 10.
+	========== assertauto ==========
+[int] 5
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 3,
+}
+	========== assertauto ==========
+0 is less than 1
+	========== assertauto ==========
+en: Value 0 is less than 1.
+	========== assertauto ==========
+fr: La valeur 0 est inférieure à 1.

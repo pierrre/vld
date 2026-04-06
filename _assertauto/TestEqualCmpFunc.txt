@@ -1,0 +1,27 @@
+EqualCmpFunc(1, cmp.Compare[...])
+	========== assertauto ==========
+en: Value must be equal to 1 with function cmp.Compare[...].
+	========== assertauto ==========
+fr: La valeur doit être égale à 1 avec la fonction cmp.Compare[...].
+	========== assertauto ==========
+[int] 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 2
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+2 is not equal to 1
+	========== assertauto ==========
+en: Value 2 is not equal to 1.
+	========== assertauto ==========
+fr: La valeur 2 n'est pas égale à 1.

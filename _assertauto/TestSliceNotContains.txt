@@ -1,0 +1,33 @@
+SliceNotContains(1)
+	========== assertauto ==========
+en: Slice must not contain 1.
+	========== assertauto ==========
+fr: Le slice ne doit pas contenir 1.
+	========== assertauto ==========
+[[]int] (len=2) {
+	2,
+	3,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[[]int] (len=2) {
+	1,
+	2,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+contains 1
+	========== assertauto ==========
+en: Slice contains 1.
+	========== assertauto ==========
+fr: Le slice contient 1.

@@ -1,0 +1,27 @@
+NotEqualFunc(1, github.com/pierrre/vld_test.TestNotEqualFunc.func1)
+	========== assertauto ==========
+en: Value must not be equal to 1 with function github.com/pierrre/vld_test.TestNotEqualFunc.func1.
+	========== assertauto ==========
+fr: La valeur ne doit pas être égale à 1 avec la fonction github.com/pierrre/vld_test.TestNotEqualFunc.func1.
+	========== assertauto ==========
+[int] 2
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+1 is equal to 1
+	========== assertauto ==========
+en: Value 1 is equal to 1.
+	========== assertauto ==========
+fr: La valeur 1 est égale à 1.

@@ -1,0 +1,29 @@
+MapNotEmpty
+	========== assertauto ==========
+en: Value must not be empty.
+	========== assertauto ==========
+fr: La valeur ne doit pas être vide.
+	========== assertauto ==========
+[map[string]int] (len=1) {
+	"a": 1,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[map[string]int] (len=0) {}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+is empty
+	========== assertauto ==========
+en: Value is empty.
+	========== assertauto ==========
+fr: La valeur est vide.

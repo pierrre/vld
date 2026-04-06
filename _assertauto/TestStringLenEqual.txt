@@ -1,0 +1,27 @@
+StringLenEqual(3)
+	========== assertauto ==========
+en: Length must be equal to 3.
+	========== assertauto ==========
+fr: La longueur doit être égale à 3.
+	========== assertauto ==========
+[string] (len=3) "abc"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[string] (len=4) "abcd"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+length 4 is not equal to 3
+	========== assertauto ==========
+en: Length 4 is not equal to 3.
+	========== assertauto ==========
+fr: La longueur 4 n'est pas égale à 3.

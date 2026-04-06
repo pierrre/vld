@@ -1,0 +1,27 @@
+NotZero
+	========== assertauto ==========
+en: Value must not be zero.
+	========== assertauto ==========
+fr: La valeur ne doit pas être zéro.
+	========== assertauto ==========
+[int] 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+is zero
+	========== assertauto ==========
+en: Value is zero.
+	========== assertauto ==========
+fr: La valeur est zéro.

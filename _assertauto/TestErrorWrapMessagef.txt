@@ -1,0 +1,6 @@
+[*fmt.wrapError] {
+	Error(): "test 1: error",
+	Unwrap(): [*errors.errorString] {
+		Error(): "error",
+	},
+}

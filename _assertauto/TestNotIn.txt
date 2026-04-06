@@ -1,0 +1,27 @@
+NotIn([]int{1, 2, 3})
+	========== assertauto ==========
+en: Value must not be in []int{1, 2, 3}.
+	========== assertauto ==========
+fr: La valeur ne doit pas être dans []int{1, 2, 3}.
+	========== assertauto ==========
+[int] 4
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[int] 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+1 is in []int{1, 2, 3}
+	========== assertauto ==========
+en: Value 1 is in []int{1, 2, 3}.
+	========== assertauto ==========
+fr: La valeur 1 est dans []int{1, 2, 3}.

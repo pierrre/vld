@@ -1,0 +1,29 @@
+MapLenEqual(1)
+	========== assertauto ==========
+en: Length must be equal to 1.
+	========== assertauto ==========
+fr: La longueur doit être égale à 1.
+	========== assertauto ==========
+[map[string]int] (len=1) {
+	"a": 1,
+}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[map[string]int] (len=0) {}
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+length 0 is not equal to 1
+	========== assertauto ==========
+en: Length 0 is not equal to 1.
+	========== assertauto ==========
+fr: La longueur 0 n'est pas égale à 1.

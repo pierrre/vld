@@ -1,0 +1,36 @@
+CmpMax(1)
+	========== assertauto ==========
+en: Value must be less than or equal to 1.
+	========== assertauto ==========
+fr: La valeur doit être inférieure ou égale à 1.
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 2
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+2 is greater than 1
+	========== assertauto ==========
+en: Value 2 is greater than 1.
+	========== assertauto ==========
+fr: La valeur 2 est supérieure à 1.

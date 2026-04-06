@@ -1,0 +1,40 @@
+CmpGreater(1)
+	========== assertauto ==========
+en: Value must be greater than 1.
+	========== assertauto ==========
+fr: La valeur doit être supérieure à 1.
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 2
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 1
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+1 is not greater than 1
+	========== assertauto ==========
+en: Value 1 is not greater than 1.
+	========== assertauto ==========
+fr: La valeur 1 n'est pas supérieure à 1.
+	========== assertauto ==========
+[github.com/pierrre/vld_test.intComparer](int) 0
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+0 is not greater than 1
+	========== assertauto ==========
+en: Value 0 is not greater than 1.
+	========== assertauto ==========
+fr: La valeur 0 n'est pas supérieure à 1.

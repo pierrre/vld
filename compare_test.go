@@ -2,7 +2,7 @@ package vld_test
 
 import (
 	"cmp"
-	"fmt"
+	"testing"
 
 	. "github.com/pierrre/vld"
 )
@@ -13,121 +13,33 @@ func (i intComparer) Compare(other intComparer) int {
 	return cmp.Compare(i, other)
 }
 
-func ExampleCmpEqual() {
-	vr := CmpEqual(intComparer(1))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(intComparer(1)))
-	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(LocalizeError(vr.Validate(intComparer(2)), "en"))
-	// Output:
-	// CmpEqual(1)
-	// Value must be equal to 1.
-	// <nil>
-	// 2 is not equal to 1
-	// Value 2 is not equal to 1.
+func TestCmpEqual(t *testing.T) {
+	testValidator(t, CmpEqual(intComparer(1)), intComparer(1), intComparer(2))
 }
 
-func ExampleCmpNotEqual() {
-	vr := CmpNotEqual(intComparer(1))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(vr.Validate(intComparer(1)))
-	fmt.Println(LocalizeError(vr.Validate(intComparer(1)), "en"))
-	// Output:
-	// CmpNotEqual(1)
-	// Value must not be equal to 1.
-	// <nil>
-	// 1 is equal to 1
-	// Value 1 is equal to 1.
+func TestCmpNotEqual(t *testing.T) {
+	testValidator(t, CmpNotEqual(intComparer(1)), intComparer(2), intComparer(1))
 }
 
-func ExampleCmpMin() {
-	vr := CmpMin(intComparer(1))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(vr.Validate(intComparer(1)))
-	fmt.Println(vr.Validate(intComparer(0)))
-	fmt.Println(LocalizeError(vr.Validate(intComparer(0)), "en"))
-	// Output:
-	// CmpMin(1)
-	// Value must be greater than or equal to 1.
-	// <nil>
-	// <nil>
-	// 0 is less than 1
-	// Value 0 is less than 1.
+func TestCmpMin(t *testing.T) {
+	testValidator(t, CmpMin(intComparer(1)), intComparer(2), intComparer(1), intComparer(0))
 }
 
-func ExampleCmpMax() {
-	vr := CmpMax(intComparer(1))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(intComparer(0)))
-	fmt.Println(vr.Validate(intComparer(1)))
-	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(LocalizeError(vr.Validate(intComparer(2)), "en"))
-	// Output:
-	// CmpMax(1)
-	// Value must be less than or equal to 1.
-	// <nil>
-	// <nil>
-	// 2 is greater than 1
-	// Value 2 is greater than 1.
+func TestCmpMax(t *testing.T) {
+	testValidator(t, CmpMax(intComparer(1)), intComparer(0), intComparer(1), intComparer(2))
 }
 
-func ExampleCmpRange() {
-	vr := CmpRange(intComparer(1), intComparer(3))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(vr.Validate(intComparer(1)))
-	fmt.Println(vr.Validate(intComparer(3)))
-	fmt.Println(vr.Validate(intComparer(0)))
-	fmt.Println(vr.Validate(intComparer(4)))
-	fmt.Println(LocalizeError(vr.Validate(intComparer(0)), "en"))
-	// Output:
-	// CmpRange(1, 3)
-	// Value must be in the range [1, 3].
-	// <nil>
-	// <nil>
-	// <nil>
-	// 0 is not in the range [1, 3]
-	// 4 is not in the range [1, 3]
-	// Value 0 is not in the range [1, 3].
+func TestCmpRange(t *testing.T) {
+	testValidator(t,
+		CmpRange(intComparer(1), intComparer(3)),
+		intComparer(2), intComparer(1), intComparer(3), intComparer(0), intComparer(4),
+	)
 }
 
-func ExampleCmpLess() {
-	vr := CmpLess(intComparer(1))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(intComparer(0)))
-	fmt.Println(vr.Validate(intComparer(1)))
-	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(LocalizeError(vr.Validate(intComparer(1)), "en"))
-	// Output:
-	// CmpLess(1)
-	// Value must be less than 1.
-	// <nil>
-	// 1 is not less than 1
-	// 2 is not less than 1
-	// Value 1 is not less than 1.
+func TestCmpLess(t *testing.T) {
+	testValidator(t, CmpLess(intComparer(1)), intComparer(0), intComparer(1), intComparer(2))
 }
 
-func ExampleCmpGreater() {
-	vr := CmpGreater(intComparer(1))
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(intComparer(2)))
-	fmt.Println(vr.Validate(intComparer(1)))
-	fmt.Println(vr.Validate(intComparer(0)))
-	fmt.Println(LocalizeError(vr.Validate(intComparer(1)), "en"))
-	// Output:
-	// CmpGreater(1)
-	// Value must be greater than 1.
-	// <nil>
-	// 1 is not greater than 1
-	// 0 is not greater than 1
-	// Value 1 is not greater than 1.
+func TestCmpGreater(t *testing.T) {
+	testValidator(t, CmpGreater(intComparer(1)), intComparer(2), intComparer(1), intComparer(0))
 }

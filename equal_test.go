@@ -2,97 +2,31 @@ package vld_test
 
 import (
 	"cmp"
-	"fmt"
+	"testing"
 
 	. "github.com/pierrre/vld"
 )
 
-func ExampleEqual() {
-	vr := Equal(1)
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(1))
-	fmt.Println(vr.Validate(2))
-	fmt.Println(LocalizeError(vr.Validate(2), "en"))
-	// Output:
-	// Equal(1)
-	// Value must be equal to 1.
-	// <nil>
-	// 2 is not equal to 1
-	// Value 2 is not equal to 1.
+func TestEqual(t *testing.T) {
+	testValidator(t, Equal(1), 1, 2)
 }
 
-func ExampleEqualFunc() {
-	vr := EqualFunc(1, func(a, b int) bool { return a == b })
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(1))
-	fmt.Println(vr.Validate(2))
-	fmt.Println(LocalizeError(vr.Validate(2), "en"))
-	// Output:
-	// EqualFunc(1, github.com/pierrre/vld_test.ExampleEqualFunc.func1)
-	// Value must be equal to 1 with function github.com/pierrre/vld_test.ExampleEqualFunc.func1.
-	// <nil>
-	// 2 is not equal to 1
-	// Value 2 is not equal to 1.
+func TestEqualFunc(t *testing.T) {
+	testValidator(t, EqualFunc(1, func(a, b int) bool { return a == b }), 1, 2)
 }
 
-func ExampleEqualCmpFunc() {
-	vr := EqualCmpFunc(1, cmp.Compare)
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(1))
-	fmt.Println(vr.Validate(2))
-	fmt.Println(LocalizeError(vr.Validate(2), "en"))
-	// Output:
-	// EqualCmpFunc(1, cmp.Compare[...])
-	// Value must be equal to 1 with function cmp.Compare[...].
-	// <nil>
-	// 2 is not equal to 1
-	// Value 2 is not equal to 1.
+func TestEqualCmpFunc(t *testing.T) {
+	testValidator(t, EqualCmpFunc(1, cmp.Compare), 1, 2)
 }
 
-func ExampleNotEqual() {
-	vr := NotEqual(1)
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(2))
-	fmt.Println(vr.Validate(1))
-	fmt.Println(LocalizeError(vr.Validate(1), "en"))
-	// Output:
-	// NotEqual(1)
-	// Value must not be equal to 1.
-	// <nil>
-	// 1 is equal to 1
-	// Value 1 is equal to 1.
+func TestNotEqual(t *testing.T) {
+	testValidator(t, NotEqual(1), 2, 1)
 }
 
-func ExampleNotEqualFunc() {
-	vr := NotEqualFunc(1, func(a, b int) bool { return a == b })
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(2))
-	fmt.Println(vr.Validate(1))
-	fmt.Println(LocalizeError(vr.Validate(1), "en"))
-	// Output:
-	// NotEqualFunc(1, github.com/pierrre/vld_test.ExampleNotEqualFunc.func1)
-	// Value must not be equal to 1 with function github.com/pierrre/vld_test.ExampleNotEqualFunc.func1.
-	// <nil>
-	// 1 is equal to 1
-	// Value 1 is equal to 1.
+func TestNotEqualFunc(t *testing.T) {
+	testValidator(t, NotEqualFunc(1, func(a, b int) bool { return a == b }), 2, 1)
 }
 
-func ExampleNotEqualCmpFunc() {
-	vr := NotEqualCmpFunc(1, cmp.Compare)
-	fmt.Println(vr)
-	fmt.Println(LocalizeValidator(vr, "en"))
-	fmt.Println(vr.Validate(2))
-	fmt.Println(vr.Validate(1))
-	fmt.Println(LocalizeError(vr.Validate(1), "en"))
-	// Output:
-	// NotEqualCmpFunc(1, cmp.Compare[...])
-	// Value must not be equal to 1 with function cmp.Compare[...].
-	// <nil>
-	// 1 is equal to 1
-	// Value 1 is equal to 1.
+func TestNotEqualCmpFunc(t *testing.T) {
+	testValidator(t, NotEqualCmpFunc(1, cmp.Compare), 2, 1)
 }
