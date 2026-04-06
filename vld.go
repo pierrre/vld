@@ -29,6 +29,28 @@ func (f ValidatorFunc[T]) Localization() (key string, args []any) {
 	return "ValidatorFunc", []any{getFuncName(f)}
 }
 
+// NoOp creates a [NoOpValidator].
+func NoOp[T any]() NoOpValidator[T] {
+	return NoOpValidator[T]{}
+}
+
+// NoOpValidator is a [Validator] that always returns nil.
+type NoOpValidator[T any] struct{}
+
+// Validate implements [Validator].
+func (v NoOpValidator[T]) Validate(_ T) error {
+	return nil
+}
+
+func (v NoOpValidator[T]) String() string {
+	return "NoOp"
+}
+
+// Localization implements [Localizable].
+func (v NoOpValidator[T]) Localization() (key string, args []any) {
+	return "NoOpValidator", nil
+}
+
 func buildMultiValidatorString[T any](name string, vrs ...Validator[T]) string {
 	sb := new(strings.Builder)
 	sb.WriteString(name)

@@ -20,3 +20,14 @@ func ExampleValidatorFunc() {
 	// 2 is not equal to 1
 	// Value 2 is not equal to 1.
 }
+
+func ExampleNoOp() {
+	vr := NoOp[int]()
+	fmt.Println(vr)
+	fmt.Println(LocalizeValidator(vr, "en"))
+	fmt.Println(vr.Validate(1))
+	// Output:
+	// NoOp
+	// No validation.
+	// <nil>
+}

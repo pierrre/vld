@@ -52,6 +52,10 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Function %[1]s.",
 		"fr": "Fonction %[1]s.",
 	},
+	"NoOpValidator": {
+		"en": "No validation.",
+		"fr": "Pas de validation.",
+	},
 	"TypeOptionalValidator": {
 		"en": "Value must satisfy the following validator if it is of type %[1]T: %[2]s",
 		"fr": "La valeur doit satisfaire le validateur suivant si elle est de type %[1]T: %[2]s",
