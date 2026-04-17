@@ -26,6 +26,6 @@ valid
 	========== assertauto ==========
 "abc" has suffix "c"
 	========== assertauto ==========
-en: Bytes "abc" has suffix "c".
+en: Bytes "abc" have suffix "c".
 	========== assertauto ==========
 fr: Les bytes "abc" ont le suffixe "c".

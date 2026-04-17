@@ -87,7 +87,7 @@ func (e *NotZeroError) Localization() (key string, args []any) {
 	return "NotZeroError", nil
 }
 
-// Optional creates a [OptionalValidator].
+// Optional creates an [OptionalValidator].
 func Optional[T comparable](vr Validator[T]) *OptionalValidator[T] {
 	return &OptionalValidator[T]{
 		Validator: vr,

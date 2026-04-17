@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// Equal creates a [EqualValidator].
+// Equal creates an [EqualValidator].
 func Equal[T comparable](v T) *EqualValidator[T] {
 	return &EqualValidator[T]{
 		Expected: v,
@@ -30,7 +30,7 @@ func (vr *EqualValidator[T]) Localization() (key string, args []any) {
 	return "EqualValidator", []any{vr.Expected}
 }
 
-// EqualFunc creates a [EqualFuncValidator].
+// EqualFunc creates an [EqualFuncValidator].
 func EqualFunc[T any](v T, eqFunc func(a, b T) bool) *EqualFuncValidator[T] {
 	return &EqualFuncValidator[T]{
 		Expected: v,
@@ -68,7 +68,7 @@ func (vr *EqualFuncValidator[T]) Localization() (key string, args []any) {
 	return "EqualFuncValidator", []any{vr.Expected, getFuncName(vr.Func)}
 }
 
-// EqualCmpFunc creates a [EqualCmpFuncValidator].
+// EqualCmpFunc creates an [EqualCmpFuncValidator].
 func EqualCmpFunc[T any](v T, cmpFunc func(a, b T) int) *EqualCmpFuncValidator[T] {
 	return &EqualCmpFuncValidator[T]{
 		Expected: v,

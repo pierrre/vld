@@ -26,6 +26,6 @@ valid
 	========== assertauto ==========
 "acd" does not contain "b"
 	========== assertauto ==========
-en: Bytes "acd" does not contain "b".
+en: Bytes "acd" do not contain "b".
 	========== assertauto ==========
 fr: Les bytes "acd" ne contiennent pas "b".

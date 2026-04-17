@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// If creates a [IfValidator].
+// If creates an [IfValidator].
 func If[T any](cond func(v T) bool, vr Validator[T]) *IfValidator[T] {
 	return &IfValidator[T]{
 		Condition: cond,
@@ -40,7 +40,7 @@ func (vr *IfValidator[T]) Localize(locales ...string) string {
 	return sb.String()
 }
 
-// IfElse creates a [IfElseValidator].
+// IfElse creates an [IfElseValidator].
 func IfElse[T any](cond func(v T) bool, thenVr Validator[T], elseVr Validator[T]) *IfElseValidator[T] {
 	return &IfElseValidator[T]{
 		Condition: cond,

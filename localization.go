@@ -17,7 +17,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "La valeur doit satisfaire au moins un des validateurs suivants:",
 	},
 	"AllValidator": {
-		"en": "The value must satisfy all of the following validators:",
+		"en": "Value must satisfy all of the following validators:",
 		"fr": "La valeur doit satisfaire tous les validateurs suivants:",
 	},
 	"IfValidator": {
@@ -417,7 +417,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "Les bytes doivent être égaux à %[1]q.",
 	},
 	"BytesEqualError": {
-		"en": "Bytes %[1]q is not equal to %[2]q.",
+		"en": "Bytes %[1]q are not equal to %[2]q.",
 		"fr": "Les bytes %[1]q ne sont pas égaux à %[2]q.",
 	},
 	"BytesNotEqualValidator": {
@@ -425,7 +425,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "Les bytes ne doivent pas être égaux à %[1]q.",
 	},
 	"BytesNotEqualError": {
-		"en": "Bytes %[1]q is equal to %[2]q.",
+		"en": "Bytes %[1]q are equal to %[2]q.",
 		"fr": "Les bytes %[1]q sont égaux à %[2]q.",
 	},
 	"BytesContainsValidator": {
@@ -433,7 +433,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "Les bytes doivent contenir %[1]q.",
 	},
 	"BytesContainsError": {
-		"en": "Bytes %[1]q does not contain %[2]q.",
+		"en": "Bytes %[1]q do not contain %[2]q.",
 		"fr": "Les bytes %[1]q ne contiennent pas %[2]q.",
 	},
 	"BytesNotContainsValidator": {
@@ -441,7 +441,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "Les bytes ne doivent pas contenir %[1]q.",
 	},
 	"BytesNotContainsError": {
-		"en": "Bytes %[1]q contains %[2]q.",
+		"en": "Bytes %[1]q contain %[2]q.",
 		"fr": "Les bytes %[1]q contiennent %[2]q.",
 	},
 	"BytesHasPrefixValidator": {
@@ -449,7 +449,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "Les bytes doivent avoir le préfixe %[1]q.",
 	},
 	"BytesHasPrefixError": {
-		"en": "Bytes %[1]q does not have prefix %[2]q.",
+		"en": "Bytes %[1]q do not have prefix %[2]q.",
 		"fr": "Les bytes %[1]q n'ont pas le préfixe %[2]q.",
 	},
 	"BytesNotHasPrefixValidator": {
@@ -457,7 +457,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "Les bytes ne doivent pas avoir le préfixe %[1]q.",
 	},
 	"BytesNotHasPrefixError": {
-		"en": "Bytes %[1]q has prefix %[2]q.",
+		"en": "Bytes %[1]q have prefix %[2]q.",
 		"fr": "Les bytes %[1]q ont le préfixe %[2]q.",
 	},
 	"BytesHasSuffixValidator": {
@@ -465,7 +465,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "Les bytes doivent avoir le suffixe %[1]q.",
 	},
 	"BytesHasSuffixError": {
-		"en": "Bytes %[1]q does not have suffix %[2]q.",
+		"en": "Bytes %[1]q do not have suffix %[2]q.",
 		"fr": "Les bytes %[1]q n'ont pas le suffixe %[2]q.",
 	},
 	"BytesNotHasSuffixValidator": {
@@ -473,7 +473,7 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "Les bytes ne doivent pas avoir le suffixe %[1]q.",
 	},
 	"BytesNotHasSuffixError": {
-		"en": "Bytes %[1]q has suffix %[2]q.",
+		"en": "Bytes %[1]q have suffix %[2]q.",
 		"fr": "Les bytes %[1]q ont le suffixe %[2]q.",
 	},
 }

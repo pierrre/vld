@@ -1,6 +1,6 @@
 package vld
 
-// And creates a [AndValidator].
+// And creates an [AndValidator].
 func And[T any](vrs ...Validator[T]) *AndValidator[T] {
 	return &AndValidator[T]{
 		Validators: vrs,
@@ -32,7 +32,7 @@ func (vr *AndValidator[T]) Localize(locales ...string) string {
 	return localizeMultiValidator("AndValidator", vr.Validators, locales...)
 }
 
-// Or creates a [OrValidator].
+// Or creates an [OrValidator].
 func Or[T any](vrs ...Validator[T]) *OrValidator[T] {
 	return &OrValidator[T]{
 		Validators: vrs,

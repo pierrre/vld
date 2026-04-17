@@ -26,6 +26,6 @@ valid
 	========== assertauto ==========
 "abd" is not equal to "abc"
 	========== assertauto ==========
-en: Bytes "abd" is not equal to "abc".
+en: Bytes "abd" are not equal to "abc".
 	========== assertauto ==========
 fr: Les bytes "abd" ne sont pas égaux à "abc".

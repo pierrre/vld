@@ -26,6 +26,6 @@ valid
 	========== assertauto ==========
 "bac" does not have prefix "a"
 	========== assertauto ==========
-en: Bytes "bac" does not have prefix "a".
+en: Bytes "bac" do not have prefix "a".
 	========== assertauto ==========
 fr: Les bytes "bac" n'ont pas le préfixe "a".

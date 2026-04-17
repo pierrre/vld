@@ -26,6 +26,6 @@ valid
 	========== assertauto ==========
 "acb" does not have suffix "c"
 	========== assertauto ==========
-en: Bytes "acb" does not have suffix "c".
+en: Bytes "acb" do not have suffix "c".
 	========== assertauto ==========
 fr: Les bytes "acb" n'ont pas le suffixe "c".

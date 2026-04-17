@@ -26,6 +26,6 @@ valid
 	========== assertauto ==========
 "abc" is equal to "abc"
 	========== assertauto ==========
-en: Bytes "abc" is equal to "abc".
+en: Bytes "abc" are equal to "abc".
 	========== assertauto ==========
 fr: Les bytes "abc" sont égaux à "abc".

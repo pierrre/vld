@@ -26,6 +26,6 @@ valid
 	========== assertauto ==========
 "abc" contains "b"
 	========== assertauto ==========
-en: Bytes "abc" contains "b".
+en: Bytes "abc" contain "b".
 	========== assertauto ==========
 fr: Les bytes "abc" contiennent "b".

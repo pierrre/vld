@@ -5,7 +5,7 @@ import (
 	"slices"
 )
 
-// In creates a [InValidator].
+// In creates an [InValidator].
 func In[T comparable](vs ...T) *InValidator[T] {
 	return &InValidator[T]{
 		Values: vs,
