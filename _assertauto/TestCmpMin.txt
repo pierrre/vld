@@ -1,8 +1,8 @@
 CmpMin(1)
 	========== assertauto ==========
-en: Value must be greater than or equal to 1.
+en: Value must be greater than or equal to 1 using Compare method.
 	========== assertauto ==========
-fr: La valeur doit être supérieure ou égale à 1.
+fr: La valeur doit être supérieure ou égale à 1 en utilisant la méthode Compare.
 	========== assertauto ==========
 [github.com/pierrre/vld_test.intComparer](int) 2
 	========== assertauto ==========

@@ -1,8 +1,8 @@
 CmpLess(1)
 	========== assertauto ==========
-en: Value must be less than 1.
+en: Value must be less than 1 using Compare method.
 	========== assertauto ==========
-fr: La valeur doit être inférieure à 1.
+fr: La valeur doit être inférieure à 1 en utilisant la méthode Compare.
 	========== assertauto ==========
 [github.com/pierrre/vld_test.intComparer](int) 0
 	========== assertauto ==========

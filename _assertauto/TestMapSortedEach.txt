@@ -1,8 +1,8 @@
 MapSortedEach(Equal(vld.KeyValue[string,int]{Key:"a", Value:1}))
 	========== assertauto ==========
-en: Each key/value of the map must satisfy the following validator: Value must be equal to vld.KeyValue[string,int]{Key:"a", Value:1}.
+en: Each key/value of the map must satisfy the following validator (in sorted key order): Value must be equal to vld.KeyValue[string,int]{Key:"a", Value:1}.
 	========== assertauto ==========
-fr: Chaque clé/valeur de la map doit satisfaire le validateur suivant: La valeur doit être égale à vld.KeyValue[string,int]{Key:"a", Value:1}.
+fr: Chaque clé/valeur de la map doit satisfaire le validateur suivant (dans l'ordre croissant des clés): La valeur doit être égale à vld.KeyValue[string,int]{Key:"a", Value:1}.
 	========== assertauto ==========
 [map[string]int] (len=1) {
 	"a": 1,

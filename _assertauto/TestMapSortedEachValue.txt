@@ -1,8 +1,8 @@
 MapSortedEachValue(Equal(1))
 	========== assertauto ==========
-en: Each value of the map must satisfy the following validator: Value must be equal to 1.
+en: Each value of the map must satisfy the following validator (in sorted key order): Value must be equal to 1.
 	========== assertauto ==========
-fr: Chaque valeur de la map doit satisfaire le validateur suivant: La valeur doit être égale à 1.
+fr: Chaque valeur de la map doit satisfaire le validateur suivant (dans l'ordre croissant des clés): La valeur doit être égale à 1.
 	========== assertauto ==========
 [map[string]int] (len=1) {
 	"a": 1,

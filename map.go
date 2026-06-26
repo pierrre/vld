@@ -268,7 +268,7 @@ func (vr *MapSortedEachValidator[M, K, V]) String() string {
 
 // Localization implements [Localizable].
 func (vr *MapSortedEachValidator[M, K, V]) Localization() (key string, args []any) {
-	return "MapEachValidator", []any{vr.Validator}
+	return "MapSortedEachValidator", []any{vr.Validator}
 }
 
 // MapSortedEachKey creates a [MapSortedEachKeyValidator].
@@ -294,7 +294,7 @@ func (vr *MapSortedEachKeyValidator[M, K, V]) String() string {
 
 // Localization implements [Localizable].
 func (vr *MapSortedEachKeyValidator[M, K, V]) Localization() (key string, args []any) {
-	return "MapEachKeyValidator", []any{vr.Validator}
+	return "MapSortedEachKeyValidator", []any{vr.Validator}
 }
 
 // MapSortedEachValue creates a [MapSortedEachValueValidator].
@@ -320,7 +320,7 @@ func (vr *MapSortedEachValueValidator[M, K, V]) String() string {
 
 // Localization implements [Localizable].
 func (vr *MapSortedEachValueValidator[M, K, V]) Localization() (key string, args []any) {
-	return "MapEachValueValidator", []any{vr.Validator}
+	return "MapSortedEachValueValidator", []any{vr.Validator}
 }
 
 func validateMapSortedEach[M ~map[K]V, K cmp.Ordered, V any](m M, f func(KeyValue[K, V]) error) error {

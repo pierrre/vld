@@ -32,7 +32,7 @@ func (vr *CmpEqualValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *CmpEqualValidator[T]) Localization() (key string, args []any) {
-	return "EqualValidator", []any{vr.Expected}
+	return "CmpEqualValidator", []any{vr.Expected}
 }
 
 // CmpNotEqual creates a [CmpNotEqualValidator].
@@ -58,7 +58,7 @@ func (vr *CmpNotEqualValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *CmpNotEqualValidator[T]) Localization() (key string, args []any) {
-	return "NotEqualValidator", []any{vr.Expected}
+	return "CmpNotEqualValidator", []any{vr.Expected}
 }
 
 // CmpMin creates a [CmpMinValidator].
@@ -84,7 +84,7 @@ func (vr *CmpMinValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *CmpMinValidator[T]) Localization() (key string, args []any) {
-	return "MinValidator", []any{vr.Min}
+	return "CmpMinValidator", []any{vr.Min}
 }
 
 // CmpMax creates a [CmpMaxValidator].
@@ -110,7 +110,7 @@ func (vr *CmpMaxValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *CmpMaxValidator[T]) Localization() (key string, args []any) {
-	return "MaxValidator", []any{vr.Max}
+	return "CmpMaxValidator", []any{vr.Max}
 }
 
 // CmpRange creates a [CmpRangeValidator].
@@ -138,7 +138,7 @@ func (vr *CmpRangeValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *CmpRangeValidator[T]) Localization() (key string, args []any) {
-	return "RangeValidator", []any{vr.Min, vr.Max}
+	return "CmpRangeValidator", []any{vr.Min, vr.Max}
 }
 
 // CmpLess creates a [CmpLessValidator].
@@ -164,7 +164,7 @@ func (vr *CmpLessValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *CmpLessValidator[T]) Localization() (key string, args []any) {
-	return "LessValidator", []any{vr.Max}
+	return "CmpLessValidator", []any{vr.Max}
 }
 
 // CmpGreater creates a [CmpGreaterValidator].
@@ -190,5 +190,5 @@ func (vr *CmpGreaterValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *CmpGreaterValidator[T]) Localization() (key string, args []any) {
-	return "GreaterValidator", []any{vr.Min}
+	return "CmpGreaterValidator", []any{vr.Min}
 }

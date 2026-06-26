@@ -140,6 +140,34 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Value %#[1]v is equal to %#[2]v.",
 		"fr": "La valeur %#[1]v est égale à %#[2]v.",
 	},
+	"CmpEqualValidator": {
+		"en": "Value must be equal to %#[1]v using Compare method.",
+		"fr": "La valeur doit être égale à %#[1]v en utilisant la méthode Compare.",
+	},
+	"CmpNotEqualValidator": {
+		"en": "Value must not be equal to %#[1]v using Compare method.",
+		"fr": "La valeur ne doit pas être égale à %#[1]v en utilisant la méthode Compare.",
+	},
+	"CmpMinValidator": {
+		"en": "Value must be greater than or equal to %#[1]v using Compare method.",
+		"fr": "La valeur doit être supérieure ou égale à %#[1]v en utilisant la méthode Compare.",
+	},
+	"CmpMaxValidator": {
+		"en": "Value must be less than or equal to %#[1]v using Compare method.",
+		"fr": "La valeur doit être inférieure ou égale à %#[1]v en utilisant la méthode Compare.",
+	},
+	"CmpRangeValidator": {
+		"en": "Value must be in the range [%#[1]v, %#[2]v] using Compare method.",
+		"fr": "La valeur doit être dans l'intervalle [%#[1]v, %#[2]v] en utilisant la méthode Compare.",
+	},
+	"CmpLessValidator": {
+		"en": "Value must be less than %#[1]v using Compare method.",
+		"fr": "La valeur doit être inférieure à %#[1]v en utilisant la méthode Compare.",
+	},
+	"CmpGreaterValidator": {
+		"en": "Value must be greater than %#[1]v using Compare method.",
+		"fr": "La valeur doit être supérieure à %#[1]v en utilisant la méthode Compare.",
+	},
 	"InValidator": {
 		"en": "Value must be in %#[1]v.",
 		"fr": "La valeur doit être dans %#[1]v.",
@@ -343,6 +371,18 @@ var LocalizationMessages = map[string]map[string]string{
 	"MapEachValueValidator": {
 		"en": "Each value of the map must satisfy the following validator: %[1]s",
 		"fr": "Chaque valeur de la map doit satisfaire le validateur suivant: %[1]s",
+	},
+	"MapSortedEachValidator": {
+		"en": "Each key/value of the map must satisfy the following validator (in sorted key order): %[1]s",
+		"fr": "Chaque clé/valeur de la map doit satisfaire le validateur suivant (dans l'ordre croissant des clés): %[1]s",
+	},
+	"MapSortedEachKeyValidator": {
+		"en": "Each key of the map must satisfy the following validator (in sorted key order): %[1]s",
+		"fr": "Chaque clé de la map doit satisfaire le validateur suivant (dans l'ordre croissant des clés): %[1]s",
+	},
+	"MapSortedEachValueValidator": {
+		"en": "Each value of the map must satisfy the following validator (in sorted key order): %[1]s",
+		"fr": "Chaque valeur de la map doit satisfaire le validateur suivant (dans l'ordre croissant des clés): %[1]s",
 	},
 	"SeqEachValidator": {
 		"en": "Each index/element of the sequence must satisfy the following validator: %[1]s",

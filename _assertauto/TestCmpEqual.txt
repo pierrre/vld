@@ -1,8 +1,8 @@
 CmpEqual(1)
 	========== assertauto ==========
-en: Value must be equal to 1.
+en: Value must be equal to 1 using Compare method.
 	========== assertauto ==========
-fr: La valeur doit être égale à 1.
+fr: La valeur doit être égale à 1 en utilisant la méthode Compare.
 	========== assertauto ==========
 [github.com/pierrre/vld_test.intComparer](int) 1
 	========== assertauto ==========
