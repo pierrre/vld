@@ -325,8 +325,8 @@ type StringNotContainsValidator struct {
 func (vr *StringNotContainsValidator) Validate(s string) error {
 	if strings.Contains(s, vr.Sub) {
 		return &StringNotContainsError{
-			Value:    s,
-			Expected: vr.Sub,
+			Value: s,
+			Sub:   vr.Sub,
 		}
 	}
 	return nil
@@ -343,17 +343,17 @@ func (vr *StringNotContainsValidator) Localization() (key string, args []any) {
 
 // StringNotContainsError is the error type returned by [StringNotContainsValidator].
 type StringNotContainsError struct {
-	Value    string
-	Expected string
+	Value string
+	Sub   string
 }
 
 func (e *StringNotContainsError) Error() string {
-	return fmt.Sprintf("%q contains %q", e.Value, e.Expected)
+	return fmt.Sprintf("%q contains %q", e.Value, e.Sub)
 }
 
 // Localization implements [LocalizableError].
 func (e *StringNotContainsError) Localization() (key string, args []any) {
-	return "StringNotContainsError", []any{e.Value, e.Expected}
+	return "StringNotContainsError", []any{e.Value, e.Sub}
 }
 
 // StringHasPrefix creates a [StringHasPrefixValidator].
