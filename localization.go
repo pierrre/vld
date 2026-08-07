@@ -16,6 +16,10 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Value must satisfy at least one of the following validators:",
 		"fr": "La valeur doit satisfaire au moins un des validateurs suivants:",
 	},
+	"OrEmptyError": {
+		"en": "Or validator has no validators.",
+		"fr": "Le validateur Or n'a aucun validateur.",
+	},
 	"AllValidator": {
 		"en": "Value must satisfy all of the following validators:",
 		"fr": "La valeur doit satisfaire tous les validateurs suivants:",

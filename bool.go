@@ -46,6 +46,9 @@ type OrValidator[T any] struct {
 
 // Validate implements [Validator].
 func (vr *OrValidator[T]) Validate(v T) error {
+	if len(vr.Validators) == 0 {
+		return &OrEmptyError{}
+	}
 	var errs []error
 	for _, validator := range vr.Validators {
 		err := validator.Validate(v)
@@ -64,6 +67,18 @@ func (vr *OrValidator[T]) String() string {
 // Localize implements [Localizer].
 func (vr *OrValidator[T]) Localize(locales ...string) string {
 	return localizeMultiValidator("OrValidator", vr.Validators, locales...)
+}
+
+// OrEmptyError is the error type returned by [OrValidator] when it has no validators.
+type OrEmptyError struct{}
+
+func (e *OrEmptyError) Error() string {
+	return "or validator has no validators"
+}
+
+// Localization implements [LocalizableError].
+func (e *OrEmptyError) Localization() (key string, args []any) {
+	return "OrEmptyError", nil
 }
 
 // All creates an [AllValidator].
