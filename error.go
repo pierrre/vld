@@ -14,6 +14,7 @@ type errorsUnwrapper interface {
 // If the error implements Unwrap() []error, it applies wrapFunc to each error in the slice.
 // It then returns a joined error.
 // Otherwise, it applies wrapFunc to the error and returns the result.
+// It panics if wrapFunc is nil.
 func ErrorWrap(err error, wrapFunc func(error) error) error {
 	if err == nil {
 		return nil

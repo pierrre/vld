@@ -5,6 +5,7 @@ import (
 )
 
 // Get creates a [GetValidator].
+// It panics if getFunc is nil.
 func Get[In, Out any](getFunc func(In) Out, vr Validator[Out]) *GetValidator[In, Out] {
 	return &GetValidator[In, Out]{
 		Func:      getFunc,
@@ -43,6 +44,7 @@ func validateGet[In, Out any](v In, getFunc func(In) Out, f func(Out) error) err
 }
 
 // Parse creates a [ParseValidator].
+// It panics if parseFunc is nil.
 func Parse[In, Out any](parseFunc func(In) (Out, error), vr Validator[Out]) *ParseValidator[In, Out] {
 	return &ParseValidator[In, Out]{
 		Func:      parseFunc,
@@ -131,6 +133,7 @@ func (vr *WrapValidator[T]) Localization() (key string, args []any) {
 }
 
 // Field creates a [FieldValidator].
+// It panics if getFunc is nil.
 func Field[In, Out any](name string, getFunc func(In) Out, vr Validator[Out]) *FieldValidator[In, Out] {
 	return &FieldValidator[In, Out]{
 		Name:      name,

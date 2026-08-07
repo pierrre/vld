@@ -349,6 +349,7 @@ func (vr *SliceUniqueValidator[S, E]) Localization() (key string, args []any) {
 }
 
 // SliceUniqueBy creates a [SliceUniqueByValidator].
+// It panics if getKey is nil.
 func SliceUniqueBy[S ~[]E, E any, K comparable](getKey func(E) K) *SliceUniqueByValidator[S, E, K] {
 	return &SliceUniqueByValidator[S, E, K]{
 		GetKey: getKey,

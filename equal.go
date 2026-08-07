@@ -31,6 +31,7 @@ func (vr *EqualValidator[T]) Localization() (key string, args []any) {
 }
 
 // EqualFunc creates an [EqualFuncValidator].
+// It panics if eqFunc is nil.
 func EqualFunc[T any](v T, eqFunc func(a, b T) bool) *EqualFuncValidator[T] {
 	return &EqualFuncValidator[T]{
 		Expected: v,
@@ -69,6 +70,7 @@ func (vr *EqualFuncValidator[T]) Localization() (key string, args []any) {
 }
 
 // EqualCmpFunc creates an [EqualCmpFuncValidator].
+// It panics if cmpFunc is nil.
 func EqualCmpFunc[T any](v T, cmpFunc func(a, b T) int) *EqualCmpFuncValidator[T] {
 	return &EqualCmpFuncValidator[T]{
 		Expected: v,
@@ -142,6 +144,7 @@ func (vr *NotEqualValidator[T]) Localization() (key string, args []any) {
 }
 
 // NotEqualFunc creates a [NotEqualFuncValidator].
+// It panics if eqFunc is nil.
 func NotEqualFunc[T any](v T, eqFunc func(a, b T) bool) *NotEqualFuncValidator[T] {
 	return &NotEqualFuncValidator[T]{
 		Expected: v,
@@ -180,6 +183,7 @@ func (vr *NotEqualFuncValidator[T]) Localization() (key string, args []any) {
 }
 
 // NotEqualCmpFunc creates a [NotEqualCmpFuncValidator].
+// It panics if cmpFunc is nil.
 func NotEqualCmpFunc[T any](v T, cmpFunc func(a, b T) int) *NotEqualCmpFuncValidator[T] {
 	return &NotEqualCmpFuncValidator[T]{
 		Expected: v,

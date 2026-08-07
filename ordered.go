@@ -32,6 +32,7 @@ func (vr *MinValidator[T]) Localization() (key string, args []any) {
 }
 
 // MinCmpFunc creates a [MinCmpFuncValidator].
+// It panics if cmpFunc is nil.
 func MinCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) *MinCmpFuncValidator[T] {
 	return &MinCmpFuncValidator[T]{
 		Min:  minValue,
@@ -111,6 +112,7 @@ func (vr *MaxValidator[T]) Localization() (key string, args []any) {
 }
 
 // MaxCmpFunc creates a [MaxCmpFuncValidator].
+// It panics if cmpFunc is nil.
 func MaxCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) *MaxCmpFuncValidator[T] {
 	return &MaxCmpFuncValidator[T]{
 		Max:  maxValue,
@@ -192,6 +194,7 @@ func (vr *RangeValidator[T]) Localization() (key string, args []any) {
 }
 
 // RangeCmpFunc creates a [RangeCmpFuncValidator].
+// It panics if cmpFunc is nil.
 func RangeCmpFunc[T any](minValue, maxValue T, cmpFunc func(a, b T) int) *RangeCmpFuncValidator[T] {
 	return &RangeCmpFuncValidator[T]{
 		Min:  minValue,
@@ -275,6 +278,7 @@ func (vr *LessValidator[T]) Localization() (key string, args []any) {
 }
 
 // LessCmpFunc creates a [LessCmpFuncValidator].
+// It panics if cmpFunc is nil.
 func LessCmpFunc[T any](maxValue T, cmpFunc func(a, b T) int) *LessCmpFuncValidator[T] {
 	return &LessCmpFuncValidator[T]{
 		Max:  maxValue,
@@ -354,6 +358,7 @@ func (vr *GreaterValidator[T]) Localization() (key string, args []any) {
 }
 
 // GreaterCmpFunc creates a [GreaterCmpFuncValidator].
+// It panics if cmpFunc is nil.
 func GreaterCmpFunc[T any](minValue T, cmpFunc func(a, b T) int) *GreaterCmpFuncValidator[T] {
 	return &GreaterCmpFuncValidator[T]{
 		Min:  minValue,
