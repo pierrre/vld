@@ -17,6 +17,15 @@ func TestLocalize(t *testing.T) {
 	assert.Zero(t, s)
 }
 
+func TestLocalizeNoMutateArgs(t *testing.T) {
+	lv := &EqualError[int]{Value: 1, Expected: 2}
+	args := []any{lv, 2}
+	_ = Localize("EqualError", args, "en")
+	got, ok := args[0].(*EqualError[int])
+	assert.True(t, ok)
+	assert.Equal(t, lv, got)
+}
+
 func TestLocalizeError(t *testing.T) {
 	s := LocalizeError(nil, "en")
 	assert.Zero(t, s)

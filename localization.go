@@ -3,6 +3,7 @@ package vld
 import (
 	"errors"
 	"fmt"
+	"slices"
 	"strings"
 )
 
@@ -552,9 +553,9 @@ func Localize(key string, args []any, locales ...string) string {
 	if !ok {
 		return ""
 	}
+	args = slices.Clone(args)
 	for i, a := range args {
-		s, ok := localizeValue(a, locales...)
-		if ok {
+		if s, ok := localizeValue(a, locales...); ok {
 			args[i] = s
 		}
 	}
