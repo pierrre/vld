@@ -164,6 +164,8 @@ func MapEach[M ~map[K]V, K comparable, V any](vr Validator[KeyValue[K, V]]) *Map
 }
 
 // MapEachValidator is a [Validator] that checks each key and value of the map.
+// The iteration order is non-deterministic, so the order of errors in the result is also non-deterministic.
+// Use [MapSortedEachValidator] for deterministic error ordering.
 type MapEachValidator[M ~map[K]V, K comparable, V any] struct {
 	Validator Validator[KeyValue[K, V]]
 }
@@ -190,6 +192,8 @@ func MapEachKey[M ~map[K]V, K comparable, V any](vr Validator[K]) *MapEachKeyVal
 }
 
 // MapEachKeyValidator is a [Validator] that checks each key of the map.
+// The iteration order is non-deterministic, so the order of errors in the result is also non-deterministic.
+// Use [MapSortedEachKeyValidator] for deterministic error ordering.
 type MapEachKeyValidator[M ~map[K]V, K comparable, V any] struct {
 	Validator Validator[K]
 }
@@ -216,6 +220,8 @@ func MapEachValue[M ~map[K]V, K comparable, V any](vr Validator[V]) *MapEachValu
 }
 
 // MapEachValueValidator is a [Validator] that checks each value of the map.
+// The iteration order is non-deterministic, so the order of errors in the result is also non-deterministic.
+// Use [MapSortedEachValueValidator] for deterministic error ordering.
 type MapEachValueValidator[M ~map[K]V, K comparable, V any] struct {
 	Validator Validator[V]
 }
