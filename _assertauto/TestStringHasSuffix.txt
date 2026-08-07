@@ -1,8 +1,8 @@
 StringHasSuffix("c")
 	========== assertauto ==========
-en: String must end with "c".
+en: String must have suffix "c".
 	========== assertauto ==========
-fr: La chaîne doit se terminer par "c".
+fr: La chaîne doit avoir le suffixe "c".
 	========== assertauto ==========
 [string] (len=3) "abc"
 	========== assertauto ==========
@@ -20,8 +20,8 @@ valid
 	Allocs: [float64] 1,
 }
 	========== assertauto ==========
-"acb" does not end with "c"
+"acb" does not have suffix "c"
 	========== assertauto ==========
-en: String "acb" does not end with "c".
+en: String "acb" does not have suffix "c".
 	========== assertauto ==========
-fr: La chaîne "acb" ne se termine pas par "c".
+fr: La chaîne "acb" n'a pas le suffixe "c".

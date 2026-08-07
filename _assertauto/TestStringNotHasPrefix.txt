@@ -1,8 +1,8 @@
 StringNotHasPrefix("a")
 	========== assertauto ==========
-en: String must not begin with "a".
+en: String must not have prefix "a".
 	========== assertauto ==========
-fr: La chaîne ne doit pas commencer par "a".
+fr: La chaîne ne doit pas avoir le préfixe "a".
 	========== assertauto ==========
 [string] (len=3) "bac"
 	========== assertauto ==========
@@ -20,8 +20,8 @@ valid
 	Allocs: [float64] 1,
 }
 	========== assertauto ==========
-"abc" begins with "a"
+"abc" has prefix "a"
 	========== assertauto ==========
-en: String "abc" begins with "a".
+en: String "abc" has prefix "a".
 	========== assertauto ==========
-fr: La chaîne "abc" commence par "a".
+fr: La chaîne "abc" a le préfixe "a".

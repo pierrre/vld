@@ -434,36 +434,36 @@ var LocalizationMessages = map[string]map[string]string{
 		"fr": "La chaîne %[1]q contient %[2]q.",
 	},
 	"StringHasPrefixValidator": {
-		"en": "String must begin with %[1]q.",
-		"fr": "La chaîne doit commencer par %[1]q.",
+		"en": "String must have prefix %[1]q.",
+		"fr": "La chaîne doit avoir le préfixe %[1]q.",
 	},
 	"StringHasPrefixError": {
-		"en": "String %[1]q does not begin with %[2]q.",
-		"fr": "La chaîne %[1]q ne commence pas par %[2]q.",
+		"en": "String %[1]q does not have prefix %[2]q.",
+		"fr": "La chaîne %[1]q n'a pas le préfixe %[2]q.",
 	},
 	"StringNotHasPrefixValidator": {
-		"en": "String must not begin with %[1]q.",
-		"fr": "La chaîne ne doit pas commencer par %[1]q.",
+		"en": "String must not have prefix %[1]q.",
+		"fr": "La chaîne ne doit pas avoir le préfixe %[1]q.",
 	},
 	"StringNotHasPrefixError": {
-		"en": "String %[1]q begins with %[2]q.",
-		"fr": "La chaîne %[1]q commence par %[2]q.",
+		"en": "String %[1]q has prefix %[2]q.",
+		"fr": "La chaîne %[1]q a le préfixe %[2]q.",
 	},
 	"StringHasSuffixValidator": {
-		"en": "String must end with %[1]q.",
-		"fr": "La chaîne doit se terminer par %[1]q.",
+		"en": "String must have suffix %[1]q.",
+		"fr": "La chaîne doit avoir le suffixe %[1]q.",
 	},
 	"StringHasSuffixError": {
-		"en": "String %[1]q does not end with %[2]q.",
-		"fr": "La chaîne %[1]q ne se termine pas par %[2]q.",
+		"en": "String %[1]q does not have suffix %[2]q.",
+		"fr": "La chaîne %[1]q n'a pas le suffixe %[2]q.",
 	},
 	"StringNotHasSuffixValidator": {
-		"en": "String must not end with %[1]q.",
-		"fr": "La chaîne ne doit pas se terminer par %[1]q.",
+		"en": "String must not have suffix %[1]q.",
+		"fr": "La chaîne ne doit pas avoir le suffixe %[1]q.",
 	},
 	"StringNotHasSuffixError": {
-		"en": "String %[1]q ends with %[2]q.",
-		"fr": "La chaîne %[1]q se termine par %[2]q.",
+		"en": "String %[1]q has suffix %[2]q.",
+		"fr": "La chaîne %[1]q a le suffixe %[2]q.",
 	},
 	"BytesEqualValidator": {
 		"en": "Bytes must be equal to %[1]q.",

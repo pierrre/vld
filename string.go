@@ -363,7 +363,7 @@ func StringHasPrefix(prefix string) *StringHasPrefixValidator {
 	}
 }
 
-// StringHasPrefixValidator is a [Validator] that checks if the string begins with the prefix.
+// StringHasPrefixValidator is a [Validator] that checks if the string has the specified prefix.
 type StringHasPrefixValidator struct {
 	Prefix string
 }
@@ -395,7 +395,7 @@ type StringHasPrefixError struct {
 }
 
 func (e *StringHasPrefixError) Error() string {
-	return fmt.Sprintf("%q does not begin with %q", e.Value, e.Prefix)
+	return fmt.Sprintf("%q does not have prefix %q", e.Value, e.Prefix)
 }
 
 // Localization implements [LocalizableError].
@@ -410,7 +410,7 @@ func StringNotHasPrefix(prefix string) *StringNotHasPrefixValidator {
 	}
 }
 
-// StringNotHasPrefixValidator is a [Validator] that checks if the string does not begin with the prefix.
+// StringNotHasPrefixValidator is a [Validator] that checks if the string does not have the specified prefix.
 type StringNotHasPrefixValidator struct {
 	Prefix string
 }
@@ -442,7 +442,7 @@ type StringNotHasPrefixError struct {
 }
 
 func (e *StringNotHasPrefixError) Error() string {
-	return fmt.Sprintf("%q begins with %q", e.Value, e.Prefix)
+	return fmt.Sprintf("%q has prefix %q", e.Value, e.Prefix)
 }
 
 // Localization implements [LocalizableError].
@@ -457,7 +457,7 @@ func StringHasSuffix(suffix string) *StringHasSuffixValidator {
 	}
 }
 
-// StringHasSuffixValidator is a [Validator] that checks if the string ends with the suffix.
+// StringHasSuffixValidator is a [Validator] that checks if the string has the specified suffix.
 type StringHasSuffixValidator struct {
 	Suffix string
 }
@@ -489,7 +489,7 @@ type StringHasSuffixError struct {
 }
 
 func (e *StringHasSuffixError) Error() string {
-	return fmt.Sprintf("%q does not end with %q", e.Value, e.Suffix)
+	return fmt.Sprintf("%q does not have suffix %q", e.Value, e.Suffix)
 }
 
 // Localization implements [LocalizableError].
@@ -504,7 +504,7 @@ func StringNotHasSuffix(suffix string) *StringNotHasSuffixValidator {
 	}
 }
 
-// StringNotHasSuffixValidator is a [Validator] that checks if the string does not end with the suffix.
+// StringNotHasSuffixValidator is a [Validator] that checks if the string does not have the specified suffix.
 type StringNotHasSuffixValidator struct {
 	Suffix string
 }
@@ -536,7 +536,7 @@ type StringNotHasSuffixError struct {
 }
 
 func (e *StringNotHasSuffixError) Error() string {
-	return fmt.Sprintf("%q ends with %q", e.Value, e.Suffix)
+	return fmt.Sprintf("%q has suffix %q", e.Value, e.Suffix)
 }
 
 // Localization implements [LocalizableError].
