@@ -8,17 +8,23 @@ import (
 // RegexpString is a type that can be either a [*regexp.Regexp] or a string.
 // If the value is a string, it is compiled with [regexp.MustCompile].
 // This panics if the string is not a valid regular expression.
+// If the value is a [*regexp.Regexp], it must not be nil, otherwise this panics.
 type RegexpString interface {
 	*regexp.Regexp | string
 }
 
 func getRegexp[RS RegexpString](rs RS) *regexp.Regexp {
-	r, ok := any(rs).(*regexp.Regexp)
-	if !ok {
-		s, _ := any(rs).(string)
-		r = regexp.MustCompile(s)
+	switch rs := any(rs).(type) {
+	case *regexp.Regexp:
+		if rs == nil {
+			panic("regexp must not be nil")
+		}
+		return rs
+	case string:
+		return regexp.MustCompile(rs)
+	default:
+		panic("unreachable")
 	}
-	return r
 }
 
 // RegexpMatch creates a [RegexpMatchValidator].
