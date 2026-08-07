@@ -314,6 +314,7 @@ func SliceUnique[S ~[]E, E comparable]() *SliceUniqueValidator[S, E] {
 }
 
 // SliceUniqueValidator is a [Validator] that checks if all elements of the slice are unique.
+// NaN values are not detected as duplicates because NaN != NaN in Go map comparisons.
 type SliceUniqueValidator[S ~[]E, E comparable] struct{}
 
 // Validate implements [Validator].
@@ -357,6 +358,7 @@ func SliceUniqueBy[S ~[]E, E any, K comparable](getKey func(E) K) *SliceUniqueBy
 }
 
 // SliceUniqueByValidator is a [Validator] that checks if all elements of the slice are unique by the key returned by the key function.
+// NaN keys are not detected as duplicates because NaN != NaN in Go map comparisons.
 type SliceUniqueByValidator[S ~[]E, E any, K comparable] struct {
 	GetKey func(E) K
 }
