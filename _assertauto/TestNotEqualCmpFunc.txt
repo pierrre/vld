@@ -1,8 +1,8 @@
 NotEqualCmpFunc(1, cmp.Compare[...])
 	========== assertauto ==========
-en: Value must not be equal to 1 with function cmp.Compare[...].
+en: Value must not be equal to 1 with comparison function cmp.Compare[...].
 	========== assertauto ==========
-fr: La valeur ne doit pas être égale à 1 avec la fonction cmp.Compare[...].
+fr: La valeur ne doit pas être égale à 1 avec la fonction de comparaison cmp.Compare[...].
 	========== assertauto ==========
 [int] 2
 	========== assertauto ==========

@@ -128,6 +128,10 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Value must be equal to %#[1]v with function %[2]s.",
 		"fr": "La valeur doit être égale à %#[1]v avec la fonction %[2]s.",
 	},
+	"EqualCmpFuncValidator": {
+		"en": "Value must be equal to %#[1]v with comparison function %[2]s.",
+		"fr": "La valeur doit être égale à %#[1]v avec la fonction de comparaison %[2]s.",
+	},
 	"EqualError": {
 		"en": "Value %#[1]v is not equal to %#[2]v.",
 		"fr": "La valeur %#[1]v n'est pas égale à %#[2]v.",
@@ -139,6 +143,10 @@ var LocalizationMessages = map[string]map[string]string{
 	"NotEqualFuncValidator": {
 		"en": "Value must not be equal to %#[1]v with function %[2]s.",
 		"fr": "La valeur ne doit pas être égale à %#[1]v avec la fonction %[2]s.",
+	},
+	"NotEqualCmpFuncValidator": {
+		"en": "Value must not be equal to %#[1]v with comparison function %[2]s.",
+		"fr": "La valeur ne doit pas être égale à %#[1]v avec la fonction de comparaison %[2]s.",
 	},
 	"NotEqualError": {
 		"en": "Value %#[1]v is equal to %#[2]v.",

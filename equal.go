@@ -99,7 +99,7 @@ func (vr *EqualCmpFuncValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *EqualCmpFuncValidator[T]) Localization() (key string, args []any) {
-	return "EqualFuncValidator", []any{vr.Expected, getFuncName(vr.Func)}
+	return "EqualCmpFuncValidator", []any{vr.Expected, getFuncName(vr.Func)}
 }
 
 // EqualError is the error type returned by validators that check for equality.
@@ -212,7 +212,7 @@ func (vr *NotEqualCmpFuncValidator[T]) String() string {
 
 // Localization implements [Localizable].
 func (vr *NotEqualCmpFuncValidator[T]) Localization() (key string, args []any) {
-	return "NotEqualFuncValidator", []any{vr.Expected, getFuncName(vr.Func)}
+	return "NotEqualCmpFuncValidator", []any{vr.Expected, getFuncName(vr.Func)}
 }
 
 // NotEqualError is the error type returned by validators that check for inequality.
