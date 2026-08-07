@@ -6,6 +6,7 @@ import (
 )
 
 // BytesEqual creates a [BytesEqualValidator].
+// The byte slice is stored without copying; do not modify it after creating the validator.
 func BytesEqual(s []byte) *BytesEqualValidator {
 	return &BytesEqualValidator{
 		Expected: s,
@@ -53,6 +54,7 @@ func (e *BytesEqualError) Localization() (key string, args []any) {
 }
 
 // BytesNotEqual creates a [BytesNotEqualValidator].
+// The byte slice is stored without copying; do not modify it after creating the validator.
 func BytesNotEqual(s []byte) *BytesNotEqualValidator {
 	return &BytesNotEqualValidator{
 		Expected: s,
@@ -100,6 +102,7 @@ func (e *BytesNotEqualError) Localization() (key string, args []any) {
 }
 
 // BytesContains creates a [BytesContainsValidator].
+// The byte slice is stored without copying; do not modify it after creating the validator.
 func BytesContains(sub []byte) *BytesContainsValidator {
 	return &BytesContainsValidator{
 		Sub: sub,
@@ -147,6 +150,7 @@ func (e *BytesContainsError) Localization() (key string, args []any) {
 }
 
 // BytesNotContains creates a [BytesNotContainsValidator].
+// The byte slice is stored without copying; do not modify it after creating the validator.
 func BytesNotContains(sub []byte) *BytesNotContainsValidator {
 	return &BytesNotContainsValidator{
 		Sub: sub,
@@ -194,6 +198,7 @@ func (e *BytesNotContainsError) Localization() (key string, args []any) {
 }
 
 // BytesHasPrefix creates a [BytesHasPrefixValidator].
+// The byte slice is stored without copying; do not modify it after creating the validator.
 func BytesHasPrefix(prefix []byte) *BytesHasPrefixValidator {
 	return &BytesHasPrefixValidator{
 		Prefix: prefix,
@@ -241,6 +246,7 @@ func (e *BytesHasPrefixError) Localization() (key string, args []any) {
 }
 
 // BytesNotHasPrefix creates a [BytesNotHasPrefixValidator].
+// The byte slice is stored without copying; do not modify it after creating the validator.
 func BytesNotHasPrefix(prefix []byte) *BytesNotHasPrefixValidator {
 	return &BytesNotHasPrefixValidator{
 		Prefix: prefix,
@@ -288,6 +294,7 @@ func (e *BytesNotHasPrefixError) Localization() (key string, args []any) {
 }
 
 // BytesHasSuffix creates a [BytesHasSuffixValidator].
+// The byte slice is stored without copying; do not modify it after creating the validator.
 func BytesHasSuffix(suffix []byte) *BytesHasSuffixValidator {
 	return &BytesHasSuffixValidator{
 		Suffix: suffix,
@@ -335,6 +342,7 @@ func (e *BytesHasSuffixError) Localization() (key string, args []any) {
 }
 
 // BytesNotHasSuffix creates a [BytesNotHasSuffixValidator].
+// The byte slice is stored without copying; do not modify it after creating the validator.
 func BytesNotHasSuffix(suffix []byte) *BytesNotHasSuffixValidator {
 	return &BytesNotHasSuffixValidator{
 		Suffix: suffix,
