@@ -209,6 +209,7 @@ func (vr *MessageValidator[T]) Localization() (key string, args []any) {
 }
 
 // MessageError is the error type returned by [MessageValidator].
+// It intentionally does not implement [LocalizableError] because the message is already user-provided and needs no localization.
 type MessageError struct {
 	Message string
 }
