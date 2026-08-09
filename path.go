@@ -109,6 +109,8 @@ func ErrorWrapPathElem(err error, e PathElem) error {
 }
 
 // GetErrorPath returns the [Path] of the error, by collecting the [PathElemError]s recursively.
+//
+// It follows a single error chain: for joined errors (as produced by [ErrorJoin] or validators such as [SliceEach]), it returns only the path of the first branch and silently drops the others.
 func GetErrorPath(err error) Path {
 	var path Path
 	for {

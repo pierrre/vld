@@ -32,3 +32,11 @@ func TestPathError(t *testing.T) {
 	p := GetErrorPath(err)
 	assertAutoString(t, p.String())
 }
+
+func TestGetErrorPathJoined(t *testing.T) {
+	err1 := ErrorWrapPathElem(errors.New("error 1"), &IndexPathElem{Index: 0})
+	err2 := ErrorWrapPathElem(errors.New("error 2"), &IndexPathElem{Index: 1})
+	err := ErrorJoin(err1, err2)
+	p := GetErrorPath(err)
+	assert.Equal(t, "[0]", p.String())
+}
