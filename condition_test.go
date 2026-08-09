@@ -3,6 +3,7 @@ package vld_test
 import (
 	"testing"
 
+	"github.com/pierrre/assert"
 	. "github.com/pierrre/vld"
 )
 
@@ -28,4 +29,12 @@ func TestSwitch(t *testing.T) {
 		),
 		5, -5, 0, 11, -11,
 	)
+}
+
+func TestSwitchNoMatch(t *testing.T) {
+	sv := Switch(
+		Case(func(v int) bool { return v > 0 }, Max(10)),
+		Case(func(v int) bool { return v < 0 }, Min(-10)),
+	)
+	assert.Zero(t, sv.Validate(0))
 }

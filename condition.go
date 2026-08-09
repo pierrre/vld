@@ -97,6 +97,7 @@ func Switch[T any](cases ...*SwitchCase[T]) *SwitchValidator[T] {
 }
 
 // SwitchValidator is a [Validator] that validates the value with the first validator whose condition returns true.
+// If no case matches, no validation is performed and Validate returns nil.
 type SwitchValidator[T any] struct {
 	Cases []*SwitchCase[T]
 }
