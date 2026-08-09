@@ -20,6 +20,12 @@ func TestGet(t *testing.T) {
 	)
 }
 
+func TestGetPanicNil(t *testing.T) {
+	assert.Panics(t, func() {
+		_ = Get[int, int](nil, Equal(1))
+	})
+}
+
 func TestParse(t *testing.T) {
 	vr := Parse(strconv.Atoi, Equal(1))
 	testValidator(t,
@@ -30,6 +36,12 @@ func TestParse(t *testing.T) {
 	perr, _ := assert.ErrorAsType[*ParseError[string, int]](t, err)
 	err = perr.Unwrap()
 	assert.Error(t, err)
+}
+
+func TestParsePanicNil(t *testing.T) {
+	assert.Panics(t, func() {
+		_ = Parse[string, int](nil, Equal(1))
+	})
 }
 
 func TestWrap(t *testing.T) {
@@ -45,6 +57,12 @@ func TestField(t *testing.T) {
 		User{Name: "Alice"},
 		User{Name: "Charlie"},
 	)
+}
+
+func TestFieldPanicNil(t *testing.T) {
+	assert.Panics(t, func() {
+		_ = Field[int, int]("Name", nil, Equal(1))
+	})
 }
 
 func TestMessage(t *testing.T) {

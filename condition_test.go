@@ -3,6 +3,7 @@ package vld_test
 import (
 	"testing"
 
+	"github.com/pierrre/assert"
 	. "github.com/pierrre/vld"
 )
 
@@ -13,11 +14,23 @@ func TestIf(t *testing.T) {
 	)
 }
 
+func TestIfPanicNil(t *testing.T) {
+	assert.Panics(t, func() {
+		_ = If[int](nil, Min(1))
+	})
+}
+
 func TestIfElse(t *testing.T) {
 	testValidator(t,
 		IfElse(func(v int) bool { return v > 0 }, Max(10), Min(-10)),
 		5, 11, -5, -11,
 	)
+}
+
+func TestIfElsePanicNil(t *testing.T) {
+	assert.Panics(t, func() {
+		_ = IfElse[int](nil, Max(10), Min(-10))
+	})
 }
 
 func TestSwitch(t *testing.T) {
@@ -28,4 +41,10 @@ func TestSwitch(t *testing.T) {
 		),
 		5, -5, 0, 11, -11,
 	)
+}
+
+func TestCasePanicNil(t *testing.T) {
+	assert.Panics(t, func() {
+		_ = Case[int](nil, Max(10))
+	})
 }

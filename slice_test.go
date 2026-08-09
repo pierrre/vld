@@ -3,6 +3,7 @@ package vld_test
 import (
 	"testing"
 
+	"github.com/pierrre/assert"
 	. "github.com/pierrre/vld"
 )
 
@@ -64,4 +65,10 @@ func TestSliceUniqueBy(t *testing.T) {
 		[]int{1, 2},
 		[]int{1, 2, 3},
 	)
+}
+
+func TestSliceUniqueByPanicNil(t *testing.T) {
+	assert.Panics(t, func() {
+		_ = SliceUniqueBy[[]int, int, int](nil)
+	})
 }

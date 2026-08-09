@@ -8,6 +8,9 @@ import (
 // If creates an [IfValidator].
 // It panics if cond is nil.
 func If[T any](cond func(v T) bool, vr Validator[T]) *IfValidator[T] {
+	if cond == nil {
+		panic("cond must not be nil")
+	}
 	return &IfValidator[T]{
 		Condition: cond,
 		Validator: vr,
@@ -44,6 +47,9 @@ func (vr *IfValidator[T]) Localize(locales ...string) string {
 // IfElse creates an [IfElseValidator].
 // It panics if cond is nil.
 func IfElse[T any](cond func(v T) bool, thenVr Validator[T], elseVr Validator[T]) *IfElseValidator[T] {
+	if cond == nil {
+		panic("cond must not be nil")
+	}
 	return &IfElseValidator[T]{
 		Condition: cond,
 		Then:      thenVr,
@@ -139,6 +145,9 @@ func (sv *SwitchValidator[T]) Localize(locales ...string) string {
 // Case returns a new [SwitchCase] with the given condition and [Validator].
 // It panics if cond is nil.
 func Case[T any](cond func(v T) bool, vr Validator[T]) *SwitchCase[T] {
+	if cond == nil {
+		panic("cond must not be nil")
+	}
 	return &SwitchCase[T]{
 		Condition: cond,
 		Validator: vr,
