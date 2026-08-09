@@ -22,6 +22,6 @@ valid
 	========== assertauto ==========
 message
 	========== assertauto ==========
-en: 
+en: message
 	========== assertauto ==========
-fr: 
+fr: message

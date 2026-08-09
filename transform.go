@@ -197,7 +197,10 @@ type MessageValidator[T any] struct {
 func (vr *MessageValidator[T]) Validate(v T) error {
 	err := vr.Validator.Validate(v)
 	if err != nil {
-		return &MessageError{Message: vr.Message}
+		return &MessageError{
+			Message: vr.Message,
+			Err:     err,
+		}
 	}
 	return nil
 }
@@ -212,11 +215,21 @@ func (vr *MessageValidator[T]) Localization() (key string, args []any) {
 }
 
 // MessageError is the error type returned by [MessageValidator].
-// It intentionally does not implement [LocalizableError] because the message is already user-provided and needs no localization.
+// It implements [LocalizableError] so that [LocalizeError] returns the override message verbatim, rather than traversing the error chain to the underlying error's localization.
 type MessageError struct {
 	Message string
+	Err     error
 }
 
 func (e *MessageError) Error() string {
 	return e.Message
+}
+
+func (e *MessageError) Unwrap() error {
+	return e.Err
+}
+
+// Localization implements [LocalizableError].
+func (e *MessageError) Localization() (key string, args []any) {
+	return "MessageError", []any{e.Message}
 }

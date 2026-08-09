@@ -61,6 +61,10 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Value must satisfy the following validator, with error message overridden by %[1]q: %[2]s",
 		"fr": "La valeur doit satisfaire le validateur suivant, avec le message d'erreur remplacé par %[1]q: %[2]s",
 	},
+	"MessageError": {
+		"en": "%[1]s",
+		"fr": "%[1]s",
+	},
 	"ValidatorFunc": {
 		"en": "Function %[1]s.",
 		"fr": "Fonction %[1]s.",

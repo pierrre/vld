@@ -1,6 +1,7 @@
 package vld_test
 
 import (
+	"errors"
 	"strconv"
 	"testing"
 
@@ -48,4 +49,43 @@ func TestField(t *testing.T) {
 
 func TestMessage(t *testing.T) {
 	testValidator(t, Message("message", Equal(1)), 1, 2)
+}
+
+func TestMessageErrorUnwrap(t *testing.T) {
+	vr := Message("override", Equal(1))
+	err := vr.Validate(2)
+	msgErr, _ := assert.ErrorAsType[*MessageError](t, err)
+	assert.Equal(t, "override", msgErr.Message)
+	eqErr, _ := assert.ErrorAsType[*EqualError[int]](t, err)
+	assert.Equal(t, eqErr.Value, 2)
+	assert.Equal(t, eqErr.Expected, 1)
+	assert.ErrorEqual(t, err, "override")
+}
+
+func TestMessageErrorIs(t *testing.T) {
+	errSentinel := errors.New("sentinel")
+	vr := Message("override", ValidatorFunc[int](func(v int) error {
+		return errSentinel
+	}))
+	err := vr.Validate(1)
+	assert.ErrorIs(t, err, errSentinel)
+}
+
+func TestMessageErrorPath(t *testing.T) {
+	type User struct {
+		Name string
+	}
+	vr := Message("override", Field("Name", func(u User) string { return u.Name }, StringLenMax(5)))
+	err := vr.Validate(User{Name: "Charlie"})
+	path := GetErrorPath(err)
+	assert.Equal(t, ".Name", path.String())
+}
+
+func TestMessageErrorLocalize(t *testing.T) {
+	vr := Message("override", Equal(1))
+	err := vr.Validate(2)
+	assert.Equal(t, "override", err.Error())
+	assert.Equal(t, "override", LocalizeError(err, "en"))
+	assert.Equal(t, "override", LocalizeError(err, "fr"))
+	assert.Equal(t, err.Error(), LocalizeError(err, "en"))
 }
