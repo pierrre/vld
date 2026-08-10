@@ -308,6 +308,29 @@ func validateSliceEach[S ~[]E, E any](s S, f func(KeyValue[int, E]) error) error
 	return ErrorJoin(errs...)
 }
 
+func validateSliceUniqueByKey[S ~[]E, E any, K comparable](s S, getKey func(E) K) error {
+	seen := make(map[K]int, len(s))
+	var errs []error
+	for i, v := range s {
+		key := getKey(v)
+		_, ok := seen[key]
+		if !ok {
+			seen[key] = i
+			continue
+		}
+		var err error = &SliceUniqueError[E]{
+			Value: v,
+			Index: seen[key],
+		}
+		err = &PathElemError{
+			Err:      err,
+			PathElem: &IndexPathElem{Index: i},
+		}
+		errs = append(errs, err)
+	}
+	return ErrorJoin(errs...)
+}
+
 // SliceUnique creates a [SliceUniqueValidator].
 func SliceUnique[S ~[]E, E comparable]() *SliceUniqueValidator[S, E] {
 	return &SliceUniqueValidator[S, E]{}
@@ -319,25 +342,7 @@ type SliceUniqueValidator[S ~[]E, E comparable] struct{}
 
 // Validate implements [Validator].
 func (vr *SliceUniqueValidator[S, E]) Validate(s S) error {
-	seen := make(map[E]int, len(s))
-	var errs []error
-	for i, v := range s {
-		_, ok := seen[v]
-		if !ok {
-			seen[v] = i
-			continue
-		}
-		var err error = &SliceUniqueError[E]{
-			Value: v,
-			Index: seen[v],
-		}
-		err = &PathElemError{
-			Err:      err,
-			PathElem: &IndexPathElem{Index: i},
-		}
-		errs = append(errs, err)
-	}
-	return ErrorJoin(errs...)
+	return validateSliceUniqueByKey[S, E, E](s, func(v E) E { return v })
 }
 
 func (vr *SliceUniqueValidator[S, E]) String() string {
@@ -365,26 +370,7 @@ type SliceUniqueByValidator[S ~[]E, E any, K comparable] struct {
 
 // Validate implements [Validator].
 func (vr *SliceUniqueByValidator[S, E, K]) Validate(s S) error {
-	seen := make(map[K]int, len(s))
-	var errs []error
-	for i, v := range s {
-		key := vr.GetKey(v)
-		_, ok := seen[key]
-		if !ok {
-			seen[key] = i
-			continue
-		}
-		var err error = &SliceUniqueError[E]{
-			Value: v,
-			Index: seen[key],
-		}
-		err = &PathElemError{
-			Err:      err,
-			PathElem: &IndexPathElem{Index: i},
-		}
-		errs = append(errs, err)
-	}
-	return ErrorJoin(errs...)
+	return validateSliceUniqueByKey[S, E, K](s, vr.GetKey)
 }
 
 func (vr *SliceUniqueByValidator[S, E, K]) String() string {
