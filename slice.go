@@ -308,7 +308,7 @@ func validateSliceEach[S ~[]E, E any](s S, f func(KeyValue[int, E]) error) error
 	return ErrorJoin(errs...)
 }
 
-func validateUniqueByKey[S ~[]E, E any, K comparable](s S, getKey func(E) K) error {
+func validateSliceUniqueByKey[S ~[]E, E any, K comparable](s S, getKey func(E) K) error {
 	seen := make(map[K]int, len(s))
 	var errs []error
 	for i, v := range s {
@@ -342,7 +342,7 @@ type SliceUniqueValidator[S ~[]E, E comparable] struct{}
 
 // Validate implements [Validator].
 func (vr *SliceUniqueValidator[S, E]) Validate(s S) error {
-	return validateUniqueByKey[S, E, E](s, func(v E) E { return v })
+	return validateSliceUniqueByKey[S, E, E](s, func(v E) E { return v })
 }
 
 func (vr *SliceUniqueValidator[S, E]) String() string {
@@ -370,7 +370,7 @@ type SliceUniqueByValidator[S ~[]E, E any, K comparable] struct {
 
 // Validate implements [Validator].
 func (vr *SliceUniqueByValidator[S, E, K]) Validate(s S) error {
-	return validateUniqueByKey[S, E, K](s, vr.GetKey)
+	return validateSliceUniqueByKey[S, E, K](s, vr.GetKey)
 }
 
 func (vr *SliceUniqueByValidator[S, E, K]) String() string {
