@@ -3,6 +3,7 @@ package vld
 import (
 	"bytes"
 	"fmt"
+	"unicode/utf8"
 )
 
 // BytesEqual creates a [BytesEqualValidator].
@@ -387,4 +388,45 @@ func (e *BytesNotHasSuffixError) Error() string {
 // Localization implements [LocalizableError].
 func (e *BytesNotHasSuffixError) Localization() (key string, args []any) {
 	return "BytesNotHasSuffixError", []any{e.Value, e.Suffix}
+}
+
+// BytesUTF8 creates a [BytesUTF8Validator].
+func BytesUTF8() *BytesUTF8Validator {
+	return &BytesUTF8Validator{}
+}
+
+// BytesUTF8Validator is a [Validator] that checks if the byte slice is valid UTF-8 text.
+type BytesUTF8Validator struct{}
+
+// Validate implements [Validator].
+func (vr *BytesUTF8Validator) Validate(v []byte) error {
+	if !utf8.Valid(v) {
+		return &BytesUTF8Error{
+			Value: v,
+		}
+	}
+	return nil
+}
+
+func (vr *BytesUTF8Validator) String() string {
+	return "BytesUTF8"
+}
+
+// Localization implements [Localizable].
+func (vr *BytesUTF8Validator) Localization() (key string, args []any) {
+	return "BytesUTF8Validator", nil
+}
+
+// BytesUTF8Error is the error type returned by [BytesUTF8Validator].
+type BytesUTF8Error struct {
+	Value []byte
+}
+
+func (e *BytesUTF8Error) Error() string {
+	return fmt.Sprintf("%q is not valid UTF-8 text", e.Value)
+}
+
+// Localization implements [LocalizableError].
+func (e *BytesUTF8Error) Localization() (key string, args []any) {
+	return "BytesUTF8Error", []any{e.Value}
 }

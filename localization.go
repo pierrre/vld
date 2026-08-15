@@ -533,6 +533,22 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Bytes %[1]q have suffix %[2]q.",
 		"fr": "Les bytes %[1]q ont le suffixe %[2]q.",
 	},
+	"StringUTF8Validator": {
+		"en": "String must be valid UTF-8 text.",
+		"fr": "La chaîne doit être un texte UTF-8 valide.",
+	},
+	"StringUTF8Error": {
+		"en": "String %[1]q is not valid UTF-8 text.",
+		"fr": "La chaîne %[1]q n'est pas un texte UTF-8 valide.",
+	},
+	"BytesUTF8Validator": {
+		"en": "Bytes must be valid UTF-8 text.",
+		"fr": "Les bytes doivent être un texte UTF-8 valide.",
+	},
+	"BytesUTF8Error": {
+		"en": "Bytes %[1]q are not valid UTF-8 text.",
+		"fr": "Les bytes %[1]q ne sont pas un texte UTF-8 valide.",
+	},
 }
 
 // GetLocalizationMessage returns the localization message for a given key and locales (by order of preference).

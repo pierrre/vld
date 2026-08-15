@@ -543,3 +543,44 @@ func (e *StringNotHasSuffixError) Error() string {
 func (e *StringNotHasSuffixError) Localization() (key string, args []any) {
 	return "StringNotHasSuffixError", []any{e.Value, e.Suffix}
 }
+
+// StringUTF8 creates a [StringUTF8Validator].
+func StringUTF8() *StringUTF8Validator {
+	return &StringUTF8Validator{}
+}
+
+// StringUTF8Validator is a [Validator] that checks if the string is valid UTF-8 text.
+type StringUTF8Validator struct{}
+
+// Validate implements [Validator].
+func (vr *StringUTF8Validator) Validate(s string) error {
+	if !utf8.ValidString(s) {
+		return &StringUTF8Error{
+			Value: s,
+		}
+	}
+	return nil
+}
+
+func (vr *StringUTF8Validator) String() string {
+	return "StringUTF8"
+}
+
+// Localization implements [Localizable].
+func (vr *StringUTF8Validator) Localization() (key string, args []any) {
+	return "StringUTF8Validator", nil
+}
+
+// StringUTF8Error is the error type returned by [StringUTF8Validator].
+type StringUTF8Error struct {
+	Value string
+}
+
+func (e *StringUTF8Error) Error() string {
+	return fmt.Sprintf("%q is not valid UTF-8 text", e.Value)
+}
+
+// Localization implements [LocalizableError].
+func (e *StringUTF8Error) Localization() (key string, args []any) {
+	return "StringUTF8Error", []any{e.Value}
+}

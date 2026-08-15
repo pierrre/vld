@@ -69,3 +69,7 @@ func TestStringHasSuffix(t *testing.T) {
 func TestStringNotHasSuffix(t *testing.T) {
 	testValidator(t, StringNotHasSuffix("c"), "acb", "abc")
 }
+
+func TestStringUTF8(t *testing.T) {
+	testValidator(t, StringUTF8(), "abc", "abc\xff")
+}

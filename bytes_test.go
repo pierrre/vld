@@ -37,3 +37,7 @@ func TestBytesHasSuffix(t *testing.T) {
 func TestBytesNotHasSuffix(t *testing.T) {
 	testValidator(t, BytesNotHasSuffix([]byte("c")), []byte("acb"), []byte("abc"))
 }
+
+func TestBytesUTF8(t *testing.T) {
+	testValidator(t, BytesUTF8(), []byte("abc"), []byte("abc\xff"))
+}
