@@ -342,7 +342,7 @@ type SliceUniqueValidator[S ~[]E, E comparable] struct{}
 
 // Validate implements [Validator].
 func (vr *SliceUniqueValidator[S, E]) Validate(s S) error {
-	return validateSliceUniqueByKey[S, E, E](s, func(v E) E { return v })
+	return validateSliceUniqueByKey(s, func(v E) E { return v })
 }
 
 func (vr *SliceUniqueValidator[S, E]) String() string {
@@ -370,7 +370,7 @@ type SliceUniqueByValidator[S ~[]E, E any, K comparable] struct {
 
 // Validate implements [Validator].
 func (vr *SliceUniqueByValidator[S, E, K]) Validate(s S) error {
-	return validateSliceUniqueByKey[S, E, K](s, vr.GetKey)
+	return validateSliceUniqueByKey(s, vr.GetKey)
 }
 
 func (vr *SliceUniqueByValidator[S, E, K]) String() string {
