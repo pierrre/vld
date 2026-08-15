@@ -549,6 +549,22 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "Bytes %[1]q are not valid UTF-8 text.",
 		"fr": "Les bytes %[1]q ne sont pas un texte UTF-8 valide.",
 	},
+	"TimeValidator": {
+		"en": "String must be a valid time with layout %[1]q.",
+		"fr": "La chaîne doit être une date/heure valide avec le format %[1]q.",
+	},
+	"TimeInLocationValidator": {
+		"en": "String must be a valid time with layout %[1]q in location %[2]s.",
+		"fr": "La chaîne doit être une date/heure valide avec le format %[1]q dans le fuseau %[2]s.",
+	},
+	"TimeError": {
+		"en": "String %[1]q is not a valid time with layout %[2]q: %[3]s",
+		"fr": "La chaîne %[1]q n'est pas une date/heure valide avec le format %[2]q: %[3]s",
+	},
+	"TimeInLocationError": {
+		"en": "String %[1]q is not a valid time with layout %[2]q in location %[3]s: %[4]s",
+		"fr": "La chaîne %[1]q n'est pas une date/heure valide avec le format %[2]q dans le fuseau %[3]s: %[4]s",
+	},
 }
 
 // GetLocalizationMessage returns the localization message for a given key and locales (by order of preference).

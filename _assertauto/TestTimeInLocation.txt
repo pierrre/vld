@@ -1,0 +1,27 @@
+Time("2006-01-02T15:04:05Z07:00", UTC, <nil>)
+	========== assertauto ==========
+en: String must be a valid time with layout "2006-01-02T15:04:05Z07:00" in location UTC.
+	========== assertauto ==========
+fr: La chaîne doit être une date/heure valide avec le format "2006-01-02T15:04:05Z07:00" dans le fuseau UTC.
+	========== assertauto ==========
+[string] (len=20) "2006-01-02T15:04:05Z"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 0,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[string] (len=7) "invalid"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 4,
+}
+	========== assertauto ==========
+"invalid" is not a valid time with layout "2006-01-02T15:04:05Z07:00" in location UTC: parsing time "invalid" as "2006-01-02T15:04:05Z07:00": cannot parse "invalid" as "2006"
+	========== assertauto ==========
+en: String "invalid" is not a valid time with layout "2006-01-02T15:04:05Z07:00" in location UTC: parsing time "invalid" as "2006-01-02T15:04:05Z07:00": cannot parse "invalid" as "2006"
+	========== assertauto ==========
+fr: La chaîne "invalid" n'est pas une date/heure valide avec le format "2006-01-02T15:04:05Z07:00" dans le fuseau UTC: parsing time "invalid" as "2006-01-02T15:04:05Z07:00": cannot parse "invalid" as "2006"
