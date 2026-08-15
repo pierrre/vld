@@ -565,6 +565,14 @@ var LocalizationMessages = map[string]map[string]string{
 		"en": "String %[1]q is not a valid time with layout %[2]q in location %[3]s: %[4]s",
 		"fr": "La chaîne %[1]q n'est pas une date/heure valide avec le format %[2]q dans le fuseau %[3]s: %[4]s",
 	},
+	"URLValidator": {
+		"en": "String must be a valid URL with parser %[1]s.",
+		"fr": "La chaîne doit être une URL valide avec le parseur %[1]s.",
+	},
+	"URLError": {
+		"en": "String %[1]q is not a valid URL with parser %[2]s: %[3]s",
+		"fr": "La chaîne %[1]q n'est pas une URL valide avec le parseur %[2]s: %[3]s",
+	},
 }
 
 // GetLocalizationMessage returns the localization message for a given key and locales (by order of preference).

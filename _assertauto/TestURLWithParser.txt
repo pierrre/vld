@@ -1,0 +1,27 @@
+URL(net/url.ParseRequestURI, <nil>)
+	========== assertauto ==========
+en: String must be a valid URL with parser net/url.ParseRequestURI.
+	========== assertauto ==========
+fr: La chaîne doit être une URL valide avec le parseur net/url.ParseRequestURI.
+	========== assertauto ==========
+[string] (len=24) "https://example.com/path"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 1,
+}
+	========== assertauto ==========
+valid
+	========== assertauto ==========
+[string] (len=11) "http://[::1"
+	========== assertauto ==========
+[github.com/pierrre/assert/assertauto.allocsPerRun] {
+	Runs: [int] 100,
+	Allocs: [float64] 4,
+}
+	========== assertauto ==========
+"http://[::1" is not a valid URL with parser net/url.ParseRequestURI: parse "http://[::1": missing ']' in host
+	========== assertauto ==========
+en: String "http://[::1" is not a valid URL with parser net/url.ParseRequestURI: parse "http://[::1": missing ']' in host
+	========== assertauto ==========
+fr: La chaîne "http://[::1" n'est pas une URL valide avec le parseur net/url.ParseRequestURI: parse "http://[::1": missing ']' in host
